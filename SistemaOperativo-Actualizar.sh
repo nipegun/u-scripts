@@ -23,27 +23,27 @@ echo ""
 echo ""
 echo -e "${ColorVerde}Reparando permisos de la carpeta /tmp/ ...${FinColor}"
 echo ""
-chmod 1777 /tmp
+sudo chmod 1777 /tmp
 
 echo ""
 echo -e "${ColorVerde}Ejecutando apt-get update...${FinColor}"
 echo ""
-apt-get -y update
+sudo apt-get -y update
 
 echo ""
 echo -e "${ColorVerde}Ejecutando apt-get -y upgrade...${FinColor}"
 echo ""
-apt-get -y --allow-downgrades upgrade
+sudo apt-get -y --allow-downgrades upgrade
 
 echo ""
 echo -e "${ColorVerde}Ejecutando apt-get -y dist-upgrade...${FinColor}"
 echo ""
-apt-get -y --allow-downgrades dist-upgrade
+sudo apt-get -y --allow-downgrades dist-upgrade
 
 echo ""
 echo -e "${ColorVerde}Ejecutando apt-get -y autoremove...${FinColor}"
 echo ""
-apt-get -y autoremove
+sudo apt-get -y autoremove
 
 echo ""
 echo ""
