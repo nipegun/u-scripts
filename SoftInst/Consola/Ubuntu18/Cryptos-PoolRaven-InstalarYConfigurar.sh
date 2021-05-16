@@ -56,8 +56,14 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo -e "${ColorVerde}  Borrando cartera y configuración existente...${FinColor}"
           echo -e "${ColorVerde}-------------------------------------------------${FinColor}"
           echo ""
+          
+          ## Parar daemon, si es que se está ejecutando
+             sudo su $UsuarioDaemon -c "/home/$UsuarioDaemon/ComandosCli/raven-daemon-parar.sh"
 
-          ## Raven
+          ## Borrar software de cartera
+             sudo rm -rf /home/$UsuarioDaemon/$CarpetaSoftRVN/
+
+          ## Borrar archivos de cartera
              sudo rm -rf /home/$UsuarioDaemon/.raven/
 
         ;;
