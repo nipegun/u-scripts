@@ -296,7 +296,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           mkdir -p ~/.local/share/applications/ 2> /dev/null
 
-          #touch ~/.local/share/applications/raven.desktop
+          touch ~/.local/share/applications/raven.desktop
 
           echo "[Desktop Entry]"                                            > ~/.local/share/applications/raven.desktop
           echo "Name=Raven GUI"                                            >> ~/.local/share/applications/raven.desktop
