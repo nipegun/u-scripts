@@ -61,6 +61,6 @@ echo ""
 echo -e "${ColorVerde}Activando y arrancando el servicio...${FinColor}"
 echo ""
 sudo systemctl enable rc-local
-sud systemctl start rc-local.service
+sudo systemctl start rc-local.service
 sudo systemctl status rc-local.service
 
