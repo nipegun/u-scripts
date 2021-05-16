@@ -32,13 +32,16 @@ echo ""
    fi
 
 menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
-  opciones=(1 "Crear usuario sin privilegios para ejecutar la pool (Obligatorio)" on
-            2 "Borrar la cartera y configuración anterior" off
-            3 "Instalar cartera de Ravencoin" off
-            4 "Crear contraseña para el usuario $UsuarioDaemon" on
-            5 "Instalar escritorio y algunas utilidades de terminal" off
-            6 "Reparar permisos (Obligatorio)" on
-            7 "Reniciar el sistema" off)
+  opciones=(1 "Borrar la cartera existente" off
+            2 "Crear usuario sin privilegios para ejecutar la pool (Obligatorio)" on
+            3 "Instalar la última versión de la cartera de Ravencoin" on
+            4 "Crear comandos de terminal para administrar la cartera" on
+            5 "Agregar auto-ejecución del daemon de cartera" on
+            6 "Agregar auto-ejecución gráfica de la cartera" on
+            7 "Crear acceso para ejecución gráfica de la cartera" on
+            8 "Instalar escritorio y algunas utilidades de terminal" off
+            9 "Reparar permisos (Obligatorio)" on
+            10 "Reniciar el sistema" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
 
@@ -49,31 +52,35 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         1)
 
           echo ""
+          echo -e "${ColorVerde}-------------------------------------------------${FinColor}"
+          echo -e "${ColorVerde}  Borrando cartera y configuración existente...${FinColor}"
+          echo -e "${ColorVerde}-------------------------------------------------${FinColor}"
+          echo ""
+
+          ## Raven
+             sudo rm -rf /home/$UsuarioDaemon/.raven/
+
+        ;;
+
+        2)
+
+          echo ""
           echo -e "${ColorVerde}-------------------------------------------------------------${FinColor}"
           echo -e "${ColorVerde}  Creando el usuario para ejecutar y administrar la pool...${FinColor}"
           echo -e "${ColorVerde}-------------------------------------------------------------${FinColor}"
           echo ""
 
           sudo useradd -d /home/$UsuarioDaemon/ -s /bin/bash $UsuarioDaemon
+          
+          echo ""
+          echo "  Ingresa la nueva contraseña para el usuario $UsuarioDaemon"
+          echo ""
+          sudo passwd $UsuarioDaemon
 
           ## Reparación de permisos
 
              sudo chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
-        ;;
 
-        2)
-
-          echo ""
-          echo -e "${ColorVerde}-----------------------------------------------------${FinColor}"
-          echo -e "${ColorVerde}  Borrando carteras y configuraciones anteriores...${FinColor}"
-          echo -e "${ColorVerde}-----------------------------------------------------${FinColor}"
-          echo ""
-
-          ## Raven
-             sudo rm -rf /home/$UsuarioDaemon/.raven/
-
-          ## Reparación de permisos
-             sudo chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
         3)
@@ -102,9 +109,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "  Intentando descargar el archivo comprimido de la última versión..."
           echo ""
-          sudo mkdir -p /root/SoftInst/Ravencoin/ 2> /dev/null
-          sudo rm -rf /root/SoftInst/Ravencoin/*
-          sudo cd /root/SoftInst/Ravencoin/
+          mkdir -p ~/SoftInst/Ravencoin/ 2> /dev/null
+          rm -rf ~/SoftInst/Ravencoin/*
+          cd ~/SoftInst/Ravencoin/
           ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                echo ""
@@ -116,11 +123,11 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "  Pidiendo el archivo en formato zip..."
           echo ""
-          sudo wget https://github.com/RavenProject/Ravencoin/releases/download/v$UltVersRaven/raven-$UltVersRaven-x86_64-linux-gnu.zip
+          wget https://github.com/RavenProject/Ravencoin/releases/download/v$UltVersRaven/raven-$UltVersRaven-x86_64-linux-gnu.zip
           echo ""
           echo "  Pidiendo el archivo en formato tar.gz..."
           echo ""
-          sudo wget https://github.com/RavenProject/Ravencoin/releases/download/v$UltVersRaven/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
+          wget https://github.com/RavenProject/Ravencoin/releases/download/v$UltVersRaven/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
 
           echo ""
           echo "Descomprimiendo el archivo..."
@@ -133,11 +140,11 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                sudo apt-get -y update
                sudo apt-get -y install zip
              fi
-          sudo unzip /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.zip
-          sudo mv /root/SoftInst/Ravencoin/linux/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz /root/SoftInst/Ravencoin/
-          sudo rm -rf /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.zip
-          sudo rm -rf /root/SoftInst/Ravencoin/linux/
-          sudo rm -rf /root/SoftInst/Ravencoin/__MACOSX/
+          unzip ~/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.zip
+          mv ~/SoftInst/Ravencoin/linux/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz ~/SoftInst/Ravencoin/
+          rm -rf ~/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.zip
+          rm -rf ~/SoftInst/Ravencoin/linux/
+          rm -rf ~/SoftInst/Ravencoin/__MACOSX/
           ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
                echo ""
@@ -146,8 +153,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                sudo apt-get -y update
                sudo apt-get -y install tar
              fi
-          sudo tar -xf /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
-          sudo rm -rf /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
+          tar -xf ~/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
+          rm -rf ~/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
 
           echo ""
           echo "  Creando carpetas y archivos necesarios para ese usuario..."
@@ -155,12 +162,12 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           sudo mkdir -p /home/$UsuarioDaemon/ 2> /dev/null
           sudo mkdir -p /home/$UsuarioDaemon/.raven/
           sudo touch /home/$UsuarioDaemon/.raven/raven.conf
-          sudo echo "rpcuser=user1"      > /home/$UsuarioDaemon/.raven/raven.conf
-          sudo echo "rpcpassword=pass1" >> /home/$UsuarioDaemon/.raven/raven.conf
-          sudo echo "prune=550"         >> /home/$UsuarioDaemon/.raven/raven.conf
-          sudo echo "daemon=1"          >> /home/$UsuarioDaemon/.raven/raven.conf
+          sudo su -c 'echo "rpcuser=user1"      > /home/$UsuarioDaemon/.raven/raven.conf'
+          sudo su -c 'echo "rpcpassword=pass1" >> /home/$UsuarioDaemon/.raven/raven.conf'
+          sudo su -c 'echo "prune=550"         >> /home/$UsuarioDaemon/.raven/raven.conf'
+          sudo su -c 'echo "daemon=1"          >> /home/$UsuarioDaemon/.raven/raven.conf'
           sudo rm -rf /home/$UsuarioDaemon/$CarpetaSoftRVN/
-          sudo mv /root/SoftInst/Ravencoin/raven-$UltVersRaven/ /home/$UsuarioDaemon/$CarpetaSoftRVN/
+          sudo mv ~/SoftInst/Ravencoin/raven-$UltVersRaven/ /home/$UsuarioDaemon/$CarpetaSoftRVN/
           sudo chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
           sudo find /home/$UsuarioDaemon -type d -exec chmod 775 {} \;
           sudo find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
@@ -171,6 +178,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           sudo su $UsuarioDaemon -c /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend
           sleep 5
+          sudo touch /home/$UsuarioDaemon/pooladdress-rvn.txt
+          sudo chmod 777 /home/$UsuarioDaemon/pooladdress-rvn.txt
+          sudo chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
           sudo su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress-rvn.txt
           sudo chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/pooladdress-rvn.txt
           echo ""
@@ -179,80 +189,6 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           sudo cat /home/$UsuarioDaemon/pooladdress-rvn.txt
           DirCartRVN=$(sudo cat /home/$UsuarioDaemon/pooladdress-rvn.txt)
           echo ""
-
-          ## Comandos de terminal para raven
-
-            sudo  mkdir -p /home/$UsuarioDaemon/ComandosCli/ 2> /dev/null
-
-             sudo echo '#!/bin/bash'                                                                   > /home/$UsuarioDaemon/ComandosCli/raven-daemon-iniciar.sh
-             sudo echo ""                                                                             >> /home/$UsuarioDaemon/ComandosCli/raven-daemon-iniciar.sh
-             sudo echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/raven-daemon-iniciar.sh
-             sudo echo 'echo "  Iniciando el daemon ravend..."'                                       >> /home/$UsuarioDaemon/ComandosCli/raven-daemon-iniciar.sh
-             sudo echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/raven-daemon-iniciar.sh
-             sudo echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend"                              >> /home/$UsuarioDaemon/ComandosCli/raven-daemon-iniciar.sh
-             sudo chmod +x                                                                               /home/$UsuarioDaemon/ComandosCli/raven-daemon-iniciar.sh
-
-             sudo echo '#!/bin/bash'                                                                   > /home/$UsuarioDaemon/ComandosCli/raven-cartera-info.sh
-             sudo echo ""                                                                             >> /home/$UsuarioDaemon/ComandosCli/raven-cartera-info.sh
-             sudo echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/raven-cartera-info.sh
-             sudo echo 'echo "  Mostrando info de la cartera Raven..."'                               >> /home/$UsuarioDaemon/ComandosCli/raven-cartera-info.sh
-             sudo echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/raven-cartera-info.sh
-             sudo echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getwalletinfo | jq"        >> /home/$UsuarioDaemon/ComandosCli/raven-cartera-info.sh
-             sudo chmod +x                                                                               /home/$UsuarioDaemon/ComandosCli/raven-cartera-info.sh
-
-             sudo echo '#!/bin/bash'                                                                   > /home/$UsuarioDaemon/ComandosCli/raven-daemon-parar.sh
-             sudo echo ""                                                                             >> /home/$UsuarioDaemon/ComandosCli/raven-daemon-parar.sh
-             sudo echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/raven-daemon-parar.sh
-             sudo echo 'echo "  Parando el daemon ravend..."'                                         >> /home/$UsuarioDaemon/ComandosCli/raven-daemon-parar.sh
-             sudo echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/raven-daemon-parar.sh
-             sudo echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli stop"                      >> /home/$UsuarioDaemon/ComandosCli/raven-daemon-parar.sh
-             sudo chmod +x                                                                               /home/$UsuarioDaemon/ComandosCli/raven-daemon-parar.sh
-
-             sudo echo '#!/bin/bash'                                                                   > /home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh
-             sudo echo ""                                                                             >> /home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh
-             sudo echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh
-             sudo echo 'echo "  Iniciando raven-qt..."'                                               >> /home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh
-             sudo echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh
-             sudo echo "/home/$UsuarioDaemon/ComandosCli/raven-daemon-parar.sh"                       >> /home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh
-             sudo echo "sleep 5"                                                                      >> /home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh
-             sudo echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-qt -min -testnet=0 -regtest=0" >> /home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh
-             sudo chmod +x                                                                               /home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh
-
-          ## Autoejecución de Ravencoin al iniciar el sistema
-
-             sudo echo ""
-             sudo echo "  Agregando ravend a los ComandosPostArranque..."
-             sudo echo ""
-             sudo echo "chmod +x /home/$UsuarioDaemon/ComandosCli/raven-daemon-iniciar.sh"
-             sudo echo "su "$UsuarioDaemon" -c '/home/"$UsuarioDaemon"/ComandosCli/raven-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
-
-          ## Icono de lanzamiento en el menú gráfico
-
-             echo ""
-             echo "  Agregando la aplicación gráfica al menú..."
-             echo ""
-             sudo mkdir -p /home/$UsuarioDaemon/.local/share/applications/ 2> /dev/null
-             sudo echo "[Desktop Entry]"                                            > /home/$UsuarioDaemon/.local/share/applications/raven.desktop
-             sudo echo "Name=Raven GUI"                                            >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
-             sudo echo "Type=Application"                                          >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
-             sudo echo "Exec=/home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh" >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
-             sudo echo "Terminal=false"                                            >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
-             sudo echo "Hidden=false"                                              >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
-             sudo echo "Categories=Cryptos"                                        >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
-             #echo "Icon="                                                    >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
-
-          ## Autoejecución gráfica de Ravencoin
-
-             echo ""
-             echo "  Creando el archivo de autoejecución de raven-qt para escritorio..."
-             echo ""
-             sudo mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
-             sudo echo "[Desktop Entry]"                                             > /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             sudo echo "Name=Raven GUI"                                             >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             sudo echo "Type=Application"                                           >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             sudo echo "Exec=/home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh"  >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             sudo echo "Terminal=false"                                             >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             sudo echo "Hidden=false"                                               >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
 
           ## Reparación de permisos
 
@@ -268,16 +204,101 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         4)
 
           echo ""
-          echo -e "${ColorVerde}-------------------------------------------------------${FinColor}"
-          echo -e "${ColorVerde}  Cambiando la contraseña del usuario $UsuarioDaemon...${FinColor}"
-          echo -e "${ColorVerde}-------------------------------------------------------${FinColor}"
+          echo -e "${ColorVerde}-------------------------------------------------------------${FinColor}"
+          echo -e "${ColorVerde}  Creando comandos de terminal para administrar la cartera...${FinColor}"
+          echo -e "${ColorVerde}-------------------------------------------------------------${FinColor}"
           echo ""
 
-          sudo passwd $UsuarioDaemon
+          mkdir -p ~/ComandosCli/ 2> /dev/null
+
+          echo '#!/bin/bash'                                                                   > ~/ComandosCli/raven-daemon-iniciar.sh
+          echo ""                                                                             >> ~/ComandosCli/raven-daemon-iniciar.sh
+          echo 'echo ""'                                                                      >> ~/ComandosCli/raven-daemon-iniciar.sh
+          echo 'echo "  Iniciando el daemon ravend..."'                                       >> ~/ComandosCli/raven-daemon-iniciar.sh
+          echo 'echo ""'                                                                      >> ~/ComandosCli/raven-daemon-iniciar.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend"                              >> ~/ComandosCli/raven-daemon-iniciar.sh
+          chmod +x                                                                               ~/ComandosCli/raven-daemon-iniciar.sh
+
+          echo '#!/bin/bash'                                                                   > ~/ComandosCli/raven-cartera-info.sh
+          echo ""                                                                             >> ~/ComandosCli/raven-cartera-info.sh
+          echo 'echo ""'                                                                      >> ~/ComandosCli/raven-cartera-info.sh
+          echo 'echo "  Mostrando info de la cartera Raven..."'                               >> ~/ComandosCli/raven-cartera-info.sh
+          echo 'echo ""'                                                                      >> ~/ComandosCli/raven-cartera-info.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getwalletinfo | jq"        >> ~/ComandosCli/raven-cartera-info.sh
+          chmod +x                                                                               ~/ComandosCli/raven-cartera-info.sh
+
+          echo '#!/bin/bash'                                                                   > ~/ComandosCli/raven-daemon-parar.sh
+          echo ""                                                                             >> ~/ComandosCli/raven-daemon-parar.sh
+          echo 'echo ""'                                                                      >> ~/ComandosCli/raven-daemon-parar.sh
+          echo 'echo "  Parando el daemon ravend..."'                                         >> ~/ComandosCli/raven-daemon-parar.sh
+          echo 'echo ""'                                                                      >> ~/ComandosCli/raven-daemon-parar.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli stop"                      >> ~/ComandosCli/raven-daemon-parar.sh
+          chmod +x                                                                               ~/ComandosCli/raven-daemon-parar.sh
+
+          echo '#!/bin/bash'                                                                   > ~/ComandosCli/raven-qt-iniciar.sh
+          echo ""                                                                             >> ~/ComandosCli/raven-qt-iniciar.sh
+          echo 'echo ""'                                                                      >> ~/ComandosCli/raven-qt-iniciar.sh
+          echo 'echo "  Iniciando raven-qt..."'                                               >> ~/ComandosCli/raven-qt-iniciar.sh
+          echo 'echo ""'                                                                      >> ~/ComandosCli/raven-qt-iniciar.sh
+          echo "/home/$UsuarioDaemon/ComandosCli/raven-daemon-parar.sh"                       >> ~/ComandosCli/raven-qt-iniciar.sh
+          echo "sleep 5"                                                                      >> ~/ComandosCli/raven-qt-iniciar.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-qt -min -testnet=0 -regtest=0" >> ~/ComandosCli/raven-qt-iniciar.sh
+          chmod +x                                                                               ~/ComandosCli/raven-qt-iniciar.sh
 
         ;;
 
         5)
+
+          echo ""
+          echo -e "${ColorVerde}---------------------------------------------------------------------${FinColor}"
+          echo -e "${ColorVerde}  Agregando auto-ejecución del daemon a los ComandosPostArranque...${FinColor}"
+          echo -e "${ColorVerde}---------------------------------------------------------------------${FinColor}"
+          echo ""
+
+          echo "chmod +x /home/$UsuarioDaemon/ComandosCli/raven-daemon-iniciar.sh"
+          echo "su "$UsuarioDaemon" -c '/home/"$UsuarioDaemon"/ComandosCli/raven-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
+
+        ;;
+
+        6)
+
+          echo ""
+          echo -e "${ColorVerde}-----------------------------------------------------${FinColor}"
+          echo -e "${ColorVerde}  Agregando auto-ejecución gráfica de la cartera...${FinColor}"
+          echo -e "${ColorVerde}-----------------------------------------------------${FinColor}"
+          echo ""
+
+          mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
+          echo "[Desktop Entry]"                                             > /home/$UsuarioDaemon/.config/autostart/raven.desktop
+          echo "Name=Raven GUI"                                             >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+          echo "Type=Application"                                           >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+          echo "Exec=/home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh"  >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+          echo "Terminal=false"                                             >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+          echo "Hidden=false"                                               >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+
+        ;;
+
+        7)
+
+          echo ""
+          echo -e "${ColorVerde}----------------------------------------------------------${FinColor}"
+          echo -e "${ColorVerde}  Creando acceso para ejecución gráfica de la cartera...${FinColor}"
+          echo -e "${ColorVerde}----------------------------------------------------------${FinColor}"
+          echo ""
+
+          mkdir -p /home/$UsuarioDaemon/.local/share/applications/ 2> /dev/null
+          echo "[Desktop Entry]"                                            > /home/$UsuarioDaemon/.local/share/applications/raven.desktop
+          echo "Name=Raven GUI"                                            >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
+          echo "Type=Application"                                          >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
+          echo "Exec=/home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh" >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
+          echo "Terminal=false"                                            >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
+          echo "Hidden=false"                                              >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
+          echo "Categories=Cryptos"                                        >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
+          #echo "Icon="                                                    >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
+
+        ;;
+
+        8)
 
           echo ""
           echo -e "${ColorVerde}----------------------------${FinColor}"
@@ -299,7 +320,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
         ;;
 
-        6)
+        9)
 
           echo ""
           echo -e "${ColorVerde}-------------------------${FinColor}"
@@ -318,7 +339,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
         ;;
 
-        7)
+        10)
 
           echo ""
           echo -e "${ColorVerde}-----------------------------${FinColor}"
