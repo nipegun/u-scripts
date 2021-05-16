@@ -71,6 +71,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Borrar acceso directo del menu
              sudo rm -rf /home/$UsuarioDaemon/.local/share/applications/raven.desktop
+
+          ## Borrar ComandosCli
+             sudo rm -rf /home/$UsuarioDaemon/ComandosCli/
         ;;
 
         2)
