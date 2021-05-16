@@ -16,7 +16,8 @@ echo ""
 echo -e "${ColorVerde}Creando alias para los u-scripts...${FinColor}"
 echo ""
 
-ln -s ~/scripts/u-scripts/SistemaOperativo-Actualizar.sh                          ~/scripts/u-scripts/Alias/aso
+ln -s ~/scripts/u-scripts/SistemaOperativo-Actualizar.sh             ~/scripts/u-scripts/Alias/aso
+ln -s ~/scripts/u-scripts/UScripts-Sincronizar.sh                    ~/scripts/u-scripts/Alias/sinus
 
 echo ""
 echo -e "${ColorVerde}Alias creados. Deberías poder ejecutar los u-scripts escribiendo el nombre de su alias.${FinColor}"
