@@ -245,6 +245,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-qt -min -testnet=0 -regtest=0" >> ~/ComandosCli/raven-qt-iniciar.sh
           chmod +x                                                                               ~/ComandosCli/raven-qt-iniciar.sh
 
+          sudo mv ~/ComandosCli/ /home/$UsuarioDaemon/ComandosCli/
+          sudo chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/
+
         ;;
 
         5)
