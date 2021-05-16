@@ -67,10 +67,10 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              sudo rm -rf /home/$UsuarioDaemon/.raven/
 
           ## Borrar autoejecución gráfica
-             rm -rf /home/$UsuarioDaemon/.config/autostart/raven.desktop
+             sudo rm -rf /home/$UsuarioDaemon/.config/autostart/raven.desktop
 
           ## Borrar acceso directo del menu
-             rm -rf /home/$UsuarioDaemon/.local/share/applications/raven.desktop
+             sudo rm -rf /home/$UsuarioDaemon/.local/share/applications/raven.desktop
         ;;
 
         2)
