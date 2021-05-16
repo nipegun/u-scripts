@@ -74,6 +74,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Borrar ComandosCli
              sudo rm -rf /home/$UsuarioDaemon/ComandosCli/
+
+          ## Borrar archivo con dirección de cartera
+             sudo rm -rf /home/pooladmin/pooladdress-rvn.txt
         ;;
 
         2)
