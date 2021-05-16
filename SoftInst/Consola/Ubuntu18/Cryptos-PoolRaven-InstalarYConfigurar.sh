@@ -271,13 +271,17 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo -e "${ColorVerde}-----------------------------------------------------${FinColor}"
           echo ""
 
-          mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
-          echo "[Desktop Entry]"                                             > /home/$UsuarioDaemon/.config/autostart/raven.desktop
-          echo "Name=Raven GUI"                                             >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-          echo "Type=Application"                                           >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-          echo "Exec=/home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh"  >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-          echo "Terminal=false"                                             >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-          echo "Hidden=false"                                               >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+          mkdir -p ~/.config/autostart/ 2> /dev/null
+
+          echo "[Desktop Entry]"                                             > ~/.config/autostart/raven.desktop
+          echo "Name=Raven GUI"                                             >> ~/.config/autostart/raven.desktop
+          echo "Type=Application"                                           >> ~/.config/autostart/raven.desktop
+          echo "Exec=/home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh"  >> ~/.config/autostart/raven.desktop
+          echo "Terminal=false"                                             >> ~/.config/autostart/raven.desktop
+          echo "Hidden=false"                                               >> ~/.config/autostart/raven.desktop
+
+          sudo mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
+          sudo mv ~/.config/autostart/raven.desktop /home/$UsuarioDaemon/.config/autostart/
 
         ;;
 
