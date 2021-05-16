@@ -176,13 +176,12 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "  Creando carpetas y archivos necesarios para ese usuario..."
           echo ""
-          sudo mkdir -p /home/$UsuarioDaemon/ 2> /dev/null
-          sudo mkdir -p /home/$UsuarioDaemon/.raven/
+          sudo mkdir -p /home/$UsuarioDaemon/.raven/ 2> /dev/null
           sudo touch /home/$UsuarioDaemon/.raven/raven.conf
-          sudo su -c 'echo "rpcuser=user1"      > /home/$UsuarioDaemon/.raven/raven.conf'
-          sudo su -c 'echo "rpcpassword=pass1" >> /home/$UsuarioDaemon/.raven/raven.conf'
-          sudo su -c 'echo "prune=550"         >> /home/$UsuarioDaemon/.raven/raven.conf'
-          sudo su -c 'echo "daemon=1"          >> /home/$UsuarioDaemon/.raven/raven.conf'
+          sudo su -c 'echo "rpcuser=user1"      > /home/"$UsuarioDaemon"/.raven/raven.conf'
+          sudo su -c 'echo "rpcpassword=pass1" >> /home/"$UsuarioDaemon"/.raven/raven.conf'
+          sudo su -c 'echo "prune=550"         >> /home/"$UsuarioDaemon"/.raven/raven.conf'
+          sudo su -c 'echo "daemon=1"          >> /home/"$UsuarioDaemon"/.raven/raven.conf'
           sudo rm -rf /home/$UsuarioDaemon/$CarpetaSoftRVN/
           sudo mv ~/SoftInst/Ravencoin/raven-$UltVersRaven/ /home/$UsuarioDaemon/$CarpetaSoftRVN/
           sudo chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
