@@ -18,8 +18,8 @@ if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
     echo ""
     echo "wget no está instalado. Iniciando su instalación..."
     echo ""
-    apt-get -y update
-    apt-get -y install wget
+    sudo apt-get -y update
+    sudo apt-get -y install wget
 fi
 
 # Comprobar si hay conexión a Internet antes de sincronizar los d-scripts
@@ -31,15 +31,15 @@ wget -q --tries=10 --timeout=20 --spider https://github.com
     echo -e "  ${ColorVerde} y descargando nuevos u-scripts si es que existen...${FinColor}"
     echo "---------------------------------------------------------"
     echo ""
-    rm /root/scripts/u-scripts -R 2> /dev/null
-    mkdir /root/scripts 2> /dev/null
-    cd /root/scripts
+    rm ~/scripts/u-scripts -R 2> /dev/null
+    mkdir ~/scripts 2> /dev/null
+    cd ~/scripts
     git clone --depth=1 https://github.com/nipegun/u-scripts
-    mkdir -p /root/scripts/u-scripts/Alias/
-    rm /root/scripts/u-scripts/.git -R 2> /dev/null
-    find /root/scripts/u-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
-    /root/scripts/u-scripts/UScripts-CrearAlias.sh
-    find /root/scripts/u-scripts/Alias -type f -exec chmod +x {} \;
+    mkdir -p ~/scripts/u-scripts/Alias/
+    rm ~/scripts/u-scripts/.git -R 2> /dev/null
+    find ~/scripts/u-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
+    ~/scripts/u-scripts/UScripts-CrearAlias.sh
+    find ~/scripts/u-scripts/Alias -type f -exec chmod +x {} \;
     
     echo ""
     echo "-----------------------------------------"
