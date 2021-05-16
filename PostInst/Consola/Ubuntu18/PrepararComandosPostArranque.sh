@@ -49,6 +49,7 @@ sudo su -c 'echo "" >> /root/scripts/ComandosPostArranque.sh'
 sudo su -c 'echo "" >> /root/scripts/ComandosPostArranque.sh'
 sudo su -c "echo 'FechaDeEjec="'$(date +A%YM%mD%d@%T)'"' >> /root/scripts/ComandosPostArranque.sh"
 sudo su -c 'echo "" >> /root/scripts/ComandosPostArranque.sh'
+sudo touch /var/log/PostArranque.log
 sudo su -c 'echo 'echo "Iniciada la ejecución del script post-arranque el $FechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ComandosPostArranque.sh'
 sudo su -c 'echo "" >> /root/scripts/ComandosPostArranque.sh'
 sudo su -c 'echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"  >> /root/scripts/ComandosPostArranque.sh'
@@ -59,7 +60,7 @@ sudo chmod 700 /root/scripts/ComandosPostArranque.sh
 echo ""
 echo -e "${ColorVerde}Activando y arrancando el servicio...${FinColor}"
 echo ""
-systemctl enable rc-local
-systemctl start rc-local.service
-systemctl status rc-local.service
+sudo systemctl enable rc-local
+sud systemctl start rc-local.service
+sudo systemctl status rc-local.service
 
