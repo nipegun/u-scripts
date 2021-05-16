@@ -46,9 +46,9 @@ echo ""
 sudo mkdir -p /root/scripts/ 2> /dev/null
 sudo su -c "echo '#!/bin/bash' > /root/scripts/ComandosPostArranque.sh"
 sudo su -c 'echo "" >> /root/scripts/ComandosPostArranque.sh'
-sudo su -c 'echo "ColorRojo='\033[1;31m'" >> /root/scripts/ComandosPostArranque.sh'
-sudo su -c 'echo "ColorVerde='\033[1;32m'" >> /root/scripts/ComandosPostArranque.sh'
-sudo su -c 'echo "FinColor='\033[0m'" >> /root/scripts/ComandosPostArranque.sh'
+sudo su -c "echo "ColorRojo='\033[1;31m'" >> /root/scripts/ComandosPostArranque.sh"
+sudo su -c "echo "ColorVerde='\033[1;32m'" >> /root/scripts/ComandosPostArranque.sh"
+sudo su -c "echo "FinColor='\033[0m'" >> /root/scripts/ComandosPostArranque.sh"
 sudo su -c 'echo "" >> /root/scripts/ComandosPostArranque.sh'
 sudo su -c "echo 'FechaDeEjec=$(date +A%YM%mD%d@%T)' >> /root/scripts/ComandosPostArranque.sh"
 sudo su -c 'echo "" >> /root/scripts/ComandosPostArranque.sh'
