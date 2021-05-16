@@ -59,7 +59,7 @@ sudo chmod 700 /root/scripts/ComandosPostArranque.sh
 echo ""
 echo -e "${ColorVerde}Activando y arrancando el servicio...${FinColor}"
 echo ""
-#sudo systemctl enable rc-local
-#sudo systemctl start rc-local.service
-#sudo systemctl status rc-local.service
+systemctl enable rc-local
+systemctl start rc-local.service
+systemctl status rc-local.service
 
