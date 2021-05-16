@@ -282,6 +282,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           sudo mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
           sudo mv ~/.config/autostart/raven.desktop /home/$UsuarioDaemon/.config/autostart/
+          sudo chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/
 
         ;;
 
@@ -293,15 +294,20 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo -e "${ColorVerde}----------------------------------------------------------${FinColor}"
           echo ""
 
-          mkdir -p /home/$UsuarioDaemon/.local/share/applications/ 2> /dev/null
-          echo "[Desktop Entry]"                                            > /home/$UsuarioDaemon/.local/share/applications/raven.desktop
-          echo "Name=Raven GUI"                                            >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
-          echo "Type=Application"                                          >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
-          echo "Exec=/home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh" >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
-          echo "Terminal=false"                                            >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
-          echo "Hidden=false"                                              >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
-          echo "Categories=Cryptos"                                        >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
-          #echo "Icon="                                                    >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
+          mkdir -p ~/.local/share/applications/ 2> /dev/null
+          
+          echo "[Desktop Entry]"                                            > ~/.local/share/applications/raven.desktop
+          echo "Name=Raven GUI"                                            >> ~/.local/share/applications/raven.desktop
+          echo "Type=Application"                                          >> ~/.local/share/applications/raven.desktop
+          echo "Exec=/home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh" >> ~/.local/share/applications/raven.desktop
+          echo "Terminal=false"                                            >> ~/.local/share/applications/raven.desktop
+          echo "Hidden=false"                                              >> ~/.local/share/applications/raven.desktop
+          echo "Categories=Cryptos"                                        >> ~/.local/share/applications/raven.desktop
+          #echo "Icon="                                                    >> ~/.local/share/applications/raven.desktop
+
+          sudo mkdir -p /home/$UsuarioDaemon/.local/share/applications/ 2> /dev/null
+          sudo mv ~/.local/share/applications/raven.desktop /home/$UsuarioDaemon/.local/share/applications/
+          sudo chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/
 
         ;;
 
