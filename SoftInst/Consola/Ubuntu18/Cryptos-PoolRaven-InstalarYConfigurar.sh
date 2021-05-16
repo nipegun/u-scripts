@@ -359,9 +359,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 done
 
 echo ""
-echo -e "${ColorVerde}--------------------------------------------------------------------------${FinColor}"
-echo -e "${ColorVerde}Script de instalación de una pool de minería de criptomonedas, finalzaado.${FinColor}"
-echo -e "${ColorVerde}--------------------------------------------------------------------------${FinColor}"
+echo -e "${ColorVerde}-------------------------------------------------------------------------${FinColor}"
+echo -e "${ColorVerde}Script de instalación de una pool de minería de criptomonedas, finalzado.${FinColor}"
+echo -e "${ColorVerde}-------------------------------------------------------------------------${FinColor}"
 echo ""
 
 echo "RAVEN:"
