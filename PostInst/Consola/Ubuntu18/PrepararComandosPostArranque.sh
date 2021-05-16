@@ -47,7 +47,7 @@ sudo mkdir -p /root/scripts/ 2> /dev/null
 sudo su -c "echo '#!/bin/bash' > /root/scripts/ComandosPostArranque.sh"
 sudo su -c 'echo "" >> /root/scripts/ComandosPostArranque.sh'
 sudo su -c 'echo "" >> /root/scripts/ComandosPostArranque.sh'
-sudo su -c 'echo "FechaDeEjec=$(date +A%YM%mD%d@%T)" >> /root/scripts/ComandosPostArranque.sh'
+sudo su -c "echo 'FechaDeEjec=$(date +A%YM%mD%d@%T)' >> /root/scripts/ComandosPostArranque.sh"
 sudo su -c 'echo "" >> /root/scripts/ComandosPostArranque.sh'
 sudo su -c 'echo 'echo "Iniciada la ejecución del script post-arranque el $FechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ComandosPostArranque.sh'
 sudo su -c 'echo "" >> /root/scripts/ComandosPostArranque.sh'
