@@ -16,47 +16,47 @@ FinColor='\033[0m'
 echo ""
 echo -e "${ColorVerde}Configurando el servicio...${FinColor}"
 echo ""
-sudo -c 'echo "[Unit]" > /etc/systemd/system/rc-local.service'
-sudo -c 'echo "Description=/etc/rc.local Compatibility" >> /etc/systemd/system/rc-local.service'
-sudo -c 'echo "ConditionPathExists=/etc/rc.local" >> /etc/systemd/system/rc-local.service'
-sudo -c 'echo "" >> /etc/systemd/system/rc-local.service'
-sudo -c 'echo "[Service]" >> /etc/systemd/system/rc-local.service'
-sudo -c 'echo "Type=forking" >> /etc/systemd/system/rc-local.service'
-sudo -c 'echo "ExecStart=/etc/rc.local start" >> /etc/systemd/system/rc-local.service'
-sudo -c 'echo "TimeoutSec=0" >> /etc/systemd/system/rc-local.service'
-sudo -c 'echo "StandardOutput=tty" >> /etc/systemd/system/rc-local.service'
-sudo -c 'echo "RemainAfterExit=yes" >> /etc/systemd/system/rc-local.service'
-sudo -c 'echo "SysVStartPriority=99" >> /etc/systemd/system/rc-local.service'
-sudo -c 'echo "" >> /etc/systemd/system/rc-local.service'
-sudo -c 'echo "[Install]" >> /etc/systemd/system/rc-local.service'
-sudo -c 'echo "WantedBy=multi-user.target" >> /etc/systemd/system/rc-local.service'
+sudo su -c 'echo "[Unit]" > /etc/systemd/system/rc-local.service'
+sudo su -c 'echo "Description=/etc/rc.local Compatibility" >> /etc/systemd/system/rc-local.service'
+sudo su -c 'echo "ConditionPathExists=/etc/rc.local" >> /etc/systemd/system/rc-local.service'
+sudo su -c 'echo "" >> /etc/systemd/system/rc-local.service'
+sudo su -c 'echo "[Service]" >> /etc/systemd/system/rc-local.service'
+sudo su -c 'echo "Type=forking" >> /etc/systemd/system/rc-local.service'
+sudo su -c 'echo "ExecStart=/etc/rc.local start" >> /etc/systemd/system/rc-local.service'
+sudo su -c 'echo "TimeoutSec=0" >> /etc/systemd/system/rc-local.service'
+sudo su -c 'echo "StandardOutput=tty" >> /etc/systemd/system/rc-local.service'
+sudo su -c 'echo "RemainAfterExit=yes" >> /etc/systemd/system/rc-local.service'
+sudo su -c 'echo "SysVStartPriority=99" >> /etc/systemd/system/rc-local.service'
+sudo su -c 'echo "" >> /etc/systemd/system/rc-local.service'
+sudo su -c 'echo "[Install]" >> /etc/systemd/system/rc-local.service'
+sudo su -c 'echo "WantedBy=multi-user.target" >> /etc/systemd/system/rc-local.service'
 
 echo ""
 echo -e "${ColorVerde}Creando el archivo /etc/rc.local ...${FinColor}"
 echo ""
-sudo -c "echo '#!/bin/bash' > /etc/rc.local"
-sudo -c 'echo "" >> /etc/rc.local'
-sudo -c 'echo "/root/scripts/ComandosPostArranque.sh" >> /etc/rc.local'
-sudo -c 'echo "exit 0" >> /etc/rc.local'
+sudo su -c "echo '#!/bin/bash' > /etc/rc.local"
+sudo su -c 'echo "" >> /etc/rc.local'
+sudo su -c 'echo "/root/scripts/ComandosPostArranque.sh" >> /etc/rc.local'
+sudo su -c 'echo "exit 0" >> /etc/rc.local'
 sudo chmod +x /etc/rc.local
 
 echo ""
 echo -e "${ColorVerde}Creando el archivo para meter los comandos...${FinColor}"
 echo ""
 sudo mkdir -p /root/scripts/ 2> /dev/null
-sudo -c "echo '#!/bin/bash' > /root/scripts/ComandosPostArranque.sh"
-sudo -c 'echo "" >> /root/scripts/ComandosPostArranque.sh'
-sudo -c 'echo "ColorRojo='\033[1;31m'" >> /root/scripts/ComandosPostArranque.sh'
-sudo -c 'echo "ColorVerde='\033[1;32m'" >> /root/scripts/ComandosPostArranque.sh'
-sudo -c 'echo "FinColor='\033[0m'" >> /root/scripts/ComandosPostArranque.sh'
-sudo -c 'echo "" >> /root/scripts/ComandosPostArranque.sh'
-sudo -c "echo 'FechaDeEjec=$(date +A%YM%mD%d@%T)' >> /root/scripts/ComandosPostArranque.sh"
-sudo -c 'echo "" >> /root/scripts/ComandosPostArranque.sh'
-sudo -c 'echo 'echo "Iniciada la ejecución del script post-arranque el $FechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ComandosPostArranque.sh'
-sudo -c 'echo "" >> /root/scripts/ComandosPostArranque.sh'
-sudo -c 'echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"  >> /root/scripts/ComandosPostArranque.sh'
-sudo -c 'echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/ComandosPostArranque.sh'
-sudo -c 'echo "" >> /root/scripts/ComandosPostArranque.sh'
+sudo su -c "echo '#!/bin/bash' > /root/scripts/ComandosPostArranque.sh"
+sudo su -c 'echo "" >> /root/scripts/ComandosPostArranque.sh'
+sudo su -c 'echo "ColorRojo='\033[1;31m'" >> /root/scripts/ComandosPostArranque.sh'
+sudo su -c 'echo "ColorVerde='\033[1;32m'" >> /root/scripts/ComandosPostArranque.sh'
+sudo su -c 'echo "FinColor='\033[0m'" >> /root/scripts/ComandosPostArranque.sh'
+sudo su -c 'echo "" >> /root/scripts/ComandosPostArranque.sh'
+sudo su -c "echo 'FechaDeEjec=$(date +A%YM%mD%d@%T)' >> /root/scripts/ComandosPostArranque.sh"
+sudo su -c 'echo "" >> /root/scripts/ComandosPostArranque.sh'
+sudo su -c 'echo 'echo "Iniciada la ejecución del script post-arranque el $FechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ComandosPostArranque.sh'
+sudo su -c 'echo "" >> /root/scripts/ComandosPostArranque.sh'
+sudo su -c 'echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"  >> /root/scripts/ComandosPostArranque.sh'
+sudo su -c 'echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/ComandosPostArranque.sh'
+sudo su -c 'echo "" >> /root/scripts/ComandosPostArranque.sh'
 sudo chmod 700 /root/scripts/ComandosPostArranque.sh
 
 echo ""
