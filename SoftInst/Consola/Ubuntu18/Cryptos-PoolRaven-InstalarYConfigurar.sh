@@ -215,7 +215,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo ""
              echo "  Parando el daemon..."
              echo ""
-             sudo su $UsuarioDaemon -c "/home/$UsuarioDaemon/ComandosCli/raven-daemon-parar.sh"
+             sudo su $UsuarioDaemon -c "/home/$UsuarioDaemon/CoreRVN/bin/raven-cli stop"
 
         ;;
 
