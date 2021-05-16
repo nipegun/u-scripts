@@ -36,7 +36,7 @@ wget -q --tries=10 --timeout=20 --spider https://github.com
     cd ~/scripts
     git clone --depth=1 https://github.com/nipegun/u-scripts
     mkdir -p ~/scripts/u-scripts/Alias/
-    rm ~/scripts/u-scripts/.git -R 2> /dev/null
+    rm ~/scripts/u-scripts/.git -Rf 2> /dev/null
     find ~/scripts/u-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
     ~/scripts/u-scripts/UScripts-CrearAlias.sh
     find ~/scripts/u-scripts/Alias -type f -exec chmod +x {} \;
