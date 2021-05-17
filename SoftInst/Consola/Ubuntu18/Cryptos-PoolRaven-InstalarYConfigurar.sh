@@ -15,6 +15,7 @@ FinColor='\033[0m'
 
 UsuarioDaemon="pooladmin"
 CarpetaSoftRVN="CoreRVN"
+DominioDeLaPool="localhost"
 
 echo ""
 echo -e "${ColorVerde}-------------------------------------------------------------${FinColor}"
@@ -41,7 +42,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
             7 "Crear acceso para ejecución gráfica de la cartera" on
             8 "Instalar escritorio y algunas utilidades de terminal" off
             9 "Reparar permisos (Obligatorio)" on
-            10 "Reniciar el sistema" off)
+           10 "Instalar la pool rvn-kawpow-pool" on
+           11 "Reniciar el sistema" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
 
@@ -371,6 +373,41 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         ;;
 
         10)
+
+          echo ""
+          echo -e "${ColorVerde}---------------------------------------${FinColor}"
+          echo -e "${ColorVerde}  Instalando la pool rvn-kawpow-pool...${FinColor}"
+          echo -e "${ColorVerde}---------------------------------------${FinColor}"
+          echo ""
+
+          ## Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
+             if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
+               echo ""
+               echo "git no está instalado. Iniciando su instalación..."
+               echo ""
+               apt-get -y update
+               apt-get -y install git
+             fi
+
+
+          sudo apt install git -y
+          cd ~
+          git config --global http.https://gopkg.in.followRedirects true
+          git clone https://github.com/notminerproduction/rvn-kawpow-pool.git
+          cd rvn-kawpow-pool/
+          ./install.sh
+
+          find /root/rvn-kawpow-pool/ -type f -iname "*.sh" -exec chmod +x {} \;
+          sed -i -e 's|"stratumHost": "192.168.0.200",|"stratumHost": "'"$DominioDeLaPool"'",|g'                                        ~/rvn-kawpow-pool/config.json
+          sed -i -e 's|"address": "RKopFydExeQXSZZiSTtg66sRAWvMzFReUj",|"address": "'"$DirCartRVN"'",|g'                                ~/rvn-kawpow-pool/pool_configs/ravencoin.json
+          sed -i -e 's|"donateaddress": "RKopFydExeQXSZZiSTtg66sRAWvMzFReUj",|"donateaddress": "RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy",|g' ~/rvn-kawpow-pool/pool_configs/ravencoin.json
+          sed -i -e 's|RL5SUNMHmjXtN1AzCRFQrFEhjnf7QQY7Tz|RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy|g'                                         ~/rvn-kawpow-pool/pool_configs/ravencoin.json
+          sed -i -e 's|Ta26x9axaDQWaV2bt2z8Dk3R3dN7gHw9b6|RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy|g'                                         ~/rvn-kawpow-pool/pool_configs/ravencoin.json
+          apt-get -y install npm
+
+        ;;
+
+        11)
 
           echo ""
           echo -e "${ColorVerde}-----------------------------${FinColor}"
