@@ -72,6 +72,9 @@ elif [ $VersUbuntu == "focal" ]; then
   ## Instalar las extensiones del huésped
      sudo sh /home/$UsuarioActual/vboxguestadditions/autorun.sh
 
+  ## Reiniciar el sistema
+     sudo shutdown -r now
+
 elif [ $VersUbuntu == "jammy" ]; then
 
   echo ""
@@ -94,6 +97,9 @@ elif [ $VersUbuntu == "jammy" ]; then
 
   ## Instalar las extensiones del huésped
      sudo sh /home/$UsuarioActual/vboxguestadditions/autorun.sh
+
+  ## Reiniciar el sistema
+     sudo shutdown -r now
 
 else
 
