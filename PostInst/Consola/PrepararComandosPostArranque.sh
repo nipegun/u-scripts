@@ -46,16 +46,6 @@ elif [ $VersUbuntu == "bionic" ]; then
   echo ""
 
   echo ""
-  echo "  Comandos para Ubuntu 18.04 LTS todavía no preparados. Prueba ejecutarlo en otra versión de Ubuntu."
-  echo ""
-
-elif [ $VersUbuntu == "focal" ]; then
-
-  echo ""
-  echo -e "${ColorVerde}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 20.04 LTS (Focal Fossa)...${FinColor}"
-  echo ""
-
-  echo ""
   echo "  Configurando el servicio..."
   echo ""
   sudo su -c 'echo "[Unit]"                                   > /etc/systemd/system/rc-local.service'
@@ -105,6 +95,16 @@ elif [ $VersUbuntu == "focal" ]; then
   sudo systemctl enable rc-local
   sudo systemctl start rc-local.service
   sudo systemctl status rc-local.service
+
+elif [ $VersUbuntu == "focal" ]; then
+
+  echo ""
+  echo -e "${ColorVerde}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 20.04 LTS (Focal Fossa)...${FinColor}"
+  echo ""
+
+  echo ""
+  echo "  Comandos para Ubuntu 20.04 LTS todavía no preparados. Prueba ejecutarlo en otra versión de Ubuntu."
+  echo ""
 
 elif [ $VersUbuntu == "jammy" ]; then
 
