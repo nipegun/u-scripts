@@ -70,7 +70,7 @@ elif [ $VersUbuntu == "focal" ]; then
      sudo mount /dev/sr0 /home/$UsuarioActual/vboxguestadditions/
 
   ## Instalar las extensiones del huésped
-     sudo sh /media/$UsuarioActual/autorun.sh
+     sudo sh /home/$UsuarioActual/vboxguestadditions/autorun.sh
 
 elif [ $VersUbuntu == "jammy" ]; then
 
@@ -93,7 +93,7 @@ elif [ $VersUbuntu == "jammy" ]; then
      sudo mount /dev/sr0 /home/$UsuarioActual/vboxguestadditions/
 
   ## Instalar las extensiones del huésped
-     sudo sh /media/$UsuarioActual/autorun.sh
+     sudo sh /home/$UsuarioActual/vboxguestadditions/autorun.sh
 
 else
 
