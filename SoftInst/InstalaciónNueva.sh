@@ -16,33 +16,10 @@ ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
-## Determinar la versión de Debian
+## Determinar la versión de Ubuntu
+   VersUbuntu=$(cat /etc/lsb-release | grep ODENAME | head -n1 | cut -d'=' -f2)
 
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       OS_NAME=$NAME
-       OS_VERS=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       OS_NAME=$(lsb_release -si)
-       OS_VERS=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       OS_NAME=$DISTRIB_ID
-       OS_VERS=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       OS_NAME=Debian
-       OS_VERS=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       OS_NAME=$(uname -s)
-       OS_VERS=$(uname -r)
-   fi
-
-if [ $OS_VERS == "trusty" ]; then
+if [ $VersUbuntu == "trusty" ]; then
 
   echo ""
   echo "------------------------------------------------------------------------------------------"
@@ -54,7 +31,7 @@ if [ $OS_VERS == "trusty" ]; then
   echo "  Comandos para Ubuntu 14.04 LTS todavía no preparados. Prueba ejecutarlo en otra versión de Ubuntu."
   echo ""
 
-elif [ $OS_VERS == "xenial" ]; then
+elif [ $VersUbuntu == "xenial" ]; then
 
   echo ""
   echo "-------------------------------------------------------------------------------------------"
@@ -66,7 +43,7 @@ elif [ $OS_VERS == "xenial" ]; then
   echo "  Comandos para Ubuntu 16.04 LTS todavía no preparados. Prueba ejecutarlo en otra versión de Ubuntu."
   echo ""
 
-elif [ $OS_VERS == "bionic" ]; then
+elif [ $VersUbuntu == "bionic" ]; then
 
   echo ""
   echo "--------------------------------------------------------------------------------------------"
@@ -78,7 +55,7 @@ elif [ $OS_VERS == "bionic" ]; then
   echo "  Comandos para Ubuntu 18.04 LTS todavía no preparados. Prueba ejecutarlo en otra versión de Ubuntu."
   echo ""
 
-elif [ $OS_VERS == "focal" ]; then
+elif [ $VersUbuntu == "focal" ]; then
 
   echo ""
   echo "------------------------------------------------------------------------------------------"
@@ -90,7 +67,7 @@ elif [ $OS_VERS == "focal" ]; then
   echo "  Comandos para Ubuntu 20.04 LTS todavía no preparados. Prueba ejecutarlo en otra versión de Ubuntu."
   echo ""
 
-elif [ $OS_VERS == "jammy" ]; then
+elif [ $VersUbuntu == "jammy" ]; then
 
   echo ""
   echo "----------------------------------------------------------------------------------------------"
