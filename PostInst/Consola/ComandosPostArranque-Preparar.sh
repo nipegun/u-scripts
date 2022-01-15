@@ -116,5 +116,11 @@ elif [ $VersUbuntu == "jammy" ]; then
   echo "  Comandos para Ubuntu 22.04 LTS todavía no preparados. Prueba ejecutarlo en otra versión de Ubuntu."
   echo ""
 
+else
+
+  echo ""
+  echo -e "${ColorRojo}  Los u-scripts no se pueden ejecutar en versiones de Ubuntu que no sean LTS...${FinColor}"
+  echo ""
+
 fi
 
