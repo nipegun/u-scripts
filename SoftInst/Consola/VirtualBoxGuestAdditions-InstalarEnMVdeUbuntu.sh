@@ -80,7 +80,7 @@ elif [ $VersUbuntu == "jammy" ]; then
      mount /dev/sr0
 
   ## Instalar las extensiones del huésped
-     sh /media/$UsuarioActual/autorun.sh
+     sudo sh /media/$UsuarioActual/autorun.sh
 
 else
 
