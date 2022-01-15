@@ -67,7 +67,7 @@ elif [ $VersUbuntu == "focal" ]; then
 
   ## Montarlo nuevamente en la carpeta deseada
      mkdir -p /home/$UsuarioActual/vboxguestadditions/ 2> /dev/null
-     mount /dev/sr0
+     mount /dev/sr0 /home/$UsuarioActual/vboxguestadditions/
 
   ## Instalar las extensiones del huésped
      sudo sh /media/$UsuarioActual/autorun.sh
@@ -90,7 +90,7 @@ elif [ $VersUbuntu == "jammy" ]; then
 
   ## Montarlo nuevamente en la carpeta deseada
      mkdir -p /home/$UsuarioActual/vboxguestadditions/ 2> /dev/null
-     mount /dev/sr0
+     mount /dev/sr0 /home/$UsuarioActual/vboxguestadditions/
 
   ## Instalar las extensiones del huésped
      sudo sh /media/$UsuarioActual/autorun.sh
