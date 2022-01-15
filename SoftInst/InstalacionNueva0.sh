@@ -22,9 +22,7 @@ FinColor='\033[0m'
 if [ $VersUbuntu == "trusty" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 14.04 LTS (Trusty Tahr)..."
-  echo "------------------------------------------------------------------------------------------"
+  echo -e "${ColorVerde}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 14.04 LTS (Trusty Tahr)...${FinColor}"
   echo ""
 
   echo ""
@@ -34,9 +32,7 @@ if [ $VersUbuntu == "trusty" ]; then
 elif [ $VersUbuntu == "xenial" ]; then
 
   echo ""
-  echo "-------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 16.04 LTS (Xenial Xerus)..."
-  echo "-------------------------------------------------------------------------------------------"
+  echo -e "${ColorVerde}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 16.04 LTS (Xenial Xerus)...${FinColor}"
   echo ""
 
   echo ""
@@ -46,9 +42,7 @@ elif [ $VersUbuntu == "xenial" ]; then
 elif [ $VersUbuntu == "bionic" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 18.04 LTS (Bionic Beaver)..."
-  echo "--------------------------------------------------------------------------------------------"
+  echo -e "${ColorVerde}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 18.04 LTS (Bionic Beaver)...${FinColor}"
   echo ""
 
   echo ""
@@ -58,9 +52,7 @@ elif [ $VersUbuntu == "bionic" ]; then
 elif [ $VersUbuntu == "focal" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 20.04 LTS (Focal Fossa)..."
-  echo "------------------------------------------------------------------------------------------"
+  echo -e "${ColorVerde}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 20.04 LTS (Focal Fossa)...${FinColor}"
   echo ""
 
   echo ""
@@ -70,9 +62,7 @@ elif [ $VersUbuntu == "focal" ]; then
 elif [ $VersUbuntu == "jammy" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 22.04 LTS (Jammy Jellyfish)..."
-  echo "----------------------------------------------------------------------------------------------"
+  echo -e "${ColorVerde}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 22.04 LTS (Jammy Jellyfish)...${FinColor}"
   echo ""
 
   echo ""
