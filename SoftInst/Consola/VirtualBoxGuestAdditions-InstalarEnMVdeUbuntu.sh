@@ -73,7 +73,7 @@ elif [ $VersUbuntu == "focal" ]; then
      sudo sh /home/$UsuarioActual/vboxguestadditions/autorun.sh
 
   ## Reiniciar el sistema
-     sudo shutdown -r now
+     #sudo shutdown -r now
 
 elif [ $VersUbuntu == "jammy" ]; then
 
@@ -99,7 +99,7 @@ elif [ $VersUbuntu == "jammy" ]; then
      sudo sh /home/$UsuarioActual/vboxguestadditions/autorun.sh
 
   ## Reiniciar el sistema
-     sudo shutdown -r now
+     #sudo shutdown -r now
 
 else
 
