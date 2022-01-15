@@ -65,9 +65,22 @@ elif [ $VersUbuntu == "jammy" ]; then
   echo -e "${ColorVerde}  Iniciando el script de instalación de las Guest Additions para una MV de Ubuntu 22.04 LTS (Jammy Jellyfish)...${FinColor}"
   echo ""
 
-  echo ""
-  echo "  Comandos para Ubuntu 22.04 LTS todavía no preparados. Prueba ejecutarlo en otra versión de Ubuntu."
-  echo ""
+  ## Instalar dependencias
+     sudo apt-get -y update
+     sudo apt-get -y install build-essential
+
+  ## Determinar el usuario que está ejecutando el script
+     UsuarioActual=$(whoami)
+
+  ## Desmontar el DVD virtual
+     umount /dev/sr0 
+
+  ## Montarlo nuevamente en la carpeta deseada
+     mkdir -p /home/$UsuarioActual/vboxguestadditions/ 2> /dev/null
+     mount /dev/sr0
+
+  ## Instalar las extensiones del huésped
+     sh /media/$UsuarioActual/autorun.sh
 
 else
 
