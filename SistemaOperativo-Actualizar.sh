@@ -21,27 +21,27 @@ echo -e "${ColorVerde}  Iniciando el script de actualización del sistema operat
 echo ""
 
 echo ""
-echo -e "${ColorVerde}  Reparando permisos de la carpeta /tmp/ ...${FinColor}"
+echo "  Reparando permisos de la carpeta /tmp/ ...$"
 echo ""
 sudo chmod 1777 /tmp
 
 echo ""
-echo -e "${ColorVerde}  Ejecutando apt-get update...${FinColor}"
+echo "  Ejecutando apt-get update..."
 echo ""
 sudo apt-get -y update
 
 echo ""
-echo -e "${ColorVerde}  Ejecutando apt-get -y upgrade...${FinColor}"
+echo "  Ejecutando apt-get -y upgrade..."
 echo ""
 sudo apt-get -y --allow-downgrades upgrade
 
 echo ""
-echo -e "${ColorVerde}  Ejecutando apt-get -y dist-upgrade...${FinColor}"
+echo "  Ejecutando apt-get -y dist-upgrade..."
 echo ""
 sudo apt-get -y --allow-downgrades dist-upgrade
 
 echo ""
-echo -e "${ColorVerde}  Ejecutando apt-get -y autoremove...${FinColor}"
+echo "  Ejecutando apt-get -y autoremove..."
 echo ""
 sudo apt-get -y autoremove
 
