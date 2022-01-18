@@ -28,11 +28,12 @@
    echo ""
    echo "  Modificando /etc/pam.d/gdm-password..."
    echo ""
-   sed -i '/root quiet_success/c\#auth required pam_succeed_if.so user != root quiet_success /etc/pam.d/gdm-password
+   sed -i '/root quiet_success/c\#auth required pam_succeed_if.so user != root quiet_success' /etc/pam.d/gdm-password
 
-echo ""
-echo "  Script finalizado..."
-echo ""
-echo "  Ya deberías poder loguearte con el root..."
-echo ""
+## Notificar finalización de script
+   echo ""
+   echo "  Script finalizado..."
+   echo ""
+   echo "  Ya deberías poder loguearte con el root..."
+   echo ""
 
