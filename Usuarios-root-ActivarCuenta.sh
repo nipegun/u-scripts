@@ -22,7 +22,7 @@
    echo ""
    echo "  Modificando el archivo de configuración de Gnome Display Manager..."
    echo ""
-   sed -i -e 's|[security]|[security]\nAllowRoot=true|g' /etc/gdm3/custom.conf
+   sed -i -e 's|\[security]|\[security]\nAllowRoot=true|g' /etc/gdm3/custom.conf
 
 ## Modificar /etc/pam.d/gdm-password
    echo ""
