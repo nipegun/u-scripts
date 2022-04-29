@@ -11,7 +11,7 @@
 #  Para minar TON y ETH
 #
 #  Ejecución remota:
-#  curl -s x | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/main/SoftInst/ParaCLI/lolMiner-Instalar.sh | sudo bash
 #--------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
@@ -19,12 +19,12 @@ ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
 vArchivo=$(curl -s https://github.com/Lolliedieb/lolMiner-releases/releases/tag/1.48 | grep href | grep "tar.gz" | grep 64 | cut -d'"' -f2)
-sudo apt-get -y install wget
-wget https://github.com$vArchivo -O /home/nipegun/lolminer.tar.gz
-sudo apt-get -y install tar
-cd /home/nipegun/
+apt-get -y install wget
+apt-get -y install tar
 
-tar -xvf /home/nipegun/lolminer.tar.gz
-mv /home/nipegun/1.48 /home/nipegun/lolMiner
-sed -i -e 's/WALLET=.*/WALLET=UQBLiO-jvWqwChjFqOsYlGDyZw6G3vYrKOQrgqnVNnTghhRs/' /home/nipegun/lolMiner/mine_ton.sh
+mkdir /Mineros 2 >/dev/null
+wget https://github.com$vArchivo -O /Mineros/lolminer.tar.gz
+tar -xvf /Mineros/lolminer.tar.gz
+mv /Mineros/1.48 /Mineros/lolMiner
+sed -i -e 's/WALLET=.*/WALLET=UQBLiO-jvWqwChjFqOsYlGDyZw6G3vYrKOQrgqnVNnTghhRs/' /Mineros/lolMiner/mine_ton.sh
 
