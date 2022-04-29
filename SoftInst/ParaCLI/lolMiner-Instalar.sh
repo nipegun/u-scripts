@@ -24,3 +24,5 @@ cd /home/nipegun/
 
 tar -xvf /home/nipegun/lolminer.tar.gz
 mv /home/nipegun/1.48 /home/nipegun/lolMiner
+sed -i -e 's/WALLET=.*/WALLET=UQBLiO-jvWqwChjFqOsYlGDyZw6G3vYrKOQrgqnVNnTghhRs/' /home/nipegun/lolMiner/mine_ton.sh
+
