@@ -8,6 +8,8 @@
 #--------------------------------------------------------------------
 #  Script de NiPeGun para instalar y configurar lolMiner en Ubuntu
 #
+#  Para minar TON y ETH
+#
 #  Ejecución remota:
 #  curl -s x | bash
 #--------------------------------------------------------------------
