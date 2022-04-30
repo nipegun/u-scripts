@@ -27,8 +27,9 @@ mkdir /Mineros 2 >/dev/null
 wget https://github.com$vArchivo -O /Mineros/teamredMiner.tar.gz
 tar -xvf /Mineros/teamredMiner.tar.gz
 mv /Mineros/teamredminer-v$Version-linux /Mineros/teamredMiner
+
 echo '#!/bin/bash' > /Mineros/teamredMiner/mine_rvn-woolypooly.sh
-echo "/Mineros/teamredMiner/teamredminer -a kawpow -o stratum+tcp://rvn.woolypooly.com:55555 -u RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy.YestonRX560-4GB -p x" >> /Mineros/teamredMiner/mine_rvn-woolypooly.sh
+echo "/Mineros/teamredMiner/teamredminer -a kawpow -o stratum+tcp://pool.eu.woolypooly.com:55555 -u RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy.YestonRX560-4GB -p x" >> /Mineros/teamredMiner/mine_rvn-woolypooly.sh
 chmod 777 /Mineros/teamredMiner/mine_rvn-woolypooly.sh
 
 echo '#!/bin/bash' > /Mineros/teamredMiner/mine_rvn-ravenminer.sh
