@@ -28,3 +28,4 @@ tar -xvf /Mineros/lolminer.tar.gz
 mv /Mineros/1.48 /Mineros/lolMiner
 sed -i -e 's/WALLET=.*/WALLET=UQBLiO-jvWqwChjFqOsYlGDyZw6G3vYrKOQrgqnVNnTghhRs/' /Mineros/lolMiner/mine_ton.sh
 
+sudo apt-get install xserver-xorg-video-dummy
