@@ -41,7 +41,7 @@ echo "  default-lease-time 600;"                      >> /etc/dhcp/dhcpd.conf
 echo "  max-lease-time 7200;"                         >> /etc/dhcp/dhcpd.conf
 echo ""                                               >> /etc/dhcp/dhcpd.conf
 echo "  host PrimeraReserva {"                        >> /etc/dhcp/dhcpd.conf
-echo "    hardware ethernet 00:00:00:00:00:01;"       >> /etc/dhcp/dhcpd.conf
+echo "    hardware ethernet 00:00:00:00:00:02;"       >> /etc/dhcp/dhcpd.conf
 echo "    fixed-address $vLANIP.10;"                  >> /etc/dhcp/dhcpd.conf
 echo "  }"                                            >> /etc/dhcp/dhcpd.conf
 echo "}"                                              >> /etc/dhcp/dhcpd.conf
