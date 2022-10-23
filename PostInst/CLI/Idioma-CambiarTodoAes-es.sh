@@ -9,7 +9,7 @@
 #  Script de NiPeGun para cambiar el idioma del sistema y del teclado a sólo español
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Idioma-CambiarTodoAes-es.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/main/PostInst/CLI/Idioma-CambiarTodoAes-es.sh | bash
 # ----------
 
   # Poner que sólo se genere el español de España cuando se creen locales
