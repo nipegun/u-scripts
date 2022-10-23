@@ -1,15 +1,19 @@
 #!/bin/bash
 
+echo ""
+echo "  Preparando el cliente Ubuntu para poder loguearse en el servidor LDAP..."
+echo ""
+
 vBase="BASE dc=practica,dc=com"
 vURI="URI ldap://192.168.50.10"
 
-sudo apt-get update
-sudo apt-get -y install ldap-utils
-sudo apt-get -y install libpam-ldap
-sudo apt-get -y install libnss-ldap
-sudo apt-get -y install nss-updatedb
-sudo apt-get -y install libnss-db
-sudo apt-get -y install nscd
+#sudo apt-get update
+sudo apt-get -y install ldap-utils    > /dev/null
+sudo apt-get -y install libpam-ldap  >> /dev/null
+sudo apt-get -y install libnss-ldap  >> /dev/null
+sudo apt-get -y install nss-updatedb >> /dev/null
+sudo apt-get -y install libnss-db    >> /dev/null
+sudo apt-get -y install nscd         >> /dev/null
 
 sudo sed -i -e 's|#bind_policy hard|bind_policy soft|g'  /etc/ldap.conf
 sudo sed -i -e 's|pam_password md5|pam_password crypt|g' /etc/ldap.conf
