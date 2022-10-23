@@ -1,5 +1,12 @@
 #!/bin/bash
 
+sudo apt-get update
+sudo apt-get -y install ldap-utils
+sudo apt-get -y install libpam-ldap
+sudo apt-get -y install libnss-ldap
+sudo apt-get -y install nss-updatedb
+sudo apt-get -y install libnss-db
+sudo apt-get -y install nscd 
 sudo sed -i -e 's|#bind_policy hard|bind_policy soft|g' /etc/ldap.conf
 sudo sed -i -e 's|pam_password md5|pam_password crypt|g' /etc/ldap.conf
 echo "BASE dc=practica,dc=com" > ~/ldap.conf
