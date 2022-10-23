@@ -15,3 +15,13 @@ sudo sed -i -e 's|^passwd:.*|passwd: files ldap|g' /etc/nsswitch.conf
 sudo sed -i -e 's|^group:.*|group: files ldap|g' /etc/nsswitch.conf
 sudo sed -i -e 's|^shadow:.*|shadow: files ldap|g' /etc/nsswitch.conf
 
+"passwd: files ldap"
+"group: files ldap"
+"shadow: files ldap"
+"hosts: files dns"
+"networks: files"
+"protocols: db files"
+"services: db files"
+"ethers: db files"
+"rpc: db files"
+
