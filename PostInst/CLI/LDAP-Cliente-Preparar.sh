@@ -24,15 +24,6 @@ sudo sed -i -e 's|systemd|ldap|g' /etc/nsswitch.conf
 sudo sed -i -e 's|^passwd:.*|passwd: files ldap|g' /etc/nsswitch.conf
 sudo sed -i -e 's|^group:.*|group: files ldap|g'   /etc/nsswitch.conf
 sudo sed -i -e 's|^shadow:.*|shadow: files ldap|g' /etc/nsswitch.conf
-#"passwd: files ldap"
-#"group: files ldap"
-#"shadow: files ldap"
-#"hosts: files dns"
-#"networks: files"
-#"protocols: db files"
-#"services: db files"
-#"ethers: db files"
-#"rpc: db files"
 sudo nss_updatedb ldap
 sudo systemctl restart nscd.service
 sudo sed -i -e 's|pam_ldap.so use_authtok try_first_pass|pam_ldap.so|g' /etc/pam.d/common-password
