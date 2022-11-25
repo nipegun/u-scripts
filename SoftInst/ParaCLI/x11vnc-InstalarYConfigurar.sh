@@ -86,20 +86,20 @@ elif [ $vVersUbuntu == "jammy" ]; then
   echo ""
   echo "  Creando el servicio de systemd..."
   echo ""
-  echo "[Unit]"                                                                                                                                            > /lib/systemd/system/x11vnc.service
-  echo "Description=x11vnc service"                                                                                                                       >> /lib/systemd/system/x11vnc.service
-  echo "After=display-manager.service network.target syslog.target"                                                                                       >> /lib/systemd/system/x11vnc.service
-  echo ""                                                                                                                                                 >> /lib/systemd/system/x11vnc.service
-  echo "[Service]"                                                                                                                                        >> /lib/systemd/system/x11vnc.service
-  echo "Type=simple"                                                                                                                                      >> /lib/systemd/system/x11vnc.service
-  echo "ExecStart=/usr/bin/x11vnc -forever -display :0 -auth guess -passwd Pass123"                                                                       >> /lib/systemd/system/x11vnc.service
-# echo "ExecStart=/usr/bin/x11vnc -display :0 -forever -shared -rfbauth /etc/x11vnc.passwd"                                                               >> /lib/systemd/system/x11vnc.service
-# echo "ExecStart=/usr/bin/x11vnc -display :0 -auth guess -forever -loop -noxdamage -repeat -localhost -rfbauth /etc/x11vnc.passwd -rfbport 5900 -shared" >> /lib/systemd/system/x11vnc.service
-  echo "ExecStop=/usr/bin/killall x11vnc"                                                                                                                 >> /lib/systemd/system/x11vnc.service
-  echo "Restart=on-failure"                                                                                                                               >> /lib/systemd/system/x11vnc.service
-  echo ""                                                                                                                                                 >> /lib/systemd/system/x11vnc.service
-  echo "[Install]"                                                                                                                                        >> /lib/systemd/system/x11vnc.service
-  echo "WantedBy=multi-user.target"                                                                                                                       >> /lib/systemd/system/x11vnc.service
+  echo "[Unit]"                                                                                                                                            > /etc/systemd/system/x11vnc.service
+  echo "Description=x11vnc service"                                                                                                                       >> /etc/systemd/system/x11vnc.service
+  echo "After=display-manager.service network.target syslog.target"                                                                                       >> /etc/systemd/system/x11vnc.service
+  echo ""                                                                                                                                                 >> /etc/systemd/system/x11vnc.service
+  echo "[Service]"                                                                                                                                        >> /etc/systemd/system/x11vnc.service
+  echo "Type=simple"                                                                                                                                      >> /etc/systemd/system/x11vnc.service
+  echo "ExecStart=/usr/bin/x11vnc -forever -display :0 -auth guess -passwd Pass123"                                                                       >> /etc/systemd/system/x11vnc.service
+# echo "ExecStart=/usr/bin/x11vnc -display :0 -forever -shared -rfbauth /etc/x11vnc.passwd"                                                               >> /etc/systemd/system/x11vnc.service
+# echo "ExecStart=/usr/bin/x11vnc -display :0 -auth guess -forever -loop -noxdamage -repeat -localhost -rfbauth /etc/x11vnc.passwd -rfbport 5900 -shared" >> /etc/systemd/system/x11vnc.service
+  echo "ExecStop=/usr/bin/killall x11vnc"                                                                                                                 >> /etc/systemd/system/x11vnc.service
+  echo "Restart=on-failure"                                                                                                                               >> /etc/systemd/system/x11vnc.service
+  echo ""                                                                                                                                                 >> /etc/systemd/system/x11vnc.service
+  echo "[Install]"                                                                                                                                        >> /etc/systemd/system/x11vnc.service
+  echo "WantedBy=multi-user.target"                                                                                                                       >> /etc/systemd/system/x11vnc.service
 
   echo ""
   echo "  Recargando la configuración de los daemons..."
