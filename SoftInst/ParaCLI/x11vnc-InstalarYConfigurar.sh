@@ -12,9 +12,11 @@
 #  curl -s x | bash
 #--------------------------------------------------------------------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+vColorAzul="\033[0;34m"
+vColorAzulClaro="\033[1;34m"
+vColorVerde='\033[1;32m'
+vColorRojo='\033[1;31m'
+vFinColor='\033[0m'
 
 # Determinar la versión de Ubuntu
   vVersUbuntu=$(cat /etc/lsb-release | grep ODENAME | head -n1 | cut -d'=' -f2)
@@ -22,7 +24,7 @@ FinColor='\033[0m'
 if [ $vVersUbuntu == "trusty" ]; then
 
   echo ""
-  echo -e "${ColorVerde}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 14.04 LTS (Trusty Tahr)...${FinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 14.04 LTS (Trusty Tahr)...${vFinColor}"
   echo ""
 
   echo ""
@@ -32,7 +34,7 @@ if [ $vVersUbuntu == "trusty" ]; then
 elif [ $vVersUbuntu == "xenial" ]; then
 
   echo ""
-  echo -e "${ColorVerde}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 16.04 LTS (Xenial Xerus)...${FinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 16.04 LTS (Xenial Xerus)...${vFinColor}"
   echo ""
 
   echo ""
@@ -42,7 +44,7 @@ elif [ $vVersUbuntu == "xenial" ]; then
 elif [ $vVersUbuntu == "bionic" ]; then
 
   echo ""
-  echo -e "${ColorVerde}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 18.04 LTS (Bionic Beaver)...${FinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 18.04 LTS (Bionic Beaver)...${vFinColor}"
   echo ""
 
   echo ""
@@ -52,7 +54,7 @@ elif [ $vVersUbuntu == "bionic" ]; then
 elif [ $vVersUbuntu == "focal" ]; then
 
   echo ""
-  echo -e "${ColorVerde}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 20.04 LTS (Focal Fossa)...${FinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 20.04 LTS (Focal Fossa)...${vFinColor}"
   echo ""
 
   echo ""
@@ -62,7 +64,7 @@ elif [ $vVersUbuntu == "focal" ]; then
 elif [ $vVersUbuntu == "jammy" ]; then
 
   echo ""
-  echo -e "${ColorVerde}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 22.04 LTS (Jammy Jellyfish)...${FinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 22.04 LTS (Jammy Jellyfish)...${vFinColor}"
   echo ""
 
   echo ""
@@ -72,7 +74,7 @@ elif [ $vVersUbuntu == "jammy" ]; then
 else
 
   echo ""
-  echo -e "${ColorRojo}  Los u-scripts no se pueden ejecutar en versiones de Ubuntu que no sean LTS...${FinColor}"
+  echo -e "${vColorRojo}  Los u-scripts no se pueden ejecutar en versiones de Ubuntu que no sean LTS...${vFinColor}"
   echo ""
 
 fi
