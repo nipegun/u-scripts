@@ -103,6 +103,13 @@ elif [ $vVersUbuntu == "jammy" ]; then
   echo ""
   systemctl enable x11vnc.service --now
 
+  echo ""
+  echo "  Creando contraseña de usuario para x11vnc..."
+  echo ""
+  x11vnc -storepasswd
+
+
+
 else
 
   echo ""
