@@ -68,8 +68,40 @@ elif [ $vVersUbuntu == "jammy" ]; then
   echo ""
 
   echo ""
-  echo "  Comandos para Ubuntu 22.04 LTS todavía no preparados. Prueba ejecutarlo en otra versión de Ubuntu."
+  echo "  Actualizando el sistema..."
   echo ""
+  apt-get -y update && apt-get -y upgrade
+
+  echo ""
+  echo "  Instalando el paquete x11vnc..."
+  echo ""
+  sudo apt-get install x11vnc
+
+  echo ""
+  echo "  Creando el servicio de systemd..."
+  echo ""
+  echo "[Unit]"                                                                           > /lib/systemd/system/x11vnc.service
+  echo "Description=x11vnc service"                                                      >> /lib/systemd/system/x11vnc.service
+  echo "After=display-manager.service network.target syslog.target"                      >> /lib/systemd/system/x11vnc.service
+  echo ""                                                                                >> /lib/systemd/system/x11vnc.service
+  echo "[Service]"                                                                       >> /lib/systemd/system/x11vnc.service
+  echo "Type=simple"                                                                     >> /lib/systemd/system/x11vnc.service
+  echo "ExecStart=/usr/bin/x11vnc -forever -display :0 -auth guess -passwd yourPassword" >> /lib/systemd/system/x11vnc.service
+  echo "ExecStop=/usr/bin/killall x11vnc"                                                >> /lib/systemd/system/x11vnc.service
+  echo "Restart=on-failure"                                                              >> /lib/systemd/system/x11vnc.service
+  echo ""                                                                                >> /lib/systemd/system/x11vnc.service
+  echo "[Install]"                                                                       >> /lib/systemd/system/x11vnc.service
+  echo "WantedBy=multi-user.target"                                                      >> /lib/systemd/system/x11vnc.service
+
+  echo ""
+  echo "  Recargando la configuración de los daemons..."
+  echo ""
+  systemctl daemon-reload
+
+  echo ""
+  echo "  Activando e iniciando el servicio x11vnc..."
+  echo ""
+  systemctl enable x11vnc.service --now
 
 else
 
