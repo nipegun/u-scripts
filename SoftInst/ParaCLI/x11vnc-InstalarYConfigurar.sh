@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------------
+# ----------
 #  Script de NiPeGun para instalar y configurar x11vnc en Ubuntu
 #
 #  Ejecución remota:
-#  curl -s x | bash
-#--------------------------------------------------------------------
+#  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/main/SoftInst/ParaCLI/x11vnc-InstalarYConfigurar.sh | sudo bash
+# ----------
 
 vColorAzul="\033[0;34m"
 vColorAzulClaro="\033[1;34m"
