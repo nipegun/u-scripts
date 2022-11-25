@@ -75,7 +75,13 @@ elif [ $vVersUbuntu == "jammy" ]; then
   echo ""
   echo "  Instalando el paquete x11vnc..."
   echo ""
-  sudo apt-get install x11vnc
+  apt-get -y install x11vnc
+
+  echo ""
+  echo "  Instalando el paquete net-tools para poder utilizar netstat en -auth guess..."
+  echo ""
+  apt-get -y install net-tools
+
 
   echo ""
   echo "  Creando el servicio de systemd..."
@@ -86,9 +92,9 @@ elif [ $vVersUbuntu == "jammy" ]; then
   echo ""                                                                                                                                                 >> /lib/systemd/system/x11vnc.service
   echo "[Service]"                                                                                                                                        >> /lib/systemd/system/x11vnc.service
   echo "Type=simple"                                                                                                                                      >> /lib/systemd/system/x11vnc.service
-# echo "ExecStart=/usr/bin/x11vnc -forever -display :0 -auth guess -passwd Pass123"                                                                       >> /lib/systemd/system/x11vnc.service
+  echo "ExecStart=/usr/bin/x11vnc -forever -display :0 -auth guess -passwd Pass123"                                                                       >> /lib/systemd/system/x11vnc.service
 # echo "ExecStart=/usr/bin/x11vnc -display :0 -forever -shared -rfbauth /etc/x11vnc.passwd"                                                               >> /lib/systemd/system/x11vnc.service
-  echo "ExecStart=/usr/bin/x11vnc -display :0 -auth guess -forever -loop -noxdamage -repeat -localhost -rfbauth /etc/x11vnc.passwd -rfbport 5900 -shared" >> /lib/systemd/system/x11vnc.service
+# echo "ExecStart=/usr/bin/x11vnc -display :0 -auth guess -forever -loop -noxdamage -repeat -localhost -rfbauth /etc/x11vnc.passwd -rfbport 5900 -shared" >> /lib/systemd/system/x11vnc.service
   echo "ExecStop=/usr/bin/killall x11vnc"                                                                                                                 >> /lib/systemd/system/x11vnc.service
   echo "Restart=on-failure"                                                                                                                               >> /lib/systemd/system/x11vnc.service
   echo ""                                                                                                                                                 >> /lib/systemd/system/x11vnc.service
