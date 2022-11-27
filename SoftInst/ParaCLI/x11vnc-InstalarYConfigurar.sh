@@ -159,7 +159,7 @@ elif [ $vVersUbuntu == "jammy" ]; then
           echo ""
           echo "  Presiona ctrl + c para abortar el reinicio..."
           echo ""
-          sleep5
+          sleep 5
           shutdown -r now
 
         ;;
