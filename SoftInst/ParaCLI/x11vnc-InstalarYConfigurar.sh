@@ -127,7 +127,8 @@ elif [ $vVersUbuntu == "jammy" ]; then
 #         echo "ExecStart=/usr/bin/x11vnc -display :0 -auth guess -forever -loop -noxdamage -repeat -localhost -rfbauth /etc/x11vnc.passwd -rfbport 5900 -shared" >> /etc/systemd/system/x11vnc.service
 #          echo "ExecStart=/usr/bin/x11vnc -auth /run/user/1000/gdm/Xauthority -passwd Pass123 -noxdamage -forever"                                               >> /etc/systemd/system/x11vnc.service
 #          echo "ExecStart=/usr/bin/x11vnc -auth /run/user/1000/gdm/Xauthority -rfbauth /etc/x11vnc.passwd"                                                       >> /etc/systemd/system/x11vnc.service
-          echo "ExecStart=/usr/bin/x11vnc -auth guess -passwd Pass123 -noxdamage -forever"                                               >> /etc/systemd/system/x11vnc.service
+#          echo "x11vnc -noxdamage -many -display :0 -auth /var/run/gdm/$(sudo ls /var/run/gdm | grep $(whoami))/database -forever -bg -passwd Pass123"                                                       >> /etc/systemd/system/x11vnc.service
+echo "ExecStart=/usr/bin/x11vnc -auth guess -passwd Pass123 -noxdamage -forever"                                               >> /etc/systemd/system/x11vnc.service
           echo "ExecStop=/usr/bin/killall x11vnc"                                                                                                                 >> /etc/systemd/system/x11vnc.service
           echo "Restart=on-failure"                                                                                                                               >> /etc/systemd/system/x11vnc.service
           echo ""                                                                                                                                                 >> /etc/systemd/system/x11vnc.service
