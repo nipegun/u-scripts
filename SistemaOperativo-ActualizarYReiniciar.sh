@@ -9,6 +9,6 @@
 #  Script de NiPeGun para actualizar e inmediamente reiniciar Ubuntu
 # ----------
 
-~/scripts/d-scripts/SistemaOperativo-Actualizar.sh
-~/scripts/d-scripts/SistemaOperativo-Reiniciar.sh
+~/scripts/u-scripts/SistemaOperativo-Actualizar.sh
+~/scripts/u-scripts/SistemaOperativo-Reiniciar.sh
 
