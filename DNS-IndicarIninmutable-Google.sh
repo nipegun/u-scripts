@@ -17,7 +17,7 @@ echo "  Configurando Google como servidor DNS ininmutable..."
 echo ""
 sudo chattr -i /etc/resolv.conf.bak 2> /dev/null
 sudo su root -c "echo 'nameserver 8.8.8.8'  > /etc/resolv.conf.bak"
-sudo su root -c "echo 'nameserver 8.4.4.8' >> /etc/resolv.conf.bak"
+sudo su root -c "echo 'nameserver 8.8.4.4' >> /etc/resolv.conf.bak"
 sudo chattr +i /etc/resolv.conf.bak
 sudo rm -f /etc/resolv.conf
 sudo cp /etc/resolv.conf.bak /etc/resolv.conf
