@@ -36,6 +36,13 @@ FinColor='\033[0m'
     rm ~/scripts/u-scripts -R 2> /dev/null
     mkdir ~/scripts 2> /dev/null
     cd ~/scripts
+    # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo "git no está instalado. Iniciando su instalación..."
+      echo ""
+      sudo apt-get -y update && sudo apt-get -y install git
+    fi
     git clone --depth=1 https://github.com/nipegun/u-scripts
     mkdir -p ~/scripts/u-scripts/Alias/
     rm ~/scripts/u-scripts/.git -Rf 2> /dev/null
