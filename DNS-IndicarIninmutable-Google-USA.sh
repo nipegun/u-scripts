@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #----------------------------------------------------------------------------------------------------------
-#  Script de NiPeGun para configurar CloudFlare como servidor DNS ininmutable en Ubuntu
+#  Script de NiPeGun para configurar CloudFlare USA como servidor DNS ininmutable en Ubuntu
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/main/DNS-IndicarIninmutable-Google.sh | bash
