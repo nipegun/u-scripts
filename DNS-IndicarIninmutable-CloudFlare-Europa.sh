@@ -28,7 +28,7 @@ sudo chattr +i /etc/resolv.conf.temp
 echo ""
 echo "    Quitando atributo ininmutable a /etc/resolv.conf..."
 echo ""
-sudo chattr -a -i /etc/resolv.conf.temp 2> /dev/null
+sudo chattr -a -i /etc/resolv.conf.temp
 
 echo ""
 echo "    Borrando el archivo /etc/resolv.conf..."
