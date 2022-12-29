@@ -33,12 +33,14 @@ sudo chattr -i /etc/resolv.conf.temp 2> /dev/null
 echo ""
 echo "    Borrando el archivo /etc/resolv.conf..."
 echo ""
-sudo rm -f /etc/resolv.conf
+#sudo rm -f /etc/resolv.conf
+sudo su root -c "rm -f /etc/resolv.conf"
 
 echo ""
 echo "    Copiando el archivo resolv.conf temporal a su ubicación final..."
 echo ""
-sudo cp /etc/resolv.conf.temp /etc/resolv.conf
+#sudo cp /etc/resolv.conf.temp /etc/resolv.conf
+sudo su root -c "cp /etc/resolv.conf.temp /etc/resolv.conf"
 
 echo ""
 echo "    Asignando atributo ininmutable a /etc/resolv.conf..."
