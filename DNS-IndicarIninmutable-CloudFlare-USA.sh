@@ -41,7 +41,7 @@ echo ""
 sudo cp /etc/resolv.conf.temp /etc/resolv.conf
 
 echo ""
-echo "  Asignando atributo ininmutable a /etc/resolv.conf..."
+echo "    Asignando atributo ininmutable a /etc/resolv.conf..."
 echo ""
 sudo chattr +i /etc/resolv.conf
 
