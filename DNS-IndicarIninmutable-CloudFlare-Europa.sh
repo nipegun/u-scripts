@@ -13,12 +13,35 @@
 #--------------------------------------------------------------------------------------------------------------
 
 echo ""
-echo "  Configurando CloudFlare como servidor DNS ininmutable..."
+echo "  Configurando CloudFlare Europa como servidor DNS ininmutable..."
 echo ""
-sudo chattr -i /etc/resolv.conf.bak 2> /dev/null
-sudo su root -c "echo 'nameserver 9.9.9.9'          > /etc/resolv.conf.bak"
-sudo su root -c "echo 'nameserver 149.112.112.112' >> /etc/resolv.conf.bak"
-sudo chattr +i /etc/resolv.conf.bak
+
+echo ""
+echo "    Creando el archivo resolv.conf temporal..."
+echo ""
+sudo chattr -i /etc/resolv.conf.temp 2> /dev/null
+sudo rm -f /etc/resolv.conf.temp     2> /dev/null
+sudo su root -c "echo 'nameserver 9.9.9.9'          > /etc/resolv.conf.temp"
+sudo su root -c "echo 'nameserver 149.112.112.112' >> /etc/resolv.conf.temp"
+sudo chattr +i /etc/resolv.conf.temp
+
+echo ""
+echo "    Quitando atributo ininmutable a /etc/resolv.conf..."
+echo ""
+sudo chattr -i /etc/resolv.conf.temp 2> /dev/null
+
+echo ""
+echo "    Borrando el archivo /etc/resolv.conf..."
+echo ""
 sudo rm -f /etc/resolv.conf
-sudo cp /etc/resolv.conf.bak /etc/resolv.conf
+
+echo ""
+echo "    Copiando el archivo resolv.conf temporal a su ubicación final..."
+echo ""
+sudo cp /etc/resolv.conf.temp /etc/resolv.conf
+
+echo ""
+echo "  Asignando atributo ininmutable a /etc/resolv.conf..."
+echo ""
 sudo chattr +i /etc/resolv.conf
+
