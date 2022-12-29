@@ -6,20 +6,43 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #----------------------------------------------------------------------------------------------------------
-#  Script de NiPeGun para configurar CloudFlare USA como servidor DNS ininmutable en Ubuntu
+#  Script de NiPeGun para configurar Google USA como servidor DNS ininmutable en Ubuntu
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/main/DNS-IndicarIninmutable-Google.sh | bash
 #----------------------------------------------------------------------------------------------------------
 
 echo ""
-echo "  Configurando Google como servidor DNS ininmutable..."
+echo "  Configurando Google USA como servidor DNS ininmutable..."
 echo ""
-sudo chattr -i /etc/resolv.conf.bak 2> /dev/null
-sudo su root -c "echo 'nameserver 8.8.8.8'  > /etc/resolv.conf.bak"
-sudo su root -c "echo 'nameserver 8.8.4.4' >> /etc/resolv.conf.bak"
-sudo chattr +i /etc/resolv.conf.bak
+
+echo ""
+echo "    Creando el archivo resolv.conf temporal..."
+echo ""
+sudo chattr -i /etc/resolv.conf.temp 2> /dev/null
+sudo rm -f /etc/resolv.conf.temp     2> /dev/null
+sudo su root -c "echo 'nameserver 8.8.8.8'  > /etc/resolv.conf.temp"
+sudo su root -c "echo 'nameserver 8.8.4.4' >> /etc/resolv.conf.temp"
+sudo chattr +i /etc/resolv.conf.temp
+
+echo ""
+echo "    Quitando atributo ininmutable a /etc/resolv.conf..."
+echo ""
+sudo chattr -i /etc/resolv.conf.temp 2> /dev/null
+
+echo ""
+echo "    Borrando el archivo /etc/resolv.conf..."
+echo ""
 sudo rm -f /etc/resolv.conf
-sudo cp /etc/resolv.conf.bak /etc/resolv.conf
+
+echo ""
+echo "    Copiando el archivo resolv.conf temporal a su ubicación final..."
+echo ""
+sudo cp /etc/resolv.conf.temp /etc/resolv.conf
+
+echo ""
+echo "  Asignando atributo ininmutable a /etc/resolv.conf..."
+echo ""
 sudo chattr +i /etc/resolv.conf
+
 
