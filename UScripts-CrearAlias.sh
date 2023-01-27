@@ -17,6 +17,7 @@ echo -e "${ColorVerde}  Creando alias para los u-scripts...${FinColor}"
 echo ""
 
 ln -s ~/scripts/u-scripts/SistemaOperativo-Actualizar.sh            ~/scripts/u-scripts/Alias/aso
+ln -s ~/scripts/u-scripts/SistemaOperativo-ActualizarYApagar.sh     ~/scripts/u-scripts/Alias/asoya
 ln -s ~/scripts/u-scripts/SistemaOperativo-ActualizarYReiniciar.sh  ~/scripts/u-scripts/Alias/asoyr
 ln -s ~/scripts/u-scripts/SistemaOperativo-Apagar.sh                ~/scripts/u-scripts/Alias/apso
 ln -s ~/scripts/u-scripts/SistemaOperativo-Reiniciar.sh             ~/scripts/u-scripts/Alias/rso
