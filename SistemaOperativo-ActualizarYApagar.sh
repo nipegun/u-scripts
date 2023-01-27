@@ -12,6 +12,6 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/main/SistemaOperativo-ActualizarYApagar.sh | bash
 # ----------
 
-/root/scripts/u-scripts/SistemaOperativo-Actualizar.sh
-/root/scripts/u-scripts/SistemaOperativo-Apagar.sh
+~/scripts/u-scripts/SistemaOperativo-Actualizar.sh
+~/scripts/u-scripts/SistemaOperativo-Apagar.sh
 
