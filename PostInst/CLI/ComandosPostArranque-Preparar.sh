@@ -12,37 +12,37 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/main/PostInst/CLI/ComandosPostArranque-Preparar.sh | bash
 # ----------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+vColorRojo='\033[1;31m'
+vColorVerde='\033[1;32m'
+vFinColor='\033[0m'
 
-## Determinar la versión de Ubuntu
-   VersUbuntu=$(cat /etc/lsb-release | grep ODENAME | head -n1 | cut -d'=' -f2)
+# Determinar la versión de Ubuntu
+  vVersUbuntu=$(cat /etc/lsb-release | grep ODENAME | head -n1 | cut -d'=' -f2)
 
-if [ $VersUbuntu == "trusty" ]; then
+if [ $vVersUbuntu == "trusty" ]; then
 
   echo ""
-  echo -e "${ColorVerde}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 14.04 LTS (Trusty Tahr)...${FinColor}"
+  echo -e "${vColorVerde}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 14.04 LTS (Trusty Tahr)...${vFinColor}"
   echo ""
 
   echo ""
   echo "  Comandos para Ubuntu 14.04 LTS todavía no preparados. Prueba ejecutarlo en otra versión de Ubuntu."
   echo ""
 
-elif [ $VersUbuntu == "xenial" ]; then
+elif [ $vVersUbuntu == "xenial" ]; then
 
   echo ""
-  echo -e "${ColorVerde}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 16.04 LTS (Xenial Xerus)...${FinColor}"
+  echo -e "${vColorVerde}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 16.04 LTS (Xenial Xerus)...${vFinColor}"
   echo ""
 
   echo ""
   echo "  Comandos para Ubuntu 16.04 LTS todavía no preparados. Prueba ejecutarlo en otra versión de Ubuntu."
   echo ""
 
-elif [ $VersUbuntu == "bionic" ]; then
+elif [ $vVersUbuntu == "bionic" ]; then
 
   echo ""
-  echo -e "${ColorVerde}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 18.04 LTS (Bionic Beaver)...${FinColor}"
+  echo -e "${vColorVerde}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 18.04 LTS (Bionic Beaver)...${vFinColor}"
   echo ""
 
   echo ""
@@ -76,16 +76,16 @@ elif [ $VersUbuntu == "bionic" ]; then
   echo "  Creando el archivo para meter los comandos..."
   echo ""
   sudo mkdir -p /root/scripts/ 2> /dev/null
-  sudo su -c "echo '#!/bin/bash'                                                                                         > /root/scripts/ComandosPostArranque.sh"
-  sudo su -c 'echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c "echo 'FechaDeEjec="'$(date +A%YM%mD%d@%T)'"'                                                              >> /root/scripts/ComandosPostArranque.sh"
-  sudo su -c 'echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo 'echo "Iniciada la ejecución del script post-arranque el $FechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"                    >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                  >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh'
+  sudo su -c "echo '#!/bin/bash'                                                                                          > /root/scripts/ComandosPostArranque.sh"
+  sudo su -c 'echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh'
+  sudo su -c 'echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh'
+  sudo su -c "echo 'vFechaDeEjec="'$(date +A%YM%mD%d@%T)'"'                                                              >> /root/scripts/ComandosPostArranque.sh"
+  sudo su -c 'echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh'
+  sudo su -c 'echo 'echo "Iniciada la ejecución del script post-arranque el $vFechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ComandosPostArranque.sh'
+  sudo su -c 'echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh'
+  sudo su -c 'echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"                     >> /root/scripts/ComandosPostArranque.sh'
+  sudo su -c 'echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                   >> /root/scripts/ComandosPostArranque.sh'
+  sudo su -c 'echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh'
   sudo chmod 700 /root/scripts/ComandosPostArranque.sh
   sudo touch /var/log/PostArranque.log
 
@@ -96,10 +96,10 @@ elif [ $VersUbuntu == "bionic" ]; then
   sudo systemctl start rc-local.service
   sudo systemctl status rc-local.service
 
-elif [ $VersUbuntu == "focal" ]; then
+elif [ $vVersUbuntu == "focal" ]; then
 
   echo ""
-  echo -e "${ColorVerde}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 20.04 LTS (Focal Fossa)...${FinColor}"
+  echo -e "${vColorVerde}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 20.04 LTS (Focal Fossa)...${vFinColor}"
   echo ""
 
   echo ""
@@ -109,7 +109,7 @@ elif [ $VersUbuntu == "focal" ]; then
 elif [ $VersUbuntu == "jammy" ]; then
 
   echo ""
-  echo -e "${ColorVerde}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 22.04 LTS (Jammy Jellyfish)...${FinColor}"
+  echo -e "${vColorVerde}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 22.04 LTS (Jammy Jellyfish)...${vFinColor}"
   echo ""
 
   echo ""
@@ -143,16 +143,16 @@ elif [ $VersUbuntu == "jammy" ]; then
   echo "  Creando el archivo para meter los comandos..."
   echo ""
   sudo mkdir -p /root/scripts/ 2> /dev/null
-  sudo su -c "echo '#!/bin/bash'                                                                                         > /root/scripts/ComandosPostArranque.sh"
-  sudo su -c 'echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c "echo 'FechaDeEjec="'$(date +A%YM%mD%d@%T)'"'                                                              >> /root/scripts/ComandosPostArranque.sh"
-  sudo su -c 'echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo 'echo "Iniciada la ejecución del script post-arranque el $FechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"                    >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                  >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh'
+  sudo su -c "echo '#!/bin/bash'                                                                                          > /root/scripts/ComandosPostArranque.sh"
+  sudo su -c 'echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh'
+  sudo su -c 'echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh'
+  sudo su -c "echo 'vFechaDeEjec="'$(date +A%YM%mD%d@%T)'"'                                                              >> /root/scripts/ComandosPostArranque.sh"
+  sudo su -c 'echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh'
+  sudo su -c 'echo 'echo "Iniciada la ejecución del script post-arranque el $vFechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ComandosPostArranque.sh'
+  sudo su -c 'echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh'
+  sudo su -c 'echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"                     >> /root/scripts/ComandosPostArranque.sh'
+  sudo su -c 'echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                   >> /root/scripts/ComandosPostArranque.sh'
+  sudo su -c 'echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh'
   sudo chmod 700 /root/scripts/ComandosPostArranque.sh
   sudo touch /var/log/PostArranque.log
 
@@ -166,7 +166,7 @@ elif [ $VersUbuntu == "jammy" ]; then
 else
 
   echo ""
-  echo -e "${ColorRojo}  Los u-scripts no se pueden ejecutar en versiones de Ubuntu que no sean LTS...${FinColor}"
+  echo -e "${vColorRojo}  Los u-scripts no se pueden ejecutar en versiones de Ubuntu que no sean LTS...${vFinColor}"
   echo ""
 
 fi
