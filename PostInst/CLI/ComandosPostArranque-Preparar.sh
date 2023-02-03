@@ -9,7 +9,7 @@
 #  Script de NiPeGun para instalar y configurar los comandos postarranque en Ubuntu
 #
 #  Ejecución remota:
-#  curl -s x | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/main/PostInst/CLI/ComandosPostArranque-Preparar.sh | bash
 # ----------
 
 ColorRojo='\033[1;31m'
