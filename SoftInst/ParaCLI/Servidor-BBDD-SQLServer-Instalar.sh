@@ -9,7 +9,7 @@
 #  Script de NiPeGun para instalar y configurar xxxxxxxxx en Ubuntu
 #
 #  Ejecución remota:
-#  curl -s x | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/main/SoftInst/ParaCLI/Servidor-BBDD-SQLServer-Instalar.sh | bash
 # ----------
 
 vColorAzul="\033[0;34m"
