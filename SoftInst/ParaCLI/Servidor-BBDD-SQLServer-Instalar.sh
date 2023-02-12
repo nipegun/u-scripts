@@ -70,7 +70,7 @@ elif [ $vVersUbuntu == "jammy" ]; then
   # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo -e "${vColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${vFinColor}"
+      echo -e "${vColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${vFinColor}"
       echo ""
       apt-get -y update
       apt-get -y install curl
@@ -82,7 +82,7 @@ elif [ $vVersUbuntu == "jammy" ]; then
     # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo -e "${vColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${vFinColor}"
+        echo -e "${vColorRojo}    El paquete wget no está instalado. Iniciando su instalación...${vFinColor}"
         echo ""
         apt-get -y update
         apt-get -y install wget
@@ -91,7 +91,7 @@ elif [ $vVersUbuntu == "jammy" ]; then
     # Comprobar si el paquete gnupg2 está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s gnupg2 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo -e "${vColorRojo}  El paquete gnupg2 no está instalado. Iniciando su instalación...${vFinColor}"
+        echo -e "${vColorRojo}    El paquete gnupg2 no está instalado. Iniciando su instalación...${vFinColor}"
         echo ""
         apt-get -y update
         apt-get -y install gnupg2
