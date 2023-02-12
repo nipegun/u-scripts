@@ -5,94 +5,66 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# Fuente: https://learn.microsoft.com/es-es/sql/linux/quickstart-install-connect-ubuntu
-# Instalación en docker: https://hub.docker.com/_/microsoft-mssql-server
-
 # ----------
-#  Script de NiPeGun para instalar el servidor de bases de datos SQLServer en Debian
+#  Script de NiPeGun para instalar y configurar xxxxxxxxx en Ubuntu
 #
-#  Ejecución remota
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-SQLServer-Instalar.sh | bash
+#  Ejecución remota:
+#  curl -s x | bash
 # ----------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+vColorAzul="\033[0;34m"
+vColorAzulClaro="\033[1;34m"
+vColorVerde='\033[1;32m'
+vColorRojo='\033[1;31m'
+vFinColor='\033[0m'
 
-# Determinar la versión de Debian
-  if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org
-    . /etc/os-release
-    OS_NAME=$NAME
-    OS_VERS=$VERSION_ID
-  elif type lsb_release >/dev/null 2>&1; then # linuxbase.org
-    OS_NAME=$(lsb_release -si)
-    OS_VERS=$(lsb_release -sr)
-  elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release
-    . /etc/lsb-release
-    OS_NAME=$DISTRIB_ID
-    OS_VERS=$DISTRIB_RELEASE
-  elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
-    OS_NAME=Debian
-    OS_VERS=$(cat /etc/debian_version)
-  else                                        # Para el viejo uname (También funciona para BSD)
-    OS_NAME=$(uname -s)
-    OS_VERS=$(uname -r)
-  fi
+# Determinar la versión de Ubuntu
+  vVersUbuntu=$(cat /etc/lsb-release | grep ODENAME | head -n1 | cut -d'=' -f2)
 
-if [ $OS_VERS == "7" ]; then
+if [ $vVersUbuntu == "trusty" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor SQLServer para Debian 7 (Wheezy)..."
-  echo "--------------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 14.04 LTS (Trusty Tahr)...${vFinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
+  echo "  Comandos para Ubuntu 14.04 LTS todavía no preparados. Prueba ejecutarlo en otra versión de Ubuntu."
   echo ""
 
-elif [ $OS_VERS == "8" ]; then
+elif [ $vVersUbuntu == "xenial" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor SQLServer para Debian 8 (Jessie)..."
-  echo "--------------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 16.04 LTS (Xenial Xerus)...${vFinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
+  echo "  Comandos para Ubuntu 16.04 LTS todavía no preparados. Prueba ejecutarlo en otra versión de Ubuntu."
   echo ""
 
-elif [ $OS_VERS == "9" ]; then
+elif [ $vVersUbuntu == "bionic" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor SQLServer para Debian 9 (Stretch)..."
-  echo "---------------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 18.04 LTS (Bionic Beaver)...${vFinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
+  echo "  Comandos para Ubuntu 18.04 LTS todavía no preparados. Prueba ejecutarlo en otra versión de Ubuntu."
   echo ""
 
-elif [ $OS_VERS == "10" ]; then
+elif [ $vVersUbuntu == "focal" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor SQLServer para Debian 10 (Buster)..."
-  echo "---------------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 20.04 LTS (Focal Fossa)...${vFinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
+  echo "  Comandos para Ubuntu 20.04 LTS todavía no preparados. Prueba ejecutarlo en otra versión de Ubuntu."
   echo ""
 
-elif [ $OS_VERS == "11" ]; then
+elif [ $vVersUbuntu == "jammy" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor SQLServer para Debian 11 (Bullseye)..."
-  echo "----------------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 22.04 LTS (Jammy Jellyfish)...${vFinColor}"
   echo ""
 
   # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
@@ -168,6 +140,12 @@ elif [ $OS_VERS == "11" ]; then
     #go
     #reconfigure;
     #go
+
+else
+
+  echo ""
+  echo -e "${vColorRojo}  Los u-scripts no se pueden ejecutar en versiones de Ubuntu que no sean LTS...${vFinColor}"
+  echo ""
 
 fi
 
