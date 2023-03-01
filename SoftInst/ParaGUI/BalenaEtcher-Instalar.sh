@@ -67,48 +67,21 @@ elif [ $vVersUbuntu == "jammy" ]; then
   echo -e "${vColorAzulClaro}  Iniciando el script de instalación de BalenaEtcher para Ubuntu 22.04 LTS (Jammy Jellyfish)...${vFinColor}"
   echo ""
 
-  # Instalar descargando el paquete AppImage
-    # Obtener link de descarga
-      # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-        if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-          echo ""
-          echo -e "${vColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${vFinColor}"
-          echo ""
-          sudo apt-get -y update
-          sudo apt-get -y install curl
-          echo ""
-        fi
-      vLink=$(curl -sL https://www.balena.io/etcher#download-etcher | sed 's->->\n-g' | grep href | grep AppImage | grep github | cut -d'`' -f2 | sed 's-ia32-x64-g')
-    # Descargar paquete
-      mkdir -p ~/AppsPortables/ 2> /dev/null
-      # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-        if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
-          echo ""
-          echo -e "${vColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${vFinColor}"
-          echo ""
-          sudo apt-get -y update
-          sudo apt-get -y install wget
-          echo ""
-        fi
-      wget $vLink -O ~/AppsPortables/BlenaEtcher.AppImage
-      chmod +x ~/AppsPortables/BlenaEtcher.AppImage
-      
-  # Instalar desde repositorio
-    # Agregar el repositorio
-      # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-        if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-          echo ""
-          echo -e "${vColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${vFinColor}"
-          echo ""
-          sudo apt-get -y update
-          sudo apt-get -y install curl
-          echo ""
-        fi
-      curl -1sLf https://dl.cloudsmith.io/public/balena/etcher/setup.deb.sh | sudo -E bash
-    # Actualizar la lista e paquetes
-      sudo apt-get -y update
-    # Instalar el paquete balena etcher
-      sudo apt-get -y install balena-etcher-electron
+  # Agregar el repositorio
+    # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${vColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${vFinColor}"
+        echo ""
+        sudo apt-get -y update
+        sudo apt-get -y install curl
+        echo ""
+      fi
+    curl -1sLf https://dl.cloudsmith.io/public/balena/etcher/setup.deb.sh | sudo -E bash
+  # Actualizar la lista e paquetes
+    sudo apt-get -y update
+  # Instalar el paquete balena etcher
+    sudo apt-get -y install balena-etcher-electron
 
 else
 
