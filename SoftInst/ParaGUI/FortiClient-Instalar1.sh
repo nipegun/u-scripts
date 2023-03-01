@@ -110,6 +110,7 @@ elif [ $vVersUbuntu == "jammy" ]; then
   echo ""
   mkdir -p ~/SoftInst/Fortinet/ 2> /dev/null
   wget https://links.fortinet.com/forticlient/deb/vpnagent -O ~/SoftInst/Fortinet/vpnagent.deb
+  chmod 777 ~/SoftInst/Fortinet/vpnagent.deb
   sudo apt -y install ~/SoftInst/Fortinet/vpnagent.deb
 
 else
