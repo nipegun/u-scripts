@@ -91,6 +91,7 @@ elif [ $vVersUbuntu == "jammy" ]; then
           echo ""
         fi
       wget $vLink -O ~/AppsPortables/BlenaEtcher.AppImage
+      chmod +x ~/AppsPortables/BlenaEtcher.AppImage
   # Instalar desde repositorio
     # Agregar el repositorio
      # echo "deb https://dl.bintray.com/resin-io/debian stable etcher" >> /etc/apt/sources.list.d/BalenaEtcher.list
