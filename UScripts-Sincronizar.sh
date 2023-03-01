@@ -12,16 +12,17 @@
 # curl -s https://raw.githubusercontent.com/nipegun/u-scripts/main/UScripts-Sincronizar.sh | bash
 # ----------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+vColorRojo='\033[1;31m'
+vColorVerde='\033[1;32m'
+vFinColor='\033[0m'
 
 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo "wget no está instalado. Iniciando su instalación..."
+    echo -e "${vColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${vFinColor}"
     echo ""
-    sudo apt-get -y update && sudo apt-get -y install wget
+    sudo apt-get -y update
+    sudo apt-get -y install wget
   fi
 
 # Comprobar si hay conexión a Internet antes de sincronizar los d-scripts
@@ -39,7 +40,7 @@ FinColor='\033[0m'
     # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo "git no está instalado. Iniciando su instalación..."
+      echo -e "${vColorRojo}    El paquete git no está instalado. Iniciando su instalación...${vFinColor}"
       echo ""
       sudo apt-get -y update && sudo apt-get -y install git
     fi
