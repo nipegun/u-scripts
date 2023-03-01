@@ -42,7 +42,8 @@ vFinColor='\033[0m'
       echo ""
       echo -e "${vColorRojo}    El paquete git no está instalado. Iniciando su instalación...${vFinColor}"
       echo ""
-      sudo apt-get -y update && sudo apt-get -y install git
+      sudo apt-get -y update
+      sudo apt-get -y install git
     fi
     git clone --depth=1 https://github.com/nipegun/u-scripts
     mkdir -p ~/scripts/u-scripts/Alias/
@@ -52,15 +53,11 @@ vFinColor='\033[0m'
     find ~/scripts/u-scripts/Alias -type f -exec chmod +x {} \;
     
     echo ""
-    echo "-----------------------------------------"
-    echo -e "  ${ColorVerde}u-scripts sincronizados correctamente${FinColor}"
-    echo "-----------------------------------------"
+    echo -e "  ${ColorVerde}  u-scripts sincronizados correctamente${FinColor}"
     echo ""
   else
     echo ""
-    echo "---------------------------------------------------------------------------------------------------"
-    echo -e "${ColorRojo}No se pudo iniciar la sincronización de los u-scripts porque no se detectó conexión a Internet.${FinColor}"
-    echo "---------------------------------------------------------------------------------------------------"
+    echo -e "${vColorRojo}  No se pudo iniciar la sincronización de los u-scripts porque no se detectó conexión a Internet.${vFinColor}"
     echo ""
   fi
 
