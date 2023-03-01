@@ -83,6 +83,13 @@ elif [ $vVersUbuntu == "jammy" ]; then
   # Instalar el paquete balena etcher
     sudo apt-get -y install balena-etcher-electron
 
+  # Desinstalar
+    #sudo apt-get -y remove balena-etcher-electron
+    #sudo rm /etc/apt/sources.list.d/balena-etcher.list
+    #sudo apt-get -y clean
+    #sudo rm -rf /var/lib/apt/lists/*
+    #sudo apt-get -y update
+
 else
 
   echo ""
