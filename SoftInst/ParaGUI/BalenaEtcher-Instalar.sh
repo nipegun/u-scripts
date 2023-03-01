@@ -92,11 +92,23 @@ elif [ $vVersUbuntu == "jammy" ]; then
         fi
       wget $vLink -O ~/AppsPortables/BlenaEtcher.AppImage
       chmod +x ~/AppsPortables/BlenaEtcher.AppImage
+      
   # Instalar desde repositorio
     # Agregar el repositorio
-     # echo "deb https://dl.bintray.com/resin-io/debian stable etcher" >> /etc/apt/sources.list.d/BalenaEtcher.list
-    # Agregar la llave
-      #apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 379CE192D40
+      # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${vColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${vFinColor}"
+          echo ""
+          sudo apt-get -y update
+          sudo apt-get -y install curl
+          echo ""
+        fi
+      curl -1sLf https://dl.cloudsmith.io/public/balena/etcher/setup.deb.sh | sudo -E bash
+    # Actualizar la lista e paquetes
+      sudo apt-get -y update
+    # Instalar el paquete balena etcher
+      sudo apt-get -y install balena-etcher-electron
 
 else
 
