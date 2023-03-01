@@ -80,7 +80,7 @@ elif [ $vVersUbuntu == "jammy" ]; then
         fi
       vLink=$(curl -sL https://www.balena.io/etcher#download-etcher | sed 's->->\n-g' | grep href | grep AppImage | grep github | cut -d'`' -f2 | sed 's-ia32-x64-g')
     # Descargar paquete
-      mkdir -p /root/SoftInst/BalenaEtcher/ 2> /dev/null
+      mkdir -p ~/AppsPortables/ 2> /dev/null
       # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
           echo ""
@@ -90,7 +90,7 @@ elif [ $vVersUbuntu == "jammy" ]; then
           sudo apt-get -y install wget
           echo ""
         fi
-      wget $vLink -O /root/SoftInst/BalenaEtcher/BlenaEtcher.AppImage
+      wget $vLink -O ~/AppsPortables/BlenaEtcher.AppImage
   # Instalar desde repositorio
     # Agregar el repositorio
      # echo "deb https://dl.bintray.com/resin-io/debian stable etcher" >> /etc/apt/sources.list.d/BalenaEtcher.list
