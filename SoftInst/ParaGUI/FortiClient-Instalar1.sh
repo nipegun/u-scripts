@@ -113,6 +113,8 @@ elif [ $vVersUbuntu == "jammy" ]; then
   chmod 777 ~/SoftInst/Fortinet/vpnagent.deb
   sudo apt -y install ~/SoftInst/Fortinet/vpnagent.deb
 
+  # Desinstalar
+    #sudo apt -y autoremove --purge forticlient
 else
 
   echo ""
