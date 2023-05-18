@@ -18,7 +18,7 @@ else                            # Si no es número, matarlo por nombre
   kill $vNumProceso
 
   echo ""
-  echo "        Intentando matar el proceso $vNumProceso por su nombre..."
+  echo "        Intentando matar el proceso $vNumProceso..."
   echo ""
   
 fi
