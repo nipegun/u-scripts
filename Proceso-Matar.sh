@@ -9,9 +9,10 @@ else                            # Si no es número, matarlo por nombre
   echo ""
   echo "  Intentando matar el proceso por su nombre..."
   echo ""
+  
   echo "    Buscando el número de proceso del software $1..."
-  echo ""
   vNumProceso=$(pgrep -n notepadqq)
+  
   echo ""
   echo "      El número de proceso es: $vNumProceso"
   pkill $vNumProceso
