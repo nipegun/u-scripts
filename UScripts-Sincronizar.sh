@@ -26,6 +26,7 @@
     echo ""
     sudo apt-get -y update
     sudo apt-get -y install wget
+    echo ""
   fi
 
 # Comprobar si hay conexión a Internet antes de sincronizar los d-scripts
@@ -45,6 +46,7 @@
           echo ""
           sudo apt-get -y update
           sudo apt-get -y install git
+          echo ""
         fi
       git clone --depth=1 https://github.com/nipegun/u-scripts
       rm ~/scripts/u-scripts/.git -Rf 2> /dev/null
