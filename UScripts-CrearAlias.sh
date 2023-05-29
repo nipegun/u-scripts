@@ -9,11 +9,15 @@
 #  Script de NiPeGun para crear los alias de los u-scripts 
 # ----------
 
-ColorVerde="\033[1;32m"
-FinColor="\033[0m"
+# Definir variables de color
+  vColorAzul="\033[0;34m"
+  vColorAzulClaro="\033[1;34m"
+  vColorVerde='\033[1;32m'
+  vColorRojo='\033[1;31m'
+  vFinColor='\033[0m'
 
 echo ""
-echo -e "${ColorVerde}  Creando alias para los u-scripts...${FinColor}"
+echo -e "${vColorAzulClaro}  Creando alias para los u-scripts...${vFinColor}"
 echo ""
 
 ln -s ~/scripts/u-scripts/SistemaOperativo-Actualizar.sh            ~/scripts/u-scripts/Alias/aso
@@ -25,6 +29,6 @@ ln -s ~/scripts/u-scripts/SistemaOperativo-Reiniciar.sh             ~/scripts/u-
 ln -s ~/scripts/u-scripts/UScripts-Sincronizar.sh                    ~/scripts/u-scripts/Alias/sinus
 
 echo ""
-echo -e "${ColorVerde}Alias creados. Deberías poder ejecutar los u-scripts escribiendo el nombre de su alias.${FinColor}"
+echo -e "${vColorVerde}    Alias creados. Deberías poder ejecutar los u-scripts escribiendo el nombre de su alias.${vFinColor}"
 echo ""
 
