@@ -34,7 +34,7 @@
   if [[ $? -eq 0 ]]; then
     # Sincronizar los u-scripts
       echo ""
-      echo -e "${ColorAzulClaro}  Sincronizando los u-scripts con las últimas versiones y descargando nuevos u-scripts si es que existen...${vFinColor}"
+      echo -e "${vColorAzulClaro}  Sincronizando los u-scripts con las últimas versiones y descargando nuevos u-scripts si es que existen...${vFinColor}"
       echo ""
       rm ~/scripts/u-scripts -R 2> /dev/null
       mkdir ~/scripts 2> /dev/null
