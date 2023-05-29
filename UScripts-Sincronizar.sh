@@ -9,7 +9,7 @@
 # Script de NiPeGun para sincronizar los u-scripts
 #
 # Ejecución remota:
-# curl -s https://raw.githubusercontent.com/nipegun/u-scripts/main/UScripts-Sincronizar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/u-scripts/main/UScripts-Sincronizar.sh | bash
 # ----------
 
 # Definir variables de color
