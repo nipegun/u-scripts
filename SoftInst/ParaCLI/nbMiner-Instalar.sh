@@ -21,14 +21,12 @@ FinColor='\033[0m'
 #vUltTag=$(curl -sL https://github.com/NebuTech/NBMiner/releases/latest  | cut -d'"' -f2)
 #vArchivo=$(curl -sL $vUltTag | grep href | grep inux | grep -v "sha" | cut -d'"' -f2)
 vURLArchivoUltVers=$(curl -sL https://nbminer.com | grep "dl.nbminer" | grep inux | head -n1 | cut -d'"' -f2)
-apt-get -y install wget
-mkdir /Mineros 2 >/dev/null
-wget $vURLArchivoUltVers -O /Mineros/nbMiner.tar.gz
-apt-get -y install tar
-cd /Mineros
-tar -xvf /Mineros/nbMiner.tar.gz
-
-mv /Mineros/nbminer-v$Version-linux /Mineros/nbMiner
+sudo apt-get -y install wget
+sudo mkdir /Mineros/NBMiner 2 >/dev/null
+sudo wget $vURLArchivoUltVers -O /Mineros/nbMiner.tar.gz
+sudo apt-get -y install tar
+sudo tar -xvf /Mineros/nbMiner.tar.gz -C /target/directory
+sudo mv /Mineros//Mineros/NBMiner_Linux /Mineros/NBMiner
 
 echo '#!/bin/bash' > /Mineros/nbMiner/mine_rvn-woolypooly.sh
 echo "/Mineros/nbMiner/nbminer -a kawpow -o stratum+tcp://pool.eu.woolypooly.com:55555 -u RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy.YestonRX560-4GB -p x" >> /Mineros/nbMiner/mine_rvn-woolypooly.sh
