@@ -22,7 +22,7 @@ FinColor='\033[0m'
 #vArchivo=$(curl -sL $vUltTag | grep href | grep inux | grep -v "sha" | cut -d'"' -f2)
 vURLArchivoUltVers=$(curl -sL https://nbminer.com | grep "dl.nbminer" | grep inux | head -n1 | cut -d'"' -f2)
 sudo apt-get -y install wget
-sudo mkdir /Mineros/NBMiner 2 >/dev/null
+sudo mkdir -p /Mineros/NBMiner 2 >/dev/null
 sudo wget $vURLArchivoUltVers -O /Mineros/nbMiner.tar.gz
 sudo apt-get -y install tar
 sudo tar -xvf /Mineros/nbMiner.tar.gz -C /Mineros/NBMiner
