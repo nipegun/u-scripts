@@ -7,3 +7,5 @@ sudo amdgpu-install -y --accept-eula --usecase=opencl --opencl=rocr,legacy
 sudo usermod -a -G render nipegun
 #sudo usermod -a -G video $LOGNAME
 sudo usermod -a -G video nipegun
+sudo apt-get -y install clinfo
+
