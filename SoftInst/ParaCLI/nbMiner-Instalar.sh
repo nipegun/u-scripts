@@ -25,7 +25,9 @@ apt-get -y install wget
 mkdir /Mineros 2 >/dev/null
 wget $vURLArchivoUltVers -O /Mineros/nbMiner.tar.gz
 apt-get -y install tar
+cd /Mineros
 tar -xvf /Mineros/nbMiner.tar.gz
+
 mv /Mineros/nbminer-v$Version-linux /Mineros/nbMiner
 
 echo '#!/bin/bash' > /Mineros/nbMiner/mine_rvn-woolypooly.sh
