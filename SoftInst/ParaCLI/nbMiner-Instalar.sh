@@ -18,13 +18,13 @@ ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
-vUltTag=$(curl -s https://github.com/NebuTech/NBMiner/releases/latest | cut -d'"' -f2)
-vArchivo=$(curl -s $vUltTag | grep href | grep inux | grep -v "sha" | cut -d'"' -f2)
+#vUltTag=$(curl -sL https://github.com/NebuTech/NBMiner/releases/latest  | cut -d'"' -f2)
+#vArchivo=$(curl -sL $vUltTag | grep href | grep inux | grep -v "sha" | cut -d'"' -f2)
+vURLArchivoUltVers=$(curl -sL https://nbminer.com | grep "dl.nbminer" | grep inux | head -n1 | cut -d'"' -f2)
 apt-get -y install wget
-apt-get -y install tar
-
 mkdir /Mineros 2 >/dev/null
-wget https://github.com$vArchivo -O /Mineros/nbMiner.tar.gz
+wget $vURLArchivoUltVers -O /Mineros/nbMiner.tar.gz
+apt-get -y install tar
 tar -xvf /Mineros/nbMiner.tar.gz
 mv /Mineros/nbminer-v$Version-linux /Mineros/nbMiner
 
