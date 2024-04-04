@@ -52,22 +52,47 @@ if [ $cVersUbuntu == "22.04.4" ]; then
         sudo apt-get -y install wget
         echo ""
       fi
+    echo ""
+    echo "    Descargando el archivo de activación del repositorio..."
+    echo ""
     wget $vVersArch -O ~/Descargas/amdgpu-install-repository.deb
     #wget https://drivers.amd.com/drivers/linux/amdgpu-pro-20.40-1147286-ubuntu-20.04.tar.xz --referer https://www.amd.com/es/support/kb/release-notes/rn-amdgpu-unified-linux-20-40
   # Corregir permisos
     sudo chmod 777 ~/Descargas/amdgpu-install-repository.deb
   # Instalar paquete
+    echo ""
+    echo "    Instalando el archivo de activación del repositorio..."
+    echo ""
     sudo apt install ~/Descargas/amdgpu-install-repository.deb
   # Actualizar lista de paquetes de los repositorios
     sudo apt-get update
   # Instalar controlador
+    echo ""
+    echo "    Instalando driver con opciones --usecase=opencl --opencl=rocr,legacy ..."
+    echo ""
     sudo amdgpu-install -y --accept-eula --usecase=opencl --opencl=rocr,legacy
   # Agregar usuario al grupo render
+    echo ""
+    echo "    Agregando el usuario al grupo render..."
+    echo ""
     sudo usermod -a -G render $vNomUsuarioNoRoot
   # Agregar usuario al grupo video
-    sudo usermod -a -G video $vNomUsuarioNoRoot
+    echo ""
+    echo "    Agregando el usuario al grupo video..."
+    echo ""    sudo usermod -a -G video $vNomUsuarioNoRoot
   # Instalar el paquete clinfo
+    echo ""
+    echo "    Instalando clinfo..."
+    echo ""
     sudo apt-get -y install clinfo
+
+  # Notificar fin de ejecución del script
+    echo ""
+    echo -e "${cColorVerde}    Ejecución del script, finalizada.${cFinColor}"
+    echo -e "${cColorVerde}      Para eliminar los drivers ejecuta:${cFinColor}"
+    echo -e "${cColorVerde}        sudo amdgpu-install --uninstall ${cFinColor}"
+    echo -e "${cColorVerde}        sudo apt-get -y purge amdgpu-install${cFinColor}"
+    echo ""
 
 elif [ $cVersUbuntu == "22.04.5" ]; then
 
@@ -122,11 +147,5 @@ elif [ $cVersUbuntu == "24.04.2" ]; then
 
 fi
 
-# Notificar fin de ejecución del script
-  echo ""
-  echo -e "${cColorVerde}    Ejecución del script, finalizada.${cFinColor}"
-  echo -e "${cColorVerde}      Para eliminar los drivers ejecuta:${cFinColor}"
-  echo -e "${cColorVerde}        sudo amdgpu-install --uninstall ${cFinColor}"
-  echo -e "${cColorVerde}        sudo apt-get -y purge amdgpu-install${cFinColor}"
-  echo ""
+
 
