@@ -38,12 +38,26 @@ if [ $cVersUbuntu == "22.04.4" ]; then
 
   # Obtener la versión
     cUltVers=$(curl -sL https://www.amd.com/es/support/linux-drivers)
+  # Determinar que versión descargar
+    #vVersArch="http://repo.radeon.com/amdgpu-install/22.20.5/ubuntu/jammy/amdgpu-install_22.20.50205-1_all.deb"
+    vVersArch="http://repo.radeon.com/amdgpu-install/23.30.3/ubuntu/jammy/amdgpu-install_5.7.50703-1_all.deb"
+    #vVersArch="http://repo.radeon.com/amdgpu-install/23.40.3/ubuntu/jammy/amdgpu-install_6.0.60003-1_all.deb"
   # Descargar el archivo
+    # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${vColorRojo}    El paquete wget no está instalado. Iniciando su instalación...${vFinColor}"
+        echo ""
+        sudo apt-get -y update
+        sudo apt-get -y install wget
+        echo ""
+      fi
+    wget $vVersArch -O ~/Descargas/amdgpu-install-repository.deb
     #wget https://drivers.amd.com/drivers/linux/amdgpu-pro-20.40-1147286-ubuntu-20.04.tar.xz --referer https://www.amd.com/es/support/kb/release-notes/rn-amdgpu-unified-linux-20-40
   # Corregir permisos
-    sudo chmod 777 amdgpu-install_xxx_all.deb
+    sudo chmod 777 ~/Descargas/amdgpu-install-repository.deb
   # Instalar paquete
-    sudo apt install amdgpu-install_xxx_all.deb
+    sudo apt install ~/Descargas/amdgpu-install-repository.deb
   # Actualizar lista de paquetes de los repositorios
     sudo apt-get update
   # Instalar controlador
