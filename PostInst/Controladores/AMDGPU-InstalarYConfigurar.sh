@@ -126,7 +126,7 @@ fi
   echo ""
   echo -e "${cColorVerde}    Ejecución del script, finalizada.${cFinColor}"
   echo -e "${cColorVerde}      Para eliminar los drivers ejecuta:${cFinColor}"
-  echo -e "${cColorVerde}        sudo amdgpu-uninstall${cFinColor}"
-  echo -e "${cColorVerde}        sudo apt-get -y purge amdgpu-instal${cFinColor}"
+  echo -e "${cColorVerde}        sudo amdgpu-install --uninstall ${cFinColor}"
+  echo -e "${cColorVerde}        sudo apt-get -y purge amdgpu-install${cFinColor}"
   echo ""
 
