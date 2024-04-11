@@ -29,8 +29,64 @@ cVersUbuntu=$(cat /etc/os-release | grep ERSION | grep -v ID | grep -v ODENAME |
     #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
   cFinColor='\033[0m'
 
+if [ $cVersUbuntu == "20.04.6" ]; then
 
-if [ $cVersUbuntu == "22.04.4" ]; then
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de AMDPGU para Ubuntu $cVersUbuntu...${cFinColor}"
+  echo ""
+
+  # Obtener la versión
+    cUltVers=$(curl -sL https://www.amd.com/es/support/linux-drivers)
+  # Determinar que versión descargar
+               
+    #vVersArch="https://repo.radeon.com/amdgpu-install/22.20.5/ubuntu/focal/amdgpu-install_22.20.50205-1_all.deb"
+    #vVersArch="https://repo.radeon.com/amdgpu-install/23.30.3/ubuntu/focal/amdgpu-install_5.7.50703-1_all.deb"
+    vVersArch="https://repo.radeon.com/amdgpu-install/23.40.2/ubuntu/focal/amdgpu-install_6.0.60002-1_all.deb"
+  # Descargar el archivo
+    # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${vColorRojo}    El paquete wget no está instalado. Iniciando su instalación...${vFinColor}"
+        echo ""
+        sudo apt-get -y update
+        sudo apt-get -y install wget
+        echo ""
+      fi
+    echo ""
+    echo "    Descargando el archivo de activación del repositorio..."
+    echo ""
+    wget $vVersArch -O ~/Descargas/amdgpu-install-repository.deb
+    #wget https://drivers.amd.com/drivers/linux/amdgpu-pro-20.40-1147286-ubuntu-20.04.tar.xz --referer https://www.amd.com/es/support/kb/release-notes/rn-amdgpu-unified-linux-20-40
+  # Corregir permisos
+    sudo chmod 777 ~/Descargas/amdgpu-install-repository.deb
+  # Instalar paquete
+    echo ""
+    echo "    Instalando el archivo de activación del repositorio..."
+    echo ""
+    sudo apt install ~/Descargas/amdgpu-install-repository.deb
+  # Actualizar lista de paquetes de los repositorios
+    sudo apt-get update
+  # Instalar controlador
+    echo ""
+    echo "    Instalando driver con opciones --usecase=opencl --opencl=rocr,legacy ..."
+    echo ""
+    sudo amdgpu-install -y --accept-eula --usecase=opencl --opencl=rocr,legacy
+  # Agregar usuario al grupo render
+    echo ""
+    echo "    Agregando el usuario al grupo render..."
+    echo ""
+    sudo usermod -a -G render $vNomUsuarioNoRoot
+  # Agregar usuario al grupo video
+    echo ""
+    echo "    Agregando el usuario al grupo video..."
+    echo ""    sudo usermod -a -G video $vNomUsuarioNoRoot
+  # Instalar el paquete clinfo
+    echo ""
+    echo "    Instalando clinfo..."
+    echo ""
+    sudo apt-get -y install clinfo
+
+elif [ $cVersUbuntu == "22.04.4" ]; then
 
   echo ""
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación de AMDPGU para Ubuntu $cVersUbuntu...${cFinColor}"
@@ -41,7 +97,7 @@ if [ $cVersUbuntu == "22.04.4" ]; then
   # Determinar que versión descargar
     vVersArch="http://repo.radeon.com/amdgpu-install/22.20.5/ubuntu/jammy/amdgpu-install_22.20.50205-1_all.deb"
     #vVersArch="http://repo.radeon.com/amdgpu-install/23.30.3/ubuntu/jammy/amdgpu-install_5.7.50703-1_all.deb"
-    #vVersArch="http://repo.radeon.com/amdgpu-install/23.40.3/ubuntu/jammy/amdgpu-install_6.0.60003-1_all.deb"
+    #vVersArch="https://repo.radeon.com/amdgpu-install/23.40.2/ubuntu/jammy/amdgpu-install_6.0.60002-1_all.deb"
   # Descargar el archivo
     # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
