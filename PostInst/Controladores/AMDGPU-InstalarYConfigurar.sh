@@ -39,9 +39,9 @@ if [ $cVersUbuntu == "20.04.6" ]; then
     cUltVers=$(curl -sL https://www.amd.com/es/support/linux-drivers)
   # Determinar que versión descargar
                
-    #vVersArch="https://repo.radeon.com/amdgpu-install/22.20.5/ubuntu/focal/amdgpu-install_22.20.50205-1_all.deb"
+    vVersArch="https://repo.radeon.com/amdgpu-install/22.20.5/ubuntu/focal/amdgpu-install_22.20.50205-1_all.deb"
     #vVersArch="https://repo.radeon.com/amdgpu-install/23.30.3/ubuntu/focal/amdgpu-install_5.7.50703-1_all.deb"
-    vVersArch="https://repo.radeon.com/amdgpu-install/23.40.2/ubuntu/focal/amdgpu-install_6.0.60002-1_all.deb"
+    #vVersArch="https://repo.radeon.com/amdgpu-install/23.40.2/ubuntu/focal/amdgpu-install_6.0.60002-1_all.deb"
   # Descargar el archivo
     # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
