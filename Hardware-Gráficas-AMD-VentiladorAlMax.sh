@@ -18,8 +18,9 @@
 # Ajustar cada tarjeta
   for (( i=0; i<$vNumTarjGraf; i++ ))
     do
-      echo "Estableciendo la velocidad del ventilador para la tarjeta $i"
-      echo 1 > "/sys/class/drm/card$i/device/hwmon/hwmon$(($i))/pwm1_enable"
-      echo 255 > "/sys/class/drm/card$i/device/hwmon/hwmon$(($i))/pwm1"
+      echo ""
+      echo "  Estableciendo la velocidad del ventilador para la tarjeta $i"
+      echo 1 > "/sys/class/drm/card$i/device/hwmon/hwmon$(($i))/pwm1_enable" 2>/dev/null
+      echo 255 > "/sys/class/drm/card$i/device/hwmon/hwmon$(($i))/pwm1" 2> /dev/null
   done
 
