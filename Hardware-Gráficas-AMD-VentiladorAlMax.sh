@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para poner los ventiladores de las tarjetas gráficas al máximo
+# Script de NiPeGun para poner los ventiladores de las tarjetas gráficas AMD al máximo
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/u-scripts/main/ | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/u-scripts/main/Hardware-Gr%C3%A1ficas-AMD-VentiladorAlMax.sh | bash
 # ----------
 
 # Número total de tarjetas gráficas
