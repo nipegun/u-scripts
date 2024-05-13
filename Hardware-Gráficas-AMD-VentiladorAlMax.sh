@@ -9,7 +9,7 @@
 # Script de NiPeGun para poner los ventiladores de las tarjetas gráficas AMD al máximo
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/u-scripts/main/Hardware-Gr%C3%A1ficas-AMD-VentiladorAlMax.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/u-scripts/main/Hardware-Gr%C3%A1ficas-AMD-VentiladorAlMax.sh | sudo bash
 # ----------
 
 # Número total de tarjetas gráficas
@@ -18,9 +18,18 @@
 # Ajustar cada tarjeta
   for (( i=0; i<$vNumTarjGraf; i++ ))
     do
-      echo ""
-      echo "  Estableciendo la velocidad del ventilador para la tarjeta $i"
-      echo 1 > "/sys/class/drm/card$i/device/hwmon/hwmon$(($i))/pwm1_enable" 2>/dev/null
-      echo 255 > "/sys/class/drm/card$i/device/hwmon/hwmon$(($i))/pwm1" 2> /dev/null
+      if [ -f "/sys/class/drm/card$i/device/hwmon/hwmon$(($i))/pwm1_enable" ]; then
+        echo ""
+        echo "  Desactivando el modo PWM de los ventiladores de la tarjeta $i..."
+        echo ""
+        echo 1 > "/sys/class/drm/card$i/device/hwmon/hwmon$(($i))/pwm1_enable"
+      fi
+      if [ -f "/sys/class/drm/card$i/device/hwmon/hwmon$(($i))/pwm1" ]; then
+        echo ""
+        echo "  Asignando máximas revoluciones a los ventiladores e la tarjeta $i..."
+        echo ""
+        echo 255 > "/sys/class/drm/card$i/device/hwmon/hwmon$(($i))/pwm1"
+      fi
+
   done
 
