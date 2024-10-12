@@ -9,7 +9,7 @@
 #  Script de NiPeGun para instalar y configurar SIFT Workstation en Ubuntu
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/u-scripts/main/SoftInst/SIFTWorkstation-Instalar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/u-scripts/main/SoftInst/SIFTWorkstation-Instalar.sh | sudo bash
 #
 # Bajar y editar directamente el archivo en nano
 #   curl -sL x | nano -
@@ -30,7 +30,17 @@
 if [ $cVersUbuntu == "noble" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 24.04 LTS (Noble Numbat)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de SIFT Workstation para Ubuntu 24.04 LTS (Noble Numbat)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo "  Comandos para Ubuntu 24.04 LTS todavía no preparados. Prueba ejecutarlo en otra versión de Ubuntu."
+  echo ""
+
+elif [ $cVersUbuntu == "jammy" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de SIFT Workstation para Ubuntu 22.04 LTS (Jammy Jellyfish)...${cFinColor}"
   echo ""
 
   # Instalar la última versión del binario Cast
@@ -45,20 +55,10 @@ if [ $cVersUbuntu == "noble" ]; then
     # Instalar el paquete
       apt -y install /root/SoftInst/Cast/cast-$vTag-linux-amd64.deb
 
-elif [ $cVersUbuntu == "jammy" ]; then
-
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 22.04 LTS (Jammy Jellyfish)...${cFinColor}"
-  echo ""
-
-  echo ""
-  echo "  Comandos para Ubuntu 22.04 LTS todavía no preparados. Prueba ejecutarlo en otra versión de Ubuntu."
-  echo ""
-
 elif [ $cVersUbuntu == "focal" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 20.04 LTS (Focal Fossa)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de SIFT Workstation para Ubuntu 20.04 LTS (Focal Fossa)...${cFinColor}"
   echo ""
 
   echo ""
@@ -68,7 +68,7 @@ elif [ $cVersUbuntu == "focal" ]; then
 elif [ $cVersUbuntu == "bionic" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 18.04 LTS (Bionic Beaver)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de SIFT Workstation para Ubuntu 18.04 LTS (Bionic Beaver)...${cFinColor}"
   echo ""
 
   echo ""
@@ -78,7 +78,7 @@ elif [ $cVersUbuntu == "bionic" ]; then
 elif [ $cVersUbuntu == "xenial" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 16.04 LTS (Xenial Xerus)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de SIFT Workstation para Ubuntu 16.04 LTS (Xenial Xerus)...${cFinColor}"
   echo ""
 
   echo ""
@@ -88,7 +88,7 @@ elif [ $cVersUbuntu == "xenial" ]; then
 elif [ $cVersUbuntu == "trusty" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 14.04 LTS (Trusty Tahr)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de SIFT Workstation para Ubuntu 14.04 LTS (Trusty Tahr)...${cFinColor}"
   echo ""
 
   echo ""
