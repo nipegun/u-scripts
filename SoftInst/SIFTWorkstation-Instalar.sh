@@ -55,6 +55,9 @@ elif [ $cVersUbuntu == "jammy" ]; then
     # Instalar el paquete
       apt -y install /root/SoftInst/Cast/cast-$vTag-linux-amd64.deb
 
+  # Instalar SIFT
+    cast install teamdfir/sift
+
 elif [ $cVersUbuntu == "focal" ]; then
 
   echo ""
