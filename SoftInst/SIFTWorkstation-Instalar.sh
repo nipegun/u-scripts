@@ -12,7 +12,7 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/u-scripts/main/SoftInst/SIFTWorkstation-Instalar.sh | sudo bash
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/u-scripts/main/SoftInst/SIFTWorkstation-Instalar.sh | nano -
 # ----------
 
 # Definir constantes de color
