@@ -13,30 +13,28 @@
 # ----------
 
   # Poner que sólo se genere el español de España cuando se creen locales
-    echo "es_ES.UTF-8 UTF-8" > /etc/locale.gen
+    echo "es_ES.UTF-8 UTF-8" | sudo tee /etc/locale.gen
 
   # Compilar los locales borrando primero los existentes y dejando nada más que el español de España
-    apt-get -y update && apt-get -y install locales
-    locale-gen --purge es_ES.UTF-8
+    sudo apt-get -y update
+    sudo apt-get -y install locales
+    sudo locale-gen --purge es_ES.UTF-8
 
   # Modificar el archivo /etc/default/locale reflejando los cambios
-    echo 'LANG="es_ES.UTF-8"'   > /etc/default/locale
-    echo 'LANGUAGE="es_ES:es"' >> /etc/default/locale
+    echo 'LANG="es_ES.UTF-8"'  | sudo tee    /etc/default/locale
+    echo 'LANGUAGE="es_ES:es"' | sudo tee -a /etc/default/locale
 
   # Poner el teclado en español de España
-    echo 'XKBMODEL="pc105"'   > /etc/default/keyboard
-    echo 'XKBLAYOUT="es"'    >> /etc/default/keyboard
-    echo 'XKBVARIANT=""'     >> /etc/default/keyboard
-    echo 'XKBOPTIONS=""'     >> /etc/default/keyboard
-    echo ''                  >> /etc/default/keyboard
-    echo 'BACKSPACE="guess"' >> /etc/default/keyboard
-    echo ''                  >> /etc/default/keyboard
+    echo 'XKBMODEL="pc105"'  | sudo tee    /etc/default/keyboard
+    echo 'XKBLAYOUT="es"'    | sudo tee -a /etc/default/keyboard
+    echo 'XKBVARIANT=""'     | sudo tee -a /etc/default/keyboard
+    echo 'XKBOPTIONS=""'     | sudo tee -a /etc/default/keyboard
+    echo ''                  | sudo tee -a /etc/default/keyboard
+    echo 'BACKSPACE="guess"' | sudo tee -a /etc/default/keyboard
+    echo ''                  | sudo tee -a /etc/default/keyboard
 
   # Notificar cambios
     echo ""
-    echo "------------------------------------------------------------------"
-    echo "  Cambios realizados."
-    echo "  Debes reiniciar el sistema para que los cambios tengan efecto."
-    echo "------------------------------------------------------------------"
+    echo "  Cambios realizados.Debes reiniciar el sistema para que los cambios tengan efecto."
     echo ""
 
