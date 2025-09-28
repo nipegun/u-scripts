@@ -8,8 +8,11 @@
 # ----------
 #  Script de NiPeGun para instalar y configurar los comandos postarranque en Ubuntu
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/main/PostInst/CLI/ComandosPostArranque-Preparar.sh | bash
+#  Ejecución remota (puede requerir permisos sudo):
+#  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/PostInst/CLI/ComandosPostArranque-Preparar.sh | bash
+#
+#  Ejecución remota como root (para sistemas sin sudo):
+#  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/PostInst/CLI/ComandosPostArranque-Preparar.sh | sed 's-sudo--g' | bash
 # ----------
 
 vColorRojo='\033[1;31m'
@@ -28,53 +31,52 @@ if [ $VersUbuntu == "noble" ]; then
   echo ""
   echo "  Configurando el servicio..."
   echo ""
-  sudo su -c 'echo "[Unit]"                                   > /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "Description=/etc/rc.local Compatibility" >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "ConditionPathExists=/etc/rc.local"       >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo ""                                        >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "[Service]"                               >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "Type=forking"                            >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "ExecStart=/etc/rc.local start"           >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "TimeoutSec=0"                            >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "StandardOutput=tty"                      >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "RemainAfterExit=yes"                     >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "SysVStartPriority=99"                    >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo ""                                        >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "[Install]"                               >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "WantedBy=multi-user.target"              >> /etc/systemd/system/rc-local.service'
+  echo '[Unit]'                                  | sudo tee    /etc/systemd/system/rc-local.service
+  echo 'Description=/etc/rc.local Compatibility' | sudo tee -a /etc/systemd/system/rc-local.service
+  echo 'ConditionPathExists=/etc/rc.local'       | sudo tee -a /etc/systemd/system/rc-local.service
+  echo ''                                        | sudo tee -a /etc/systemd/system/rc-local.service
+  echo '[Service]'                               | sudo tee -a /etc/systemd/system/rc-local.service
+  echo 'Type=forking'                            | sudo tee -a /etc/systemd/system/rc-local.service
+  echo 'ExecStart=/etc/rc.local start'           | sudo tee -a /etc/systemd/system/rc-local.service
+  echo 'TimeoutSec=0'                            | sudo tee -a /etc/systemd/system/rc-local.service
+  echo 'StandardOutput=tty'                      | sudo tee -a /etc/systemd/system/rc-local.service
+  echo 'RemainAfterExit=yes'                     | sudo tee -a /etc/systemd/system/rc-local.service
+  echo 'SysVStartPriority=99'                    | sudo tee -a /etc/systemd/system/rc-local.service
+  echo ''                                        | sudo tee -a /etc/systemd/system/rc-local.service
+  echo '[Install]'                               | sudo tee -a /etc/systemd/system/rc-local.service
+  echo 'WantedBy=multi-user.target'              | sudo tee -a /etc/systemd/system/rc-local.service
 
   echo ""
   echo "  Creando el archivo /etc/rc.local..."
   echo ""
-  sudo su -c "echo '#!/bin/bash'                            > /etc/rc.local"
-  sudo su -c 'echo ""                                      >> /etc/rc.local'
-  sudo su -c 'echo "/root/scripts/ComandosPostArranque.sh" >> /etc/rc.local'
-  sudo su -c 'echo "exit 0"                                >> /etc/rc.local'
+  echo '#!/bin/bash'                                          | sudo tee    /etc/rc.local
+  echo ''                                                     | sudo tee -a /etc/rc.local
+  echo '/root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh' | sudo tee -a /etc/rc.local
+  echo 'exit 0'                                               | sudo tee -a /etc/rc.local
   sudo chmod +x /etc/rc.local
 
   echo ""
   echo "  Creando el archivo para meter los comandos..."
   echo ""
-  sudo mkdir -p /root/scripts/ 2> /dev/null
-  sudo su -c "echo '#!/bin/bash'                                                                                          > /root/scripts/ComandosPostArranque.sh"
-  sudo su -c 'echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c "echo 'vFechaDeEjec="'$(date +A%YM%mD%d@%T)'"'                                                              >> /root/scripts/ComandosPostArranque.sh"
-  sudo su -c 'echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo 'echo "Iniciada la ejecución del script post-arranque el $vFechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"                     >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                   >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh'
-  sudo chmod 700 /root/scripts/ComandosPostArranque.sh
-  sudo touch /var/log/PostArranque.log
+  sudo mkdir -p /root/scripts/ParaEsteUbuntu/ 2> /dev/null
+  echo '#!/bin/bash'                                                                                                 | sudo tee    /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  echo ''                                                                                                            | sudo tee -a /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  echo 'vFechaDeEjec="$(date +A%YM%mD%d@%T)"'                                                                        | sudo tee -a /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  echo ''                                                                                                            | sudo tee -a /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  echo 'echo "Iniciada la ejecución del script post-arranque el $vFechaDeEjec" >> /var/log/ComandosPostArranque.log' | sudo tee -a /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  echo ''                                                                                                            | sudo tee -a /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  echo '#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE'                             | sudo tee -a /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  echo '#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼'                           | sudo tee -a /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  echo ''                                                                                                            | sudo tee -a /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  sudo chmod 700 /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  sudo touch /var/log/ComandosPostArranque.log
 
   echo ""
   echo "  Activando y arrancando el servicio..."
   echo ""
   sudo systemctl enable rc-local
   sudo systemctl start rc-local.service
-  sudo systemctl status rc-local.service
+  sudo systemctl status rc-local.service --no-pager
 
 elif [ $VersUbuntu == "jammy" ]; then
 
@@ -85,53 +87,52 @@ elif [ $VersUbuntu == "jammy" ]; then
   echo ""
   echo "  Configurando el servicio..."
   echo ""
-  sudo su -c 'echo "[Unit]"                                   > /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "Description=/etc/rc.local Compatibility" >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "ConditionPathExists=/etc/rc.local"       >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo ""                                        >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "[Service]"                               >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "Type=forking"                            >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "ExecStart=/etc/rc.local start"           >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "TimeoutSec=0"                            >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "StandardOutput=tty"                      >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "RemainAfterExit=yes"                     >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "SysVStartPriority=99"                    >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo ""                                        >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "[Install]"                               >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "WantedBy=multi-user.target"              >> /etc/systemd/system/rc-local.service'
+  echo '[Unit]'                                  | sudo tee    /etc/systemd/system/rc-local.service
+  echo 'Description=/etc/rc.local Compatibility' | sudo tee -a /etc/systemd/system/rc-local.service
+  echo 'ConditionPathExists=/etc/rc.local'       | sudo tee -a /etc/systemd/system/rc-local.service
+  echo ''                                        | sudo tee -a /etc/systemd/system/rc-local.service
+  echo '[Service]'                               | sudo tee -a /etc/systemd/system/rc-local.service
+  echo 'Type=forking'                            | sudo tee -a /etc/systemd/system/rc-local.service
+  echo 'ExecStart=/etc/rc.local start'           | sudo tee -a /etc/systemd/system/rc-local.service
+  echo 'TimeoutSec=0'                            | sudo tee -a /etc/systemd/system/rc-local.service
+  echo 'StandardOutput=tty'                      | sudo tee -a /etc/systemd/system/rc-local.service
+  echo 'RemainAfterExit=yes'                     | sudo tee -a /etc/systemd/system/rc-local.service
+  echo 'SysVStartPriority=99'                    | sudo tee -a /etc/systemd/system/rc-local.service
+  echo ''                                        | sudo tee -a /etc/systemd/system/rc-local.service
+  echo '[Install]'                               | sudo tee -a /etc/systemd/system/rc-local.service
+  echo 'WantedBy=multi-user.target'              | sudo tee -a /etc/systemd/system/rc-local.service
 
   echo ""
   echo "  Creando el archivo /etc/rc.local..."
   echo ""
-  sudo su -c "echo '#!/bin/bash'                            > /etc/rc.local"
-  sudo su -c 'echo ""                                      >> /etc/rc.local'
-  sudo su -c 'echo "/root/scripts/ComandosPostArranque.sh" >> /etc/rc.local'
-  sudo su -c 'echo "exit 0"                                >> /etc/rc.local'
+  echo '#!/bin/bash'                                          | sudo tee    /etc/rc.local
+  echo ''                                                     | sudo tee -a /etc/rc.local
+  echo '/root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh' | sudo tee -a /etc/rc.local
+  echo 'exit 0'                                               | sudo tee -a /etc/rc.local
   sudo chmod +x /etc/rc.local
 
   echo ""
   echo "  Creando el archivo para meter los comandos..."
   echo ""
-  sudo mkdir -p /root/scripts/ 2> /dev/null
-  sudo su -c "echo '#!/bin/bash'                                                                                          > /root/scripts/ComandosPostArranque.sh"
-  sudo su -c 'echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c "echo 'vFechaDeEjec="'$(date +A%YM%mD%d@%T)'"'                                                              >> /root/scripts/ComandosPostArranque.sh"
-  sudo su -c 'echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo 'echo "Iniciada la ejecución del script post-arranque el $vFechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"                     >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                   >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh'
-  sudo chmod 700 /root/scripts/ComandosPostArranque.sh
-  sudo touch /var/log/PostArranque.log
+  sudo mkdir -p /root/scripts/ParaEsteUbuntu/ 2> /dev/null
+  echo '#!/bin/bash'                                                                                                 | sudo tee    /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  echo ''                                                                                                            | sudo tee -a /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  echo 'vFechaDeEjec="$(date +A%YM%mD%d@%T)"'                                                                        | sudo tee -a /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  echo ''                                                                                                            | sudo tee -a /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  echo 'echo "Iniciada la ejecución del script post-arranque el $vFechaDeEjec" >> /var/log/ComandosPostArranque.log' | sudo tee -a /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  echo ''                                                                                                            | sudo tee -a /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  echo '#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE'                             | sudo tee -a /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  echo '#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼'                           | sudo tee -a /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  echo ''                                                                                                            | sudo tee -a /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  sudo chmod 700 /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  sudo touch /var/log/ComandosPostArranque.log
 
   echo ""
   echo "  Activando y arrancando el servicio..."
   echo ""
   sudo systemctl enable rc-local
   sudo systemctl start rc-local.service
-  sudo systemctl status rc-local.service
+  sudo systemctl status rc-local.service --no-pager
 
 elif [ $vVersUbuntu == "focal" ]; then
 
@@ -148,57 +149,55 @@ elif [ $vVersUbuntu == "bionic" ]; then
   echo ""
   echo -e "${vColorVerde}  Iniciando el script para preparar los comandos post-arranque en Ubuntu 18.04 LTS (Bionic Beaver)...${vFinColor}"
   echo ""
-
   echo ""
   echo "  Configurando el servicio..."
   echo ""
-  sudo su -c 'echo "[Unit]"                                   > /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "Description=/etc/rc.local Compatibility" >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "ConditionPathExists=/etc/rc.local"       >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo ""                                        >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "[Service]"                               >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "Type=forking"                            >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "ExecStart=/etc/rc.local start"           >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "TimeoutSec=0"                            >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "StandardOutput=tty"                      >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "RemainAfterExit=yes"                     >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "SysVStartPriority=99"                    >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo ""                                        >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "[Install]"                               >> /etc/systemd/system/rc-local.service'
-  sudo su -c 'echo "WantedBy=multi-user.target"              >> /etc/systemd/system/rc-local.service'
+  echo '[Unit]'                                  | sudo tee    /etc/systemd/system/rc-local.service
+  echo 'Description=/etc/rc.local Compatibility' | sudo tee -a /etc/systemd/system/rc-local.service
+  echo 'ConditionPathExists=/etc/rc.local'       | sudo tee -a /etc/systemd/system/rc-local.service
+  echo ''                                        | sudo tee -a /etc/systemd/system/rc-local.service
+  echo '[Service]'                               | sudo tee -a /etc/systemd/system/rc-local.service
+  echo 'Type=forking'                            | sudo tee -a /etc/systemd/system/rc-local.service
+  echo 'ExecStart=/etc/rc.local start'           | sudo tee -a /etc/systemd/system/rc-local.service
+  echo 'TimeoutSec=0'                            | sudo tee -a /etc/systemd/system/rc-local.service
+  echo 'StandardOutput=tty'                      | sudo tee -a /etc/systemd/system/rc-local.service
+  echo 'RemainAfterExit=yes'                     | sudo tee -a /etc/systemd/system/rc-local.service
+  echo 'SysVStartPriority=99'                    | sudo tee -a /etc/systemd/system/rc-local.service
+  echo ''                                        | sudo tee -a /etc/systemd/system/rc-local.service
+  echo '[Install]'                               | sudo tee -a /etc/systemd/system/rc-local.service
+  echo 'WantedBy=multi-user.target'              | sudo tee -a /etc/systemd/system/rc-local.service
 
   echo ""
   echo "  Creando el archivo /etc/rc.local..."
   echo ""
-  sudo su -c "echo '#!/bin/bash'                            > /etc/rc.local"
-  sudo su -c 'echo ""                                      >> /etc/rc.local'
-  sudo su -c 'echo "/root/scripts/ComandosPostArranque.sh" >> /etc/rc.local'
-  sudo su -c 'echo "exit 0"                                >> /etc/rc.local'
+  echo '#!/bin/bash'                                          | sudo tee    /etc/rc.local
+  echo ''                                                     | sudo tee -a /etc/rc.local
+  echo '/root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh' | sudo tee -a /etc/rc.local
+  echo 'exit 0'                                               | sudo tee -a /etc/rc.local
   sudo chmod +x /etc/rc.local
 
   echo ""
   echo "  Creando el archivo para meter los comandos..."
   echo ""
-  sudo mkdir -p /root/scripts/ 2> /dev/null
-  sudo su -c "echo '#!/bin/bash'                                                                                          > /root/scripts/ComandosPostArranque.sh"
-  sudo su -c 'echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c "echo 'vFechaDeEjec="'$(date +A%YM%mD%d@%T)'"'                                                              >> /root/scripts/ComandosPostArranque.sh"
-  sudo su -c 'echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo 'echo "Iniciada la ejecución del script post-arranque el $vFechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"                     >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                   >> /root/scripts/ComandosPostArranque.sh'
-  sudo su -c 'echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh'
-  sudo chmod 700 /root/scripts/ComandosPostArranque.sh
-  sudo touch /var/log/PostArranque.log
+  sudo mkdir -p /root/scripts/ParaEsteUbuntu/ 2> /dev/null
+  echo '#!/bin/bash'                                                                                                 | sudo tee    /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  echo ''                                                                                                            | sudo tee -a /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  echo 'vFechaDeEjec="$(date +A%YM%mD%d@%T)"'                                                                        | sudo tee -a /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  echo ''                                                                                                            | sudo tee -a /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  echo 'echo "Iniciada la ejecución del script post-arranque el $vFechaDeEjec" >> /var/log/ComandosPostArranque.log' | sudo tee -a /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  echo ''                                                                                                            | sudo tee -a /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  echo '#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE'                             | sudo tee -a /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  echo '#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼'                           | sudo tee -a /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  echo ''                                                                                                            | sudo tee -a /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  sudo chmod 700 /root/scripts/ParaEsteUbuntu/ComandosPostArranque.sh
+  sudo touch /var/log/ComandosPostArranque.log
 
   echo ""
   echo "  Activando y arrancando el servicio..."
   echo ""
   sudo systemctl enable rc-local
   sudo systemctl start rc-local.service
-  sudo systemctl status rc-local.service
+  sudo systemctl status rc-local.service --no-pager
 
 elif [ $vVersUbuntu == "xenial" ]; then
 
