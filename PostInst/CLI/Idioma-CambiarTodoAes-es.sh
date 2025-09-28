@@ -8,8 +8,11 @@
 # ----------
 #  Script de NiPeGun para cambiar el idioma del sistema y del teclado a sólo español
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/main/PostInst/CLI/Idioma-CambiarTodoAes-es.sh | bash
+#  Ejecución remota (puede requerir permisos sudo):
+#  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/PostInst/CLI/Idioma-CambiarTodoAes-es.sh | bash
+#
+#  Ejecución remota como root (para sistemas sin sudo):
+#  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/PostInst/CLI/Idioma-CambiarTodoAes-es.sh | sed 's-sudo--g' | bash
 # ----------
 
   # Poner que sólo se genere el español de España cuando se creen locales
