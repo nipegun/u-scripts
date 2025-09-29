@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar y configurar xxxxxxxxx en Ubuntu
+#  Script de NiPeGun para instalar y configurar Wazuh en Ubuntu
 #
 # Ejecución remota:
 #   curl -sL https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/SoftInst/ParaCLI/SIEM-Wazuh-Instalar.sh | bash
