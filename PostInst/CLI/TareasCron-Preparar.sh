@@ -43,8 +43,8 @@
   echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                         | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaMinuto.sh
   echo 'echo "Iniciada la ejecución del cron de cada minuto el $vFechaDeEjec" >> /var/log/TareasCronCadaMinuto.log' | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaMinuto.sh
   echo ''                                                                                                           | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaMinuto.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA MINUTO"                                         | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaMinuto.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                       | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaMinuto.sh
+  echo '#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA MINUTO'                                         | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaMinuto.sh
+  echo '#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼'                                       | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaMinuto.sh
   echo ''                                                                                                           | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaMinuto.sh
   sudo chmod +x /root/scripts/ParaEsteUbuntu/TareasCronCadaMinuto.sh
   sudo crontab -l > /tmp/CronTemporal
@@ -62,8 +62,8 @@
   echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                     | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaHora.sh
   echo 'echo "Iniciada la ejecución del cron de cada hora el $vFechaDeEjec" >> /var/log/TareasCronCadaHora.log' | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaHora.sh
   echo ''                                                                                                       | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaHora.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA HORA"                                       | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaHora.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                     | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaHora.sh
+  echo '#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA HORA'                                       | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaHora.sh
+  echo '#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼'                                     | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaHora.sh
   echo ''                                                                                                       | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaHora.sh
   sudo chmod +x /root/scripts/ParaEsteUbuntu/TareasCronCadaHora.sh
   sudo ln -s /root/scripts/ParaEsteUbuntu/TareasCronCadaHora.sh /etc/cron.hourly/TareasCronCadaHora
@@ -78,8 +78,8 @@
   echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                                | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaHoraImpar.sh
   echo 'echo "Iniciada la ejecución del cron de cada hora impar el $vFechaDeEjec" >> /var/log/TareasCronCadaHoraImpar.log' | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaHoraImpar.sh
   echo ''                                                                                                                  | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaHoraImpar.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA HORA IMPAR"                                            | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaHoraImpar.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                          | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaHoraImpar.sh
+  echo '#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA HORA IMPAR'                                            | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaHoraImpar.sh
+  echo '#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼'                                          | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaHoraImpar.sh
   echo ''                                                                                                                  | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaHoraImpar.sh
   sudo chmod +x /root/scripts/ParaEsteUbuntu/TareasCronCadaHoraImpar.sh
   sudo crontab -l > /tmp/CronTemporal
@@ -97,8 +97,8 @@
   echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                            | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaHoraPar.sh
   echo 'echo "Iniciada la ejecución del cron de cada hora par el $vFechaDeEjec" >> /var/log/TareasCronCadaHoraPar.log' | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaHoraPar.sh
   echo ''                                                                                                              | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaHoraPar.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA HORA PAR"                                          | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaHoraPar.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                        | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaHoraPar.sh
+  echo '#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA HORA PAR'                                          | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaHoraPar.sh
+  echo '#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼'                                        | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaHoraPar.sh
   echo ''                                                                                                              | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaHoraPar.sh
   sudo chmod +x /root/scripts/ParaEsteUbuntu/TareasCronCadaHoraPar.sh
   sudo crontab -l > /tmp/CronTemporal
@@ -130,8 +130,8 @@
   echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                         | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaSemana.sh
   echo 'echo "Iniciada la ejecución del cron de cada semana el $vFechaDeEjec" >> /var/log/TareasCronCadaSemana.log' | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaSemana.sh
   echo ''                                                                                                           | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaSemana.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA SEMANA"                                         | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaSemana.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                       | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaSemana.sh
+  echo '#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA SEMANA'                                         | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaSemana.sh
+  echo '#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼'                                       | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaSemana.sh
   echo ''                                                                                                           | sudo tee -a /root/scripts/ParaEsteUbuntu/TareasCronCadaSemana.sh
   sudo chmod +x /root/scripts/ParaEsteUbuntu/TareasCronCadaSemana.sh
   sudo ln -s /root/scripts/ParaEsteUbuntu/TareasCronCadaSemana.sh /etc/cron.weekly/TareasCronCadaSemana
