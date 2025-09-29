@@ -8,8 +8,11 @@
 # ----------
 # Script de NiPeGun para preparar las tareas cron en Ubuntu
 #
-# Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/TareasCron-Preparar.sh | sed 's-sudo--g' | bash
+#  Ejecución remota (puede requerir permisos sudo):
+#  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/PostInst/CLI/TareasCron-Preparar.sh | bash
+#
+#  Ejecución remota como root (para sistemas sin sudo):
+#  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/PostInst/CLI/TareasCron-Preparar.sh | sed 's-sudo--g' | bash
 # ----------
 
 # Definir constantes de color
