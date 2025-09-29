@@ -9,16 +9,16 @@
 #  Script de NiPeGun para instalar y configurar xxxxxxxxx en Ubuntu
 #
 # Ejecución remota:
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/SoftInst/ParaCLI/SIEM-Wazuh-Instalar.sh | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/SoftInst/ParaCLI/SIEM-Wazuh-Instalar.sh | bash
 #
 # Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/SoftInst/ParaCLI/SIEM-Wazuh-Instalar.sh | bash -s Parámetro1 Parámetro2
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/SoftInst/ParaCLI/SIEM-Wazuh-Instalar.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -49,41 +49,41 @@ elif [ $cVersUbuntu == "jammy" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Wazuh para Ubuntu 22.04 LTS (Jammy Jellyfish)...${cFinColor}"
   echo ""
 
-    # Determinar la última versión disppnible
-      echo ""
-      echo "    Determinando la última versión disponible..."
-      echo ""
-      vUltVersWazuh=$(curl -sL https://documentation.wazuh.com/current/release-notes/index.html | sed 's->->\n-g' | grep href | grep release | grep internal | head -n1 | sed 's|release-||g' | cut -d'.' -f1 | cut -d'"' -f4 | sed 's|-|.|g')
-      echo "      La última versión disponible es la $vUltVersWazuh"
-      echo ""
+  # Determinar la última versión disppnible
+    echo ""
+    echo "    Determinando la última versión disponible..."
+    echo ""
+    vUltVersWazuh=$(curl -sL https://documentation.wazuh.com/current/release-notes/index.html | sed 's->->\n-g' | grep href | grep release | grep internal | head -n1 | sed 's|release-||g' | cut -d'.' -f1 | cut -d'"' -f4 | sed 's|-|.|g')
+    echo "      La última versión disponible es la $vUltVersWazuh"
+    echo ""
 
+  # Instalar
+    vUltVersSanitizada=$(echo "$vUltVersWazuh" | cut -d. -f1-2)
+    echo ""
+    echo "    Instalando la versión $vUltVersSanitizada..."
+    echo ""
+    cd /tmp
+    rm -f wazuh-install*.sh* 2> /dev/null
+    curl -sLO https://packages.wazuh.com/"$vUltVersSanitizada"/wazuh-install.sh
+    chmod +x /tmp/wazuh-install.sh
     # Instalar
-      vUltVersSanitizada=$(echo "$vUltVersWazuh" | cut -d. -f1-2)
-      echo ""
-      echo "    Instalando la versión $vUltVersSanitizada..."
-      echo ""
-      cd /tmp
-      rm -f wazuh-install*.sh* 2> /dev/null
-      curl -sLO https://packages.wazuh.com/"$vUltVersSanitizada"/wazuh-install.sh
-      chmod +x /tmp/wazuh-install.sh
-      # Instalar
-        # Comprobar si el paquete sudo está instalado. Si no lo está, instalarlo.
-          if [[ $(dpkg-query -s sudo 2>/dev/null | grep installed) == "" ]]; then
-            echo ""
-            echo -e "${cColorRojo}  El paquete sudo no está instalado. Iniciando su instalación...${cFinColor}"
-            echo ""
-            apt-get -y update
-            apt-get -y install sudo
-            echo ""
-          fi
-        sudo /tmp/wazuh-install.sh -a
+      # Comprobar si el paquete sudo está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s sudo 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}  El paquete sudo no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          apt-get -y update
+          apt-get -y install sudo
+          echo ""
+        fi
+      sudo /tmp/wazuh-install.sh -a
 
     # Deshabilitar actualizaciones
       echo ""
       echo "    Deshabilitando actualizaciones..."
       echo ""
       sed -i "s/^deb /#deb /" /etc/apt/sources.list.d/wazuh.list
-      apt update
+      apt-get -y update > /dev/null
 
     # Notificar fin de ejecución del script
       echo ""
@@ -95,6 +95,10 @@ elif [ $cVersUbuntu == "jammy" ]; then
       echo "    Si quieres ver las contraseñas de todos los usuarios de Wazuh indexer y Wazuh API puedes hacerlo de la siguiente manera:"
       echo ""
       echo "      sudo tar -O -xvf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt"
+      echo ""
+      echo "    Se ha salvado un backup de los usuarios internos en: /etc/wazuh-indexer/internalusers-backup"
+      echo ""
+      echo "    Puedes ver la contraseña del usuario admin desplazando la terminal hacia arriba."
       echo ""
 
 elif [ $cVersUbuntu == "focal" ]; then
