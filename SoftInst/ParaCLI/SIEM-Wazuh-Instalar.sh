@@ -76,7 +76,7 @@ elif [ $cVersUbuntu == "jammy" ]; then
           apt-get -y install sudo
           echo ""
         fi
-      sudo /tmp/wazuh-install.sh -a
+      sudo /tmp/wazuh-install.sh -a || exit
 
     # Deshabilitar actualizaciones
       echo ""
