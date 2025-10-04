@@ -254,7 +254,6 @@ elif [ $cVersUbuntu == "jammy" ]; then
     sudo apt-get -y install build-essential
     sudo apt-get -y install python3-dev
     sudo apt-get -y install python3-pip
-    sudo apt-get -y install python3-venv
     sudo apt-get -y install npm
     sudo apt-get -y install nodejs
     sudo apt-get -y install git
@@ -266,6 +265,9 @@ elif [ $cVersUbuntu == "jammy" ]; then
     sudo apt-get -y install libsasl2-dev
     sudo apt-get -y install libldap2-dev
     sudo apt-get -y install libssl-dev
+    sudo apt-get -y install python3.11
+    sudo apt-get -y install python3.11-venv
+    sudo apt-get -y install python3.11-dev
 
   # Crear el usuario
     echo ""
@@ -308,7 +310,7 @@ elif [ $cVersUbuntu == "jammy" ]; then
     sudo rm -rf /opt/flectra/venv/
     sudo su -s /bin/bash -c '\
       mkdir /opt/flectra/venv/                            && \
-      python3 -m venv /opt/flectra/venv/                  && \
+      python3.11 -m venv /opt/flectra/venv                && \
       source /opt/flectra/venv/bin/activate               && \
       pip install cython                                  && \
       pip install wheel                                   && \
@@ -414,7 +416,6 @@ elif [ $cVersUbuntu == "jammy" ]; then
     echo ""
     echo "        Para configurar la base de datos accede a http://$vIPLocal:7073"
     echo ""
-
 
 elif [ $cVersUbuntu == "focal" ]; then
 
