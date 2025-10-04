@@ -73,6 +73,19 @@ elif [ $cVersUbuntu == "jammy" ]; then
     echo "127.0.0.1 $vFQDNGitLab" | sudo tee -a /etc/hosts
     #sed -i -e "s|external_url 'http://gitlab.example.com'|'http://gitlab.example.com'|g" /etc/gitlab/gitlab.rb
 
+  # Detectar si el script se está ejecutando dentro de un contendor LXC
+    if [ "$(systemd-detect-virt)" = "lxc" ]; then
+      sudo sed -i '/^package\[\x27modify_kernel_parameters\x27\]/d' /etc/gitlab/gitlab.rb
+      echo "package['modify_kernel_parameters'] = false" | sudo tee -a /etc/gitlab/gitlab.rb
+      # Desactivar el stack de monitorización
+        echo "prometheus_monitoring['enable'] = false" | sudo tee -a /etc/gitlab/gitlab.rb
+        echo "node_exporter['enable'] = false"         | sudo tee -a /etc/gitlab/gitlab.rb
+        echo "redis_exporter['enable'] = false"        | sudo tee -a /etc/gitlab/gitlab.rb
+        echo "postgres_exporter['enable'] = false"     | sudo tee -a /etc/gitlab/gitlab.rb
+        echo "gitlab_exporter['enable'] = false"       | sudo tee -a /etc/gitlab/gitlab.rb
+        echo "alertmanager['enable'] = false"          | sudo tee -a /etc/gitlab/gitlab.rb
+    fi
+
   # Reconfigurar gitlab
     sudo gitlab-ctl reconfigure
 
