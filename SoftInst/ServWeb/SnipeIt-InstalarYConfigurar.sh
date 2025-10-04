@@ -33,9 +33,34 @@ if [ $cVersUbuntu == "noble" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación de snipe-it para Ubuntu 24.04 LTS (Noble Numbat)...${cFinColor}"
   echo ""
 
-  echo ""
-  echo "  Comandos para Ubuntu 24.04 LTS todavía no preparados. Prueba ejecutarlo en otra versión de Ubuntu."
-  echo ""
+  # Descargar el script oficial de instalación
+    echo ""
+    echo "    Descargando el script oficial de instalación..."
+    echo ""
+    cd /tmp/
+    # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}      El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        sudo apt-get -y update
+        sudo apt-get -y install wget
+        echo ""
+      fi
+    wget https://raw.githubusercontent.com/grokability/snipe-it/master/install.sh
+
+  # Ejecutar script oficial de instalación
+    chmod 744 install.sh
+    # Comprobar si el paquete lsb-release está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s lsb-release 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}      El paquete lsb-release no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        sudo apt-get -y update
+        sudo apt-get -y install lsb-release
+        echo ""
+      fi
+    sudo ./install.sh
 
 elif [ $cVersUbuntu == "jammy" ]; then
 
@@ -43,9 +68,34 @@ elif [ $cVersUbuntu == "jammy" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación de snipe-it para Ubuntu 22.04 LTS (Jammy Jellyfish)...${cFinColor}"
   echo ""
 
-  echo ""
-  echo "  Comandos para Ubuntu 22.04 LTS todavía no preparados. Prueba ejecutarlo en otra versión de Ubuntu."
-  echo ""
+  # Descargar el script oficial de instalación
+    echo ""
+    echo "    Descargando el script oficial de instalación..."
+    echo ""
+    cd /tmp/
+    # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}      El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        sudo apt-get -y update
+        sudo apt-get -y install wget
+        echo ""
+      fi
+    wget https://raw.githubusercontent.com/grokability/snipe-it/master/install.sh
+
+  # Ejecutar script oficial de instalación
+    chmod 744 install.sh
+    # Comprobar si el paquete lsb-release está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s lsb-release 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}      El paquete lsb-release no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        sudo apt-get -y update
+        sudo apt-get -y install lsb-release
+        echo ""
+      fi
+    sudo ./install.sh
 
 elif [ $cVersUbuntu == "focal" ]; then
 
