@@ -9,16 +9,16 @@
 #  Script de NiPeGun para instalar y configurar Wazuh en Ubuntu
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/SoftInst/ServWeb/Wazuh-Instalar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/SoftInst/ServWeb/Wazuh-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/SoftInst/ServWeb/Wazuh-Instalar.sh | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/SoftInst/ServWeb/Wazuh-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota con parámetros:
-#   curl -sL https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/SoftInst/ServWeb/Wazuh-Instalar.sh | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/SoftInst/ServWeb/Wazuh-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/SoftInst/ServWeb/Wazuh-Instalar.sh | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/SoftInst/ServWeb/Wazuh-InstalarYConfigurar.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -82,8 +82,8 @@ elif [ $cVersUbuntu == "jammy" ]; then
       echo ""
       echo "    Deshabilitando actualizaciones..."
       echo ""
-      sed -i "s/^deb /#deb /" /etc/apt/sources.list.d/wazuh.list
-      apt-get -y update > /dev/null
+      sudo sed -i "s/^deb /#deb /" /etc/apt/sources.list.d/wazuh.list
+      sudo apt-get -y update > /dev/null
 
     # Notificar fin de ejecución del script
       echo ""
