@@ -101,6 +101,16 @@ elif [ $cVersUbuntu == "jammy" ]; then
       echo "    Puedes ver la contraseña del usuario admin desplazando la terminal hacia arriba."
       echo ""
 
+    # Cambiar carpeta de logs
+      #sudo mkdir -p /mnt/PartWazuh/logs
+      #sudo systemctl stop wazuh-manager
+      #sudo rsync -avh /var/ossec/logs/ /mnt/PartWazuh/logs/
+      #sudo mount --bind /mnt/PartWazuh/logs /var/ossec/logs
+      #sudo df -h /var/ossec/logs
+      #echo "/mnt/PartWazuh/logs   /var/ossec/logs   none   bind   0   0" | sudo tee -a /etc/fstab
+      #sudo mount -a
+      #sudo systemctl start wazuh-manager
+
 elif [ $cVersUbuntu == "focal" ]; then
 
   echo ""
