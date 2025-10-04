@@ -85,6 +85,9 @@ elif [ $cVersUbuntu == "jammy" ]; then
       sudo sed -i "s/^deb /#deb /" /etc/apt/sources.list.d/wazuh.list
       sudo apt-get -y update > /dev/null
 
+    # Extraer la carpeta comprimida resultante de la instalación
+      sudo tar -xvf /tmp/wazuh-install-files.tar -C /root
+
     # Notificar fin de ejecución del script
       echo ""
       echo "    Ejecución del script, finalizada. Accede al panel de Wazuh en:"
@@ -92,11 +95,11 @@ elif [ $cVersUbuntu == "jammy" ]; then
       vIPLocal=$(hostname -I | sed 's- --g')
       echo "      https://$vIPLocal"
       echo ""
-      echo "    Si quieres ver las contraseñas de todos los usuarios de Wazuh indexer y Wazuh API puedes hacerlo de la siguiente manera:"
+      echo "    Se han guardado los certificados del servidor y las contraseñas de todos los usuarios de Wazuh indexer y Wazuh API en la carpeta:"
       echo ""
-      echo "      sudo tar -O -xvf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt"
+      echo "      /root/wazuh/"
       echo ""
-      echo "    Se ha salvado un backup de los usuarios internos en: /etc/wazuh-indexer/internalusers-backup"
+      echo "    Se ha guardado un backup de los usuarios internos en: /etc/wazuh-indexer/internalusers-backup"
       echo ""
       echo "    Puedes ver la contraseña del usuario admin desplazando la terminal hacia arriba."
       echo ""
