@@ -8,8 +8,11 @@
 # ----------
 #  Script de NiPeGun para instalar y configurar xxxxxxxxx en Ubuntu
 #
-# Ejecución remota:
+# Ejecución remota (puede requerir permisos sudo):
 #   curl -sL x | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#   curl -sL x | sed 's-sudo--g' | bash
 #
 # Ejecución remota sin caché:
 #   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
