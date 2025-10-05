@@ -196,6 +196,9 @@ if [ $cVersUbuntu == "noble" ]; then
     echo '[Install]'                               | sudo tee -a /etc/systemd/system/flectra.service
     echo 'WantedBy=multi-user.target'              | sudo tee -a /etc/systemd/system/flectra.service
 
+  # Reparar permisos
+    sudo chown flectra:flectra /opt/flectra/ -R
+
   # Activar y lanzar el servicio
     echo ""
     echo "      Activando y lanzando el servicio..."
@@ -393,6 +396,9 @@ elif [ $cVersUbuntu == "jammy" ]; then
     echo ''                                        | sudo tee -a /etc/systemd/system/flectra.service
     echo '[Install]'                               | sudo tee -a /etc/systemd/system/flectra.service
     echo 'WantedBy=multi-user.target'              | sudo tee -a /etc/systemd/system/flectra.service
+
+  # Reparar permisos
+    sudo chown flectra:flectra /opt/flectra/ -R
 
   # Activar y lanzar el servicio
     echo ""
