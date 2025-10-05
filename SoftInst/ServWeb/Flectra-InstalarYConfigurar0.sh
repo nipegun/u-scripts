@@ -298,10 +298,10 @@ elif [ $cVersUbuntu == "jammy" ]; then
     " flectra
 
   # Corregir errores de dependencias
-    sudo sed -i '/^gevent/d'   /opt/flectra/Code/requirements.txt
-    sudo sed -i '/^greenlet/d' /opt/flectra/Code/requirements.txt
-    echo "gevent==24.11.1"    | sudo tee -a /opt/flectra/Code/requirements.txt
-    echo "greenlet>=3.1.1,<4" | sudo tee -a /opt/flectra/Code/requirements.txt
+    #sudo sed -i '/^gevent/d'   /opt/flectra/Code/requirements.txt
+    #sudo sed -i '/^greenlet/d' /opt/flectra/Code/requirements.txt
+    #echo "gevent==24.11.1"    | sudo tee -a /opt/flectra/Code/requirements.txt
+    #echo "greenlet>=3.1.1,<4" | sudo tee -a /opt/flectra/Code/requirements.txt
 
   # Crear el entorno virtual
     echo ""
@@ -310,7 +310,7 @@ elif [ $cVersUbuntu == "jammy" ]; then
     sudo rm -rf /opt/flectra/venv/
     sudo su -s /bin/bash -c '\
       mkdir /opt/flectra/venv/                          && \
-      python3 -m venv /opt/flectra/venv/                && \
+      python3.11 -m venv /opt/flectra/venv/             && \
       source /opt/flectra/venv/bin/activate             && \
       pip install wheel                                 && \
       pip install -r /opt/flectra/Code/requirements.txt && \
