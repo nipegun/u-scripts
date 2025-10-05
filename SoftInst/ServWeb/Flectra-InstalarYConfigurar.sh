@@ -290,12 +290,18 @@ elif [ $cVersUbuntu == "jammy" ]; then
     echo ""
     echo "      Clonando el repo..."
     echo ""
-    sudo rm -rf /opt/flectra/Code/
+    sudo rm -rf /opt/flectra/Code/ 2> /dev/null
     sudo su -s /bin/bash -c "\
       cd /opt/flectra/                                                                        && \
       git clone --depth=1 --branch=$vUltVersFlectra https://gitlab.com/flectra-hq/flectra.git && \
       mv /opt/flectra/flectra /opt/flectra/Code
     " flectra
+
+  # Corregir errores de dependencias
+    sudo sed -i '/^gevent/d'   /opt/flectra/Code/requirements.txt
+    sudo sed -i '/^greenlet/d' /opt/flectra/Code/requirements.txt
+    echo "gevent==24.11.1"    | sudo tee -a /opt/flectra/Code/requirements.txt
+    echo "greenlet>=3.1.1,<4" | sudo tee -a /opt/flectra/Code/requirements.txt
 
   # Crear el entorno virtual
     echo ""
@@ -303,12 +309,11 @@ elif [ $cVersUbuntu == "jammy" ]; then
     echo ""
     sudo rm -rf /opt/flectra/venv/
     sudo su -s /bin/bash -c '\
-      mkdir /opt/flectra/venv/                            && \
-      python3.11 -m venv /opt/flectra/venv                && \
-      source /opt/flectra/venv/bin/activate               && \
-      pip install cython                                  && \
-      pip install wheel                                   && \
-      pip install -r /opt/flectra/Code/requirements.txt   && \
+      mkdir /opt/flectra/venv/                          && \
+      python3 -m venv /opt/flectra/venv/                && \
+      source /opt/flectra/venv/bin/activate             && \
+      pip install wheel                                 && \
+      pip install -r /opt/flectra/Code/requirements.txt && \
       deactivate \
     ' flectra
 
@@ -359,7 +364,7 @@ elif [ $cVersUbuntu == "jammy" ]; then
     #echo ""
     #echo "      Ejecutando Flectra por primera vez..."
     #echo ""
-    #sudo -u flectra bash -c '/opt/flectra/flectra.py'
+    #sudo -u flectra bash -c '/opt/flectra/flectra-start.py'
 
   # Quitar la terminal de bash asignada al usuario del sistema
     echo ""
