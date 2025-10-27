@@ -9,20 +9,17 @@
 #  Script de NiPeGun para poner los repositorios completos a las diferentes versiones de Ubuntu
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/PostInst/CLI/Repositorios-Todos-Poner.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL x | sed 's-sudo--g' | bash
-#
-# Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
-#
-# Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/PostInst/CLI/Repositorios-Todos-Poner.sh | sed 's-sudo--g' | bash
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/PostInst/CLI/Repositorios-Todos-Poner.sh | nano -
 # ----------
+
+# Determinar la fecha de ejecución del script
+  cFechaDeEjec=$(date +"a%Ym%md%dh%Hm%Ms%S")
 
 # Definir constantes de color
   cColorAzul="\033[0;34m"
@@ -42,9 +39,26 @@ if [ $cVersUbuntu == "noble" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script para poner todos los repositorios de Ubuntu 24.04 LTS (Noble Numbat)...${cFinColor}"
   echo ""
 
-  echo ""
-  echo "  Comandos para Ubuntu 24.04 LTS todavía no preparados. Prueba ejecutarlo en otra versión de Ubuntu."
-  echo ""
+  # Hacer copia de seguridad del sources.list actual
+    sudo cp -vf /etc/apt/sources.list /etc/apt/sources.list.bak-$cFechaDeEjec
+  echo ''                                                                                             | sudo tee    /etc/apt/sources.list
+  echo '# Repositorios principales'                                                                   | sudo tee -a /etc/apt/sources.list
+  echo 'deb http://archive.ubuntu.com/ubuntu noble main restricted universe multiverse'               | sudo tee -a /etc/apt/sources.list
+  echo 'deb-src http://archive.ubuntu.com/ubuntu noble main restricted universe multiverse'           | sudo tee -a /etc/apt/sources.list
+  echo ''                                                                                             | sudo tee -a /etc/apt/sources.list
+  echo '# Actualizaciones oficiales'                                                                  | sudo tee -a /etc/apt/sources.list
+  echo 'deb http://archive.ubuntu.com/ubuntu noble-updates main restricted universe multiverse'       | sudo tee -a /etc/apt/sources.list
+  echo 'deb-src http://archive.ubuntu.com/ubuntu noble-updates main restricted universe multiverse'   | sudo tee -a /etc/apt/sources.list
+  echo ''                                                                                             | sudo tee -a /etc/apt/sources.list
+  echo '# Repos de seguridad'                                                                         | sudo tee -a /etc/apt/sources.list
+  echo 'deb http://security.ubuntu.com/ubuntu noble-security main restricted universe multiverse'     | sudo tee -a /etc/apt/sources.list
+  echo 'deb-src http://security.ubuntu.com/ubuntu noble-security main restricted universe multiverse' | sudo tee -a /etc/apt/sources.list
+  echo ''                                                                                             | sudo tee -a /etc/apt/sources.list
+  echo '# Backports (paquetes más nuevos mantenidos por la comunidad)'                                | sudo tee -a /etc/apt/sources.list
+  echo 'deb http://archive.ubuntu.com/ubuntu noble-backports main restricted universe multiverse'     | sudo tee -a /etc/apt/sources.list
+  echo 'deb-src http://archive.ubuntu.com/ubuntu noble-backports main restricted universe multiverse' | sudo tee -a /etc/apt/sources.list
+  # Actualizar la lista de paquetes disponibles en los repos
+    sudo apt-get -y update
 
 elif [ $cVersUbuntu == "jammy" ]; then
 
