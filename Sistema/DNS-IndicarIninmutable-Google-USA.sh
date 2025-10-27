@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#----------------------------------------------------------------------------------------------------------
-#  Script de NiPeGun para configurar Google USA como servidor DNS ininmutable en Ubuntu
+# ----------
+# Script de NiPeGun para configurar Google USA como servidor DNS ininmutable en Ubuntu
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/main/DNS-IndicarIninmutable-Google.sh | bash
-#----------------------------------------------------------------------------------------------------------
+# Ejecución remota:
+#   curl -s https://raw.githubusercontent.com/nipegun/u-scripts/main/DNS-IndicarIninmutable-Google.sh | bash
+# ----------
 
 echo ""
 echo "  Configurando Google USA como servidor DNS ininmutable..."
