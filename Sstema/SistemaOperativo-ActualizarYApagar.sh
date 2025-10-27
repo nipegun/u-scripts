@@ -9,7 +9,7 @@
 #  Script de NiPeGun para actualizar Ubuntu
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/main/SistemaOperativo-ActualizarYApagar.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/Sstema/SistemaOperativo-ActualizarYApagar.sh | bash
 # ----------
 
 ~/scripts/u-scripts/SistemaOperativo-Actualizar.sh
