@@ -9,7 +9,7 @@
 #  Script de NiPeGun para actualizar Ubuntu
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/main/SistemaOperativo-Actualizar.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/Sistema/SistemaOperativo-Actualizar.sh | bash
 # ----------
 
 ColorRojo='\033[1;31m'
