@@ -9,7 +9,7 @@
 # Script de NiPeGun para configurar CloudFlare Europa como servidor DNS ininmutable en Ubuntu
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/u-scripts/main/DNS-IndicarIninmutable-CloudFlare.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/Sistema/DNS-IndicarIninmutable-CloudFlare-Europa.sh | bash
 # ----------
 
 echo ""
