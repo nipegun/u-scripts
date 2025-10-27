@@ -9,7 +9,7 @@
 # Script de NiPeGun para configurar Google USA como servidor DNS ininmutable en Ubuntu
 #
 # Ejecución remota:
-#   curl -s https://raw.githubusercontent.com/nipegun/u-scripts/main/DNS-IndicarIninmutable-Google.sh | bash
+#   curl -s https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/Sistema/DNS-IndicarIninmutable-Google-USA.sh | bash
 # ----------
 
 echo ""
