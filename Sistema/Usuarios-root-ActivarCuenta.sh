@@ -9,7 +9,7 @@
 #  Script de NiPeGun para activar la cuenta del root en Ubuntu
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/main/Usuarios-root-ActivarCuenta.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/Sistema/Usuarios-root-ActivarCuenta.sh | bash
 # ----------
 
 # Agregarle una constraseña a la cuenta del root para poder loguearse por cli
