@@ -95,6 +95,8 @@ elif [ $cVersUbuntu == "jammy" ]; then
       vIPLocal=$(hostname -I | sed 's- --g')
       echo "      https://$vIPLocal"
       echo ""
+      echo "    Wazuh está guardando los logs en la carpeta /var/ossec/logs"
+      echo ""
       echo "    Se han guardado los certificados del servidor y las contraseñas de todos los usuarios de Wazuh indexer y Wazuh API en la carpeta:"
       echo ""
       echo "      /root/wazuh-install-files/"
