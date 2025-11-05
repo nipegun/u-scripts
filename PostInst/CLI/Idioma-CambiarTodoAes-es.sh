@@ -15,29 +15,40 @@
 #   curl -s https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/PostInst/CLI/Idioma-CambiarTodoAes-es.sh | sed 's-sudo--g' | bash
 # ----------
 
-  # Poner que sólo se genere el español de España cuando se creen locales
-    echo "es_ES.UTF-8 UTF-8" | sudo tee /etc/locale.gen
+# Poner que sólo se genere el español de España cuando se creen locales
+  sudo rm -f  /etc/locale.gen
+  echo "es_ES.UTF-8 UTF-8" | sudo tee /etc/locale.gen
 
-  # Compilar los locales borrando primero los existentes y dejando nada más que el español de España
-    sudo apt-get -y update
-    sudo apt-get -y install locales
-    sudo locale-gen --purge es_ES.UTF-8
+# Compilar los locales borrando primero los existentes y dejando nada más que el español de España
+  sudo apt-get -y update
+  sudo apt-get -y install locales
+  sudo locale-gen --purge es_ES.UTF-8
 
-  # Modificar el archivo /etc/default/locale reflejando los cambios
-    echo 'LANG="es_ES.UTF-8"'  | sudo tee    /etc/default/locale
-    echo 'LANGUAGE="es_ES:es"' | sudo tee -a /etc/default/locale
+# Modificar el archivo /etc/default/locale reflejando los cambios
+  echo 'LANG="es_ES.UTF-8"'  | sudo tee    /etc/default/locale
+  echo 'LANGUAGE="es_ES:es"' | sudo tee -a /etc/default/locale
 
-  # Poner el teclado en español de España
-    echo 'XKBMODEL="pc105"'  | sudo tee    /etc/default/keyboard
-    echo 'XKBLAYOUT="es"'    | sudo tee -a /etc/default/keyboard
-    echo 'XKBVARIANT=""'     | sudo tee -a /etc/default/keyboard
-    echo 'XKBOPTIONS=""'     | sudo tee -a /etc/default/keyboard
-    echo ''                  | sudo tee -a /etc/default/keyboard
-    echo 'BACKSPACE="guess"' | sudo tee -a /etc/default/keyboard
-    echo ''                  | sudo tee -a /etc/default/keyboard
+# Poner el teclado en español de España
+  echo 'XKBMODEL="pc105"'  | sudo tee    /etc/default/keyboard
+  echo 'XKBLAYOUT="es"'    | sudo tee -a /etc/default/keyboard
+  echo 'XKBVARIANT=""'     | sudo tee -a /etc/default/keyboard
+  echo 'XKBOPTIONS=""'     | sudo tee -a /etc/default/keyboard
+  echo ''                  | sudo tee -a /etc/default/keyboard
+  echo 'BACKSPACE="guess"' | sudo tee -a /etc/default/keyboard
+  echo ''                  | sudo tee -a /etc/default/keyboard
 
-  # Notificar cambios
-    echo ""
-    echo "  Cambios realizados.Debes reiniciar el sistema para que los cambios tengan efecto."
-    echo ""
+# Indicar idioma español de España para todos los usuarios
+  echo ""                                                      | sudo tee    /etc/profile
+  echo '# Poner idioma español de España a todos los usuarios' | sudo tee -a /etc/profile
+  echo '  export LANG=es_ES.UTF-8'                             | sudo tee -a /etc/profile
+  echo '  export LANGUAGE=es_ES:es'                            | sudo tee -a /etc/profile
+    
+  echo '  export LANG=es_ES.UTF-8'                             | sudo tee -a /etc/skel/.bashrc
+  echo '  export LANGUAGE=es_ES:es'                            | sudo tee -a /etc/skel/.bashrc
+
+# Notificar cambios
+  echo ""
+  echo -e "${cColorAzulClaro}    Cambios realizados.${cFinColor}"
+  echo -e "${cColorAzulClaro}    Debes reiniciar el sistema para que los cambios tengan efecto.${cFinColor}"
+  echo ""
 
