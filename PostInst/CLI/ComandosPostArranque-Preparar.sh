@@ -8,11 +8,11 @@
 # ----------
 #  Script de NiPeGun para instalar y configurar los comandos postarranque en Ubuntu
 #
-#  Ejecución remota (puede requerir permisos sudo):
-#  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/PostInst/CLI/ComandosPostArranque-Preparar.sh | bash
+# Ejecución remota (puede requerir permisos sudo):
+#   curl -s https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/PostInst/CLI/ComandosPostArranque-Preparar.sh | bash
 #
-#  Ejecución remota como root (para sistemas sin sudo):
-#  curl -s https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/PostInst/CLI/ComandosPostArranque-Preparar.sh | sed 's-sudo--g' | bash
+# Ejecución remota como root (para sistemas sin sudo):
+#   curl -s https://raw.githubusercontent.com/nipegun/u-scripts/refs/heads/main/PostInst/CLI/ComandosPostArranque-Preparar.sh | sed 's-sudo--g' | bash
 # ----------
 
 vColorRojo='\033[1;31m'
@@ -22,7 +22,7 @@ vFinColor='\033[0m'
 # Determinar la versión de Ubuntu
   vVersUbuntu=$(cat /etc/lsb-release | grep ODENAME | head -n1 | cut -d'=' -f2)
 
-if [ $VersUbuntu == "noble" ]; then
+if [ $vVersUbuntu == "noble" ]; then
 
   echo ""
   echo -e "${vColorVerde}  Iniciando el script para preparar los comandos post-arranque en Ubuntu 24.04 LTS (Noble Numbat)...${vFinColor}"
@@ -78,7 +78,7 @@ if [ $VersUbuntu == "noble" ]; then
   sudo systemctl start rc-local.service
   sudo systemctl status rc-local.service --no-pager
 
-elif [ $VersUbuntu == "jammy" ]; then
+elif [ $vVersUbuntu == "jammy" ]; then
 
   echo ""
   echo -e "${vColorVerde}  Iniciando el script para preparar los comandos post-arranque en Ubuntu 22.04 LTS (Jammy Jellyfish)...${vFinColor}"
