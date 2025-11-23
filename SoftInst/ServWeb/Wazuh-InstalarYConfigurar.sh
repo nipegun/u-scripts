@@ -145,7 +145,7 @@ elif [ $cVersUbuntu == "jammy" ]; then
             echo 'P@ssw0rd' | sudo tee /var/ossec/etc/authd.pass
             sudo chmod 640 /var/ossec/etc/authd.pass
             sudo chown root:wazuh /var/ossec/etc/authd.pass
-systemctl restart wazuh-manager
+            systemctl restart wazuh-manager
 
           ;;
 
@@ -154,26 +154,20 @@ systemctl restart wazuh-manager
             echo ""
             echo "  Cambiando la carpeta donde se guardan los logs..."
             echo ""
+            sudo mkdir -p /mnt/PartWazuh/logs
+            sudo systemctl stop wazuh-manager
+            sudo rsync -avh /var/ossec/logs/ /mnt/PartWazuh/logs/
+            sudo mount --bind /mnt/PartWazuh/logs /var/ossec/logs
+            sudo df -h /var/ossec/logs
+            echo "/mnt/PartWazuh/logs   /var/ossec/logs   none   bind   0   0" | sudo tee -a /etc/fstab
+            sudo mount -a
+            sudo systemctl start wazuh-manager
 
           ;;
 
       esac
 
   done
-
-
-
-    # Cambiar carpeta de logs
-      #sudo mkdir -p /mnt/PartWazuh/logs
-      #sudo systemctl stop wazuh-manager
-      #sudo rsync -avh /var/ossec/logs/ /mnt/PartWazuh/logs/
-      #sudo mount --bind /mnt/PartWazuh/logs /var/ossec/logs
-      #sudo df -h /var/ossec/logs
-      #echo "/mnt/PartWazuh/logs   /var/ossec/logs   none   bind   0   0" | sudo tee -a /etc/fstab
-      #sudo mount -a
-      #sudo systemctl start wazuh-manager
-
-
 
 elif [ $cVersUbuntu == "focal" ]; then
 
