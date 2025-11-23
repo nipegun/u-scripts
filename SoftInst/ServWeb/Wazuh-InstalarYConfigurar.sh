@@ -49,62 +49,119 @@ elif [ $cVersUbuntu == "jammy" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Wazuh para Ubuntu 22.04 LTS (Jammy Jellyfish)...${cFinColor}"
   echo ""
 
-  # Determinar la última versión disppnible
-    echo ""
-    echo "    Determinando la última versión disponible..."
-    echo ""
-    vUltVersWazuh=$(curl -sL https://documentation.wazuh.com/current/release-notes/index.html | sed 's->->\n-g' | grep href | grep release | grep internal | head -n1 | sed 's|release-||g' | cut -d'.' -f1 | cut -d'"' -f4 | sed 's|-|.|g')
-    echo "      La última versión disponible es la $vUltVersWazuh"
-    echo ""
+  # Crear el menú
+    # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        sudo apt-get -y update
+        sudo apt-get -y install dialog
+        echo ""
+      fi
+    menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 80 16)
+      opciones=(
+        1 "Instalación por defecto"                        on
+        2 "  Configurar autenticación mediante contraseña" off
+        3 "  x"                                            off
+      )
+    choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
-  # Instalar
-    vUltVersSanitizada=$(echo "$vUltVersWazuh" | cut -d. -f1-2)
-    echo ""
-    echo "    Instalando la versión $vUltVersSanitizada..."
-    echo ""
-    cd /tmp
-    rm -f wazuh-install*.sh* 2> /dev/null
-    curl -sLO https://packages.wazuh.com/"$vUltVersSanitizada"/wazuh-install.sh
-    chmod +x /tmp/wazuh-install.sh
-    # Instalar
-      # Comprobar si el paquete sudo está instalado. Si no lo está, instalarlo.
-        if [[ $(dpkg-query -s sudo 2>/dev/null | grep installed) == "" ]]; then
-          echo ""
-          echo -e "${cColorRojo}  El paquete sudo no está instalado. Iniciando su instalación...${cFinColor}"
-          echo ""
-          apt-get -y update
-          apt-get -y install sudo
-          echo ""
-        fi
-      sudo /tmp/wazuh-install.sh -a || exit
+    for choice in $choices
+      do
+        case $choice in
 
-    # Deshabilitar actualizaciones
-      echo ""
-      echo "    Deshabilitando actualizaciones..."
-      echo ""
-      sudo sed -i "s/^deb /#deb /" /etc/apt/sources.list.d/wazuh.list
-      sudo apt-get -y update > /dev/null
+          1)
 
-    # Extraer la carpeta comprimida resultante de la instalación
-      sudo tar -xvf /tmp/wazuh-install-files.tar -C /root
+            echo ""
+            echo "  Iniciando instalación por defecto de Wazuh..."
+            echo ""
 
-    # Notificar fin de ejecución del script
-      echo ""
-      echo "    Ejecución del script, finalizada. Accede al panel de Wazuh en:"
-      echo ""
-      vIPLocal=$(hostname -I | sed 's- --g')
-      echo "      https://$vIPLocal"
-      echo ""
-      echo "    Wazuh está guardando los logs en la carpeta /var/ossec/logs"
-      echo ""
-      echo "    Se han guardado los certificados del servidor y las contraseñas de todos los usuarios de Wazuh indexer y Wazuh API en la carpeta:"
-      echo ""
-      echo "      /root/wazuh-install-files/"
-      echo ""
-      echo "    También se ha guardado un backup de los usuarios internos en: /etc/wazuh-indexer/internalusers-backup"
-      echo ""
-      echo "    Puedes ver la contraseña del usuario admin desplazando la terminal hacia arriba."
-      echo ""
+            # Determinar la última versión disppnible
+              echo ""
+              echo "    Determinando la última versión disponible..."
+              echo ""
+              vUltVersWazuh=$(curl -sL https://documentation.wazuh.com/current/release-notes/index.html | sed 's->->\n-g' | grep href | grep release | grep internal | head -n1 | sed 's|release-||g' | cut -d'.' -f1 | cut -d'"' -f4 | sed 's|-|.|g')
+              echo "      La última versión disponible es la $vUltVersWazuh"
+              echo ""
+
+            # Instalar
+              vUltVersSanitizada=$(echo "$vUltVersWazuh" | cut -d. -f1-2)
+              echo ""
+              echo "    Instalando la versión $vUltVersSanitizada..."
+              echo ""
+              cd /tmp
+              rm -f wazuh-install*.sh* 2> /dev/null
+              curl -sLO https://packages.wazuh.com/"$vUltVersSanitizada"/wazuh-install.sh
+              chmod +x /tmp/wazuh-install.sh
+              # Instalar
+                # Comprobar si el paquete sudo está instalado. Si no lo está, instalarlo.
+                  if [[ $(dpkg-query -s sudo 2>/dev/null | grep installed) == "" ]]; then
+                    echo ""
+                    echo -e "${cColorRojo}  El paquete sudo no está instalado. Iniciando su instalación...${cFinColor}"
+                    echo ""
+                    apt-get -y update
+                    apt-get -y install sudo
+                    echo ""
+                  fi
+                sudo /tmp/wazuh-install.sh -a || exit
+
+              # Deshabilitar actualizaciones
+                echo ""
+                echo "    Deshabilitando actualizaciones..."
+                echo ""
+                sudo sed -i "s/^deb /#deb /" /etc/apt/sources.list.d/wazuh.list
+                sudo apt-get -y update > /dev/null
+
+              # Extraer la carpeta comprimida resultante de la instalación
+                sudo tar -xvf /tmp/wazuh-install-files.tar -C /root
+
+              # Notificar fin de ejecución del script
+                echo ""
+                echo "    Ejecución del script, finalizada. Accede al panel de Wazuh en:"
+                echo ""
+                vIPLocal=$(hostname -I | sed 's- --g')
+                echo "      https://$vIPLocal"
+                echo ""
+                echo "    Wazuh está guardando los logs en la carpeta /var/ossec/logs"
+                echo ""
+                echo "    Se han guardado los certificados del servidor y las contraseñas de todos los usuarios de Wazuh indexer y Wazuh API en la carpeta:"
+                echo ""
+                echo "      /root/wazuh-install-files/"
+                echo ""
+                echo "    También se ha guardado un backup de los usuarios internos en: /etc/wazuh-indexer/internalusers-backup"
+                echo ""
+                echo "    Puedes ver la contraseña del usuario admin desplazando la terminal hacia arriba."
+                echo ""
+
+          ;;
+
+          2)
+
+            echo ""
+            echo "  Configurando autenticación mediante contraseña..."
+            echo ""
+            sudo sed -i 's|<use_password>no</use_password>|<use_password>yes</use_password>|g' /var/ossec/etc/ossec.conf
+            echo 'P@ssw0rd' | sudo tee /var/ossec/etc/authd.pass
+            sudo chmod 640 /var/ossec/etc/authd.pass
+            sudo chown root:wazuh /var/ossec/etc/authd.pass
+systemctl restart wazuh-manager
+
+          ;;
+
+          3)
+
+            echo ""
+            echo "  Cambiando la carpeta donde se guardan los logs..."
+            echo ""
+
+          ;;
+
+      esac
+
+  done
+
+
 
     # Cambiar carpeta de logs
       #sudo mkdir -p /mnt/PartWazuh/logs
@@ -115,6 +172,8 @@ elif [ $cVersUbuntu == "jammy" ]; then
       #echo "/mnt/PartWazuh/logs   /var/ossec/logs   none   bind   0   0" | sudo tee -a /etc/fstab
       #sudo mount -a
       #sudo systemctl start wazuh-manager
+
+
 
 elif [ $cVersUbuntu == "focal" ]; then
 
