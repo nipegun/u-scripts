@@ -64,6 +64,7 @@ if [ $cVersUbuntu == "resolut" ]; then
     sudo apt-get -y install dkms
     sudo apt-get -y install pkg-config
     sudo apt-get -y install libglvnd-dev
+    sudo apt-get -y install initramfs-tools
 
   # Blacklistear nouveau
     echo ""
