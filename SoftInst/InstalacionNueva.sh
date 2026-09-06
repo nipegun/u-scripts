@@ -36,14 +36,14 @@
 # Determinar la versión de Ubuntu
   cVersUbuntu=$(cat /etc/lsb-release | grep ODENAME | head -n1 | cut -d'=' -f2)
 
-if [ $cVersUbuntu == "resolt" ]; then
+if [ $cVersUbuntu == "resolut" ]; then
 
   echo ""
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Ubuntu 24.04 LTS (Noble Numbat)...${cFinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Ubuntu 24.04 LTS todavía no preparados. Prueba ejecutarlo en otra versión de Ubuntu."
+  echo "  Comandos para Ubuntu 26.04 LTS todavía no preparados. Prueba ejecutarlo en otra versión de Ubuntu."
   echo ""
 
 elif [ $cVersUbuntu == "noble" ]; then
